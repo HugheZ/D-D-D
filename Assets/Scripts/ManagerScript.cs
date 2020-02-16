@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ManagerScript : MonoBehaviour
 {
-    public List<GameObject> doors;
-    List<Vector2> spawnPoints;
     List<Vector3> cameraPts;
     public Vector2 reSpawnPt;
     public GameObject player;
@@ -49,20 +47,7 @@ public class ManagerScript : MonoBehaviour
     {
         roomsCleared = 0;
 
-        spawnPoints = new List<Vector2>();
         cameraPts = new List<Vector3>();
-
-        spawnPoints.Add(new Vector2(13,2));
-        spawnPoints.Add(new Vector2(28, 2));
-        spawnPoints.Add(new Vector2(-1, -10.5f));
-        spawnPoints.Add(new Vector2(24, -15));
-        spawnPoints.Add(new Vector2(0, 2));
-
-        if (curRoom - 1 < 0)
-            reSpawnPt = spawnPoints[spawnPoints.Count - 1];
-        else
-            reSpawnPt = spawnPoints[curRoom - 1];
-
 
         cameraPts.Add(new Vector3(13.5f, 6.5f, -12));
         cameraPts.Add(new Vector3(28f, 7, -12.5f));
@@ -87,18 +72,8 @@ public class ManagerScript : MonoBehaviour
     /// </summary>
     public void NextRoom()
     {
-        player.transform.position = spawnPoints[curRoom];
-        camera.transform.position = cameraPts[curRoom];
-        if (curRoom == spawnPoints.Count - 1)
-            curRoom = 0;
-        else
-            curRoom++;
-        doors[curRoom].GetComponent<DoorScript>().CreateDoor();
+        //TODO: Spawn new Room Prefab, Teleport to Spawn point of new room, delete old room
         roomsCleared++;
-        if (curRoom - 1 < 0)
-            reSpawnPt = spawnPoints[spawnPoints.Count - 1];
-        else
-            reSpawnPt = spawnPoints[curRoom - 1];
         AddScore(1);
     }
 

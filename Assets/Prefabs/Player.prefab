@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 95782589053844480}
   - component: {fileID: 114948389475382796}
   - component: {fileID: 82589164345957922}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4143574475346624}
   - component: {fileID: 61292582767942254}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4891147959107862}
   - component: {fileID: 61513098851003372}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

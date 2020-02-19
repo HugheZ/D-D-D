@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710111531429798}
   - component: {fileID: 212980812258519086}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SawTrack1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4984211538194944}
   - component: {fileID: 212083353373575496}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: sawTrap_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 95376790845653436}
   - component: {fileID: 82135267585927778}
   - component: {fileID: 114122140936057774}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: SawMode1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4145793788989324}
   - component: {fileID: 212428008300893302}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: sawTrap_2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4420827032467476}
   - component: {fileID: 212366482473781324}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SawTrack1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4321494467172014}
   - component: {fileID: 212929544940703574}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: sawTrap_2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4521968544051630}
   - component: {fileID: 212364325310616200}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SawTrack1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4545163187861388}
   - component: {fileID: 212686919161511564}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SawTrack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 58450384525166418}
   - component: {fileID: 50732989282510600}
   - component: {fileID: 114129715286955456}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: SawbladeTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4948764365353092}
   - component: {fileID: 212767706093412584}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: sawTrap_2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

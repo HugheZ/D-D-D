@@ -9,6 +9,9 @@ public class ManagerScript : MonoBehaviour
     List<Vector3> cameraPts;
     public Vector2 reSpawnPt;
     public GameObject player;
+    public GameObject room1Prefab;
+    public GameObject room2Prefab;
+    GameObject currentRoom;
     public Camera camera;
     public AudioSource endPlayer;
     //public AudioClip endAudio;
@@ -55,6 +58,10 @@ public class ManagerScript : MonoBehaviour
         cameraPts.Add(new Vector3(24, -8, -15f));
         cameraPts.Add(new Vector3(0, 6.5f, -12));
 
+        //start player in Room1
+        currentRoom = Instantiate(room1Prefab);
+        reSpawnPt = new Vector2(0, 1);
+
 
         //UI stuff
         totalScore = 0;
@@ -72,7 +79,18 @@ public class ManagerScript : MonoBehaviour
     /// </summary>
     public void NextRoom()
     {
-        //TODO: Spawn new Room Prefab, Teleport to Spawn point of new room, delete old room
+        Destroy(currentRoom);
+        if(curRoom == 1)
+        {
+            curRoom = 0;
+            currentRoom = Instantiate(room1Prefab);
+            player.transform.position = new Vector2(0, 1);
+        } else
+        {
+            curRoom++;
+            currentRoom = Instantiate(room2Prefab);
+            player.transform.position = new Vector2(0, 1);
+        }
         roomsCleared++;
         AddScore(1);
     }

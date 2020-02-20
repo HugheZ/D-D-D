@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4711114248895338}
   - component: {fileID: 61281287010297096}
   - component: {fileID: 114050538631034778}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TeleportZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

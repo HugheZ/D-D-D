@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/EndlessScene.unity
+- path: Assets/Scenes/Experimental.unity
   isLoaded: 1
   isActive: 1

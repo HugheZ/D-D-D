@@ -9,9 +9,9 @@ public class ManagerScript : MonoBehaviour
     List<Vector3> cameraPts;
     public Vector2 reSpawnPt;
     public GameObject player;
-    public GameObject room1Prefab;
-    public GameObject room2Prefab;
+    public List<GameObject> rooms;
     GameObject currentRoom;
+    System.Random rand;
     public Camera camera;
     public AudioSource endPlayer;
     //public AudioClip endAudio;
@@ -59,7 +59,8 @@ public class ManagerScript : MonoBehaviour
         cameraPts.Add(new Vector3(0, 6.5f, -12));
 
         //start player in Room1
-        currentRoom = Instantiate(room1Prefab);
+        currentRoom = Instantiate(rooms[0]);
+        rand = new System.Random();
         reSpawnPt = new Vector2(0, 1);
 
 
@@ -79,18 +80,15 @@ public class ManagerScript : MonoBehaviour
     /// </summary>
     public void NextRoom()
     {
+        player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
         Destroy(currentRoom);
-        if(curRoom == 1)
-        {
-            curRoom = 0;
-            currentRoom = Instantiate(room1Prefab);
-            player.transform.position = new Vector2(0, 1);
-        } else
-        {
-            curRoom++;
-            currentRoom = Instantiate(room2Prefab);
-            player.transform.position = new Vector2(0, 1);
-        }
+        int newRoom = curRoom;
+        while (newRoom == curRoom)
+            newRoom = rand.Next(0, rooms.Count);
+        curRoom = newRoom;
+        player.transform.position = reSpawnPt;
+        currentRoom = Instantiate(rooms[curRoom], new Vector3(0,0,0), Quaternion.identity);
+        player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         roomsCleared++;
         AddScore(1);
     }

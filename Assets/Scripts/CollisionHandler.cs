@@ -95,7 +95,7 @@ public class CollisionHandler : MonoBehaviour
     /// <summary>
     /// Toggles collision and movement logic for pits
     /// </summary>
-    void ToggleInteractivity(bool toggle)
+    public void ToggleInteractivity(bool toggle)
     {
         //toggle movement
         GetComponent<PlayerMovement>().enabled = toggle;

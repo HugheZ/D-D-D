@@ -1163,10 +1163,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reSpawnPt: {x: 0, y: 0}
   player: {fileID: 119611856}
-  room1Prefab: {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717,
-    type: 2}
-  room2Prefab: {fileID: 1978294968503758, guid: 3f9e37e49d3baa64c94d5c1cd209e89b,
-    type: 2}
+  rooms:
+  - {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
+  - {fileID: 1978294968503758, guid: 3f9e37e49d3baa64c94d5c1cd209e89b, type: 2}
+  - {fileID: 1874174344028890, guid: 442b4c4d9c7ffe84c802604e0c272098, type: 2}
+  - {fileID: 1602561825669388, guid: 401c405e966e02b44a1a083acebf3e26, type: 2}
+  - {fileID: 1289916884055048, guid: 40ef9e336fe32244e9ff3cd1403d208d, type: 2}
   camera: {fileID: 888390222}
   endPlayer: {fileID: 735227876}
   click: {fileID: 8300000, guid: a77c35e5b8519c34b857d76dbaa74dd7, type: 3}

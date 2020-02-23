@@ -35,9 +35,18 @@ public class BossAnimFacilitator : MonoBehaviour {
         int choice = Random.Range(0, 10);
         string trigger = "";
 
-        if (choice <= 3) trigger = "shoot";
-        else if (choice <= 7) trigger = "move";
-        else if (choice <= 9) trigger = "jump";
+        if (choice <= 3)
+        {
+            trigger = "shoot";
+        }
+        else if (choice <= 7)
+        {
+            trigger = "move";
+        }
+        else if (choice <= 9)
+        {
+            trigger = "jump";
+        }
         else trigger = "undf";
 
         anim.SetTrigger(trigger);

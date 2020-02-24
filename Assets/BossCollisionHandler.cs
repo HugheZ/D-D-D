@@ -47,6 +47,6 @@ public class BossCollisionHandler : MonoBehaviour {
     /// <param name="HP">new HP for the boss</param>
     void UpdateUI(float HP)
     {
-        //TODO
+        BossManager.Instance.UpdateHealth(HP);
     }
 }

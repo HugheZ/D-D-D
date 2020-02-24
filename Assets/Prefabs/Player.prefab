@@ -577,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168c391543b1c1545a582cb0420cf2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePerSwing: 5
   upHB: {fileID: 61591171899188972}
   rightHB: {fileID: 61449173425629998}
   downHB: {fileID: 61850483875676538}

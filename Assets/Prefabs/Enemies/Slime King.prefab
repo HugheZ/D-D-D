@@ -187,7 +187,7 @@ MonoBehaviour:
   maxSlideDistance: 2
   slideTime: 1
   maxJumpDistance: 5
-  jumpTime: 2.33
+  jumpTime: 13
   wallLayer:
     serializedVersion: 2
     m_Bits: 1

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114100843629854532}
   - component: {fileID: 95549368315694832}
   - component: {fileID: 82181088183205210}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ArrowTrapR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,6 +196,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 0
   FIRE: {fileID: 82181088183205210}
 --- !u!212 &212956903518840788
 SpriteRenderer:

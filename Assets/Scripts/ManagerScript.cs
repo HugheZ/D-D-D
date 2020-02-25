@@ -82,12 +82,23 @@ public class ManagerScript : MonoBehaviour
     {
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
         Destroy(currentRoom);
+        int traps = rand.Next(0, 2);
         int newRoom = curRoom;
         while (newRoom == curRoom)
             newRoom = rand.Next(0, rooms.Count);
         curRoom = newRoom;
         player.transform.position = reSpawnPt;
         currentRoom = Instantiate(rooms[curRoom], new Vector3(0,0,0), Quaternion.identity);
+        if(traps == 0)
+        {
+            //TODO: Activate A traps
+        }else if(traps == 1)
+        {
+            //TODO: Activate B traps
+        }else
+        {
+            //TODO: Activate C traps
+        }
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         roomsCleared++;
         AddScore(1);

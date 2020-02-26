@@ -435,10 +435,26 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.16666667
+    functionName: PlayBossSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: ae060cfa4bbd1e84eb8bf7bad0da13dd,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.1666666
     functionName: Move
     data: 
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1666666
+    functionName: PlayBossSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: ae060cfa4bbd1e84eb8bf7bad0da13dd,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

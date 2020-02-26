@@ -815,6 +815,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 2
+    functionName: PlayBossSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: a52be4d557ac37e479a95b5d5a7301e4,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.1333334
     functionName: Jump
     data: 
@@ -833,6 +841,14 @@ AnimationClip:
     functionName: Land
     data: 
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.0333333
+    functionName: PlayBossSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: c498bbe8ee003be41bc454a71f841c2c,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

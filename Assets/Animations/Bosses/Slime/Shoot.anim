@@ -76,6 +76,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: PlayBossSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 807f4f6ceb9344e40be7d322d1eb7f59,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.016666668
     functionName: Shoot
     data: 

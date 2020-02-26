@@ -8,13 +8,15 @@ public class CursorScript : MonoBehaviour {
     public float speed = 10;
     public GameObject cursorTip;
     bool holdingSomething = false;
+    Transform whatHolding;
     int layermask;
+    DungeonBuilderManager manager;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         layermask = LayerMask.GetMask("Traps", "TrapsNoDmg");
-
+        manager = DungeonBuilderManager.Instance;
     }
 	
 	// Update is called once per frame
@@ -30,6 +32,11 @@ public class CursorScript : MonoBehaviour {
             {
                 //put down what you're holding
                 holdingSomething = false;
+                BoxCollider2D box = whatHolding.gameObject.GetComponent<BoxCollider2D>();
+                if (box != null)
+                    box.enabled = false;
+                whatHolding.SetParent(manager.GetRoomTransform());
+                whatHolding = null;
             }
             else
             {
@@ -39,8 +46,11 @@ public class CursorScript : MonoBehaviour {
                 {
                     //make the hit a child of the cursor
                     holdingSomething = true;
-                    hit.transform.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    hit.transform.SetParent(transform);
+                    whatHolding = hit.transform;
+                    BoxCollider2D box = whatHolding.gameObject.GetComponent<BoxCollider2D>();
+                    if (box != null)
+                        box.enabled = false;
+                    whatHolding.SetParent(transform);
                     
                 }
             }

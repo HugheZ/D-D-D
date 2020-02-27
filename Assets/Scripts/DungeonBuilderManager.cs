@@ -9,6 +9,9 @@ public class DungeonBuilderManager : MonoBehaviour {
     public GameObject room;
     public Button shuffleButton;
     public Text shuffleText;
+    public List<GameObject> trapPool;
+    public List<Transform> trapSpawnPts;
+    System.Random rnd;
     int shufflesLeft;
 
     //stuff for Singleton
@@ -33,12 +36,21 @@ public class DungeonBuilderManager : MonoBehaviour {
     void Start () {
         shufflesLeft = 3;
         shuffleText.text = "Shuffles Left: " + shufflesLeft;
+        rnd = new System.Random();
+        GetNewTraps();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+    void GetNewTraps()
+    {
+        for(int i = 0; i < trapSpawnPts.Count; i++)
+        {
+            Instantiate(trapPool[rnd.Next(0,trapPool.Count)], trapSpawnPts[i]);
+        }
+    }
 
     public Transform GetRoomTransform()
     {
@@ -54,6 +66,7 @@ public class DungeonBuilderManager : MonoBehaviour {
             shuffleButton.enabled = false;
             shuffleButton.image.color = Color.red;
         }
+        GetNewTraps();
     }
     public void FinishRoom()
     {

@@ -15,7 +15,7 @@ public class CursorScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        layermask = LayerMask.GetMask("Traps", "TrapsNoDmg");
+        layermask = LayerMask.GetMask("Traps", "TrapsNoDmg", "TrapsNoInterract");
         manager = DungeonBuilderManager.Instance;
     }
 	
@@ -26,7 +26,7 @@ public class CursorScript : MonoBehaviour {
         rb.velocity = new Vector2(x, y) * speed;
 
         //will need to change for controller
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (holdingSomething)
             {

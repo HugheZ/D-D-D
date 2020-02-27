@@ -92,7 +92,7 @@ public class MainMenuManager : MonoBehaviour
         selectedGame = "EndlessScene";
         anim.SetTrigger("start");
         MenuAudio.PlayOneShot(click);
-        //SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("EndlessScene");
     }
 
 
@@ -101,10 +101,11 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     public void StartMultiplayerSearch()
     {
-        selectedGame = "";
+        selectedGame = "MultiplayerGame";
         anim.SetTrigger("start");
         MenuAudio.PlayOneShot(click);
-        throw new Exception("Not yet implemented");
+        SceneManager.LoadScene("DungeonBuilder");
+        //throw new Exception("Not yet implemented");
     }
 
     /// <summary>

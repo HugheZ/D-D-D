@@ -179,6 +179,11 @@ MonoBehaviour:
   - {fileID: 1328857478336498, guid: 29d8eb26a36ef8542bdfd994eb268e68, type: 2}
   - {fileID: 1113484195628792, guid: a5a1d9dcdecc565459b1774793ad9211, type: 2}
   - {fileID: 1378905950041778, guid: 6805a693ec5e48341867252666a74473, type: 2}
+  - {fileID: 1378905950041778, guid: 6805a693ec5e48341867252666a74473, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
   - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
   trapSpawnPts:
   - {fileID: 1471768475}

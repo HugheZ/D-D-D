@@ -196,7 +196,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 1
-  scriptEnabled: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82660026740264256}
 --- !u!212 &212820216752929592
 SpriteRenderer:

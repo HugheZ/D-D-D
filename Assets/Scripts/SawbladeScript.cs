@@ -24,7 +24,7 @@ public class SawbladeScript : MonoBehaviour
         rb.rotation += 2.0f;
     }
 
-    void flipActive()
+    public void FlipActive()
     {
         isActive = !isActive;
         if (!isActive)

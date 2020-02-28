@@ -113,8 +113,10 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     public void ShowAbout()
     {
-        AboutCanvas.SetActive(true);
-        MenuAudio.PlayOneShot(click);
+        //TEMPORARY, for build video purposes
+        /*AboutCanvas.SetActive(true);
+        MenuAudio.PlayOneShot(click);*/
+        SceneManager.LoadScene("Experimental");
     }
 
     /// <summary>

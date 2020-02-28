@@ -48,7 +48,12 @@ public class DungeonBuilderManager : MonoBehaviour {
     {
         for(int i = 0; i < trapSpawnPts.Count; i++)
         {
-            Instantiate(trapPool[rnd.Next(0,trapPool.Count)], trapSpawnPts[i]);
+            GameObject newTrap = trapPool[rnd.Next(0, trapPool.Count)];
+            if (newTrap.GetComponent<ArrowTrapScript>())
+                newTrap.GetComponent<ArrowTrapScript>().SwapEnabled();
+            if (newTrap.GetComponent<SawbladeScript>())
+                newTrap.GetComponent<SawbladeScript>().FlipActive();
+            Instantiate(newTrap, trapSpawnPts[i]);
         }
     }
 

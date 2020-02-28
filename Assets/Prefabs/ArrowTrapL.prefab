@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114710625957681252}
   - component: {fileID: 95745879098459606}
   - component: {fileID: 82339917623815728}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ArrowTrapL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1630147442100066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8077033, y: 0.79811144, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -196,6 +196,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82339917623815728}
 --- !u!212 &212115856102896342
 SpriteRenderer:

@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 50976779209447058}
   - component: {fileID: 114843472620880868}
   - component: {fileID: 82714923670583810}
-  m_Layer: 16
+  m_Layer: 19
   m_Name: Slime King
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324606682527498}
   - component: {fileID: 212116877540196842}
-  m_Layer: 16
+  m_Layer: 19
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 4428238571649384}
   - component: {fileID: 199388253024803890}
   - component: {fileID: 198692019530647272}
-  m_Layer: 16
+  m_Layer: 19
   m_Name: DeathBubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 4862893049357404}
   - component: {fileID: 198598747302833072}
   - component: {fileID: 199425329957842668}
-  m_Layer: 16
+  m_Layer: 19
   m_Name: Bubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

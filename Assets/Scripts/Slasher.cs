@@ -9,6 +9,9 @@ public class Slasher : MonoBehaviour
     bool flexing;
     bool isSwinging;
 
+    //damage per player swing
+    public float damagePerSwing;
+
     //Hitboxes
     public BoxCollider2D upHB;
     public BoxCollider2D rightHB;

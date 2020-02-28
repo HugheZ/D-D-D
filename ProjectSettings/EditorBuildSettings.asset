@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/MainMenu.unity
+    guid: 21240a75cee24684a8785569124206e8
+  - enabled: 1
+    path: Assets/Scenes/EndlessScene.unity
+    guid: 6473a6bb7d980e64a93a8ef9ecd2b84f
+  - enabled: 1
+    path: Assets/Scenes/DungeonBuilder.unity
+    guid: 6d57f040e74566146a2305d77fcf8b81
+  - enabled: 1
+    path: Assets/Scenes/Experimental.unity
+    guid: adb9c684b6e258949bd307bb0289ca55
   m_configObjects: {}

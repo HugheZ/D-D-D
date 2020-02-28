@@ -60,6 +60,8 @@ public class ManagerScript : MonoBehaviour
 
         //start player in Room1
         currentRoom = Instantiate(rooms[0]);
+        currentRoom.transform.GetChild(3).gameObject.SetActive(true);
+        print("Spawning in Room1A");
         rand = new System.Random();
         reSpawnPt = new Vector2(0, 1);
 
@@ -82,12 +84,28 @@ public class ManagerScript : MonoBehaviour
     {
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
         Destroy(currentRoom);
+        int traps = rand.Next(3);
         int newRoom = curRoom;
         while (newRoom == curRoom)
             newRoom = rand.Next(0, rooms.Count);
         curRoom = newRoom;
         player.transform.position = reSpawnPt;
         currentRoom = Instantiate(rooms[curRoom], new Vector3(0,0,0), Quaternion.identity);
+        if(traps == 0)
+        {
+            currentRoom.transform.GetChild(3).gameObject.SetActive(true);
+            print("A Room");
+        }
+        else if(traps == 1)
+        {
+            currentRoom.transform.GetChild(4).gameObject.SetActive(true);
+            print("B Room");
+        }
+        else
+        {
+            currentRoom.transform.GetChild(5).gameObject.SetActive(true);
+            print("C Room");
+        }
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         roomsCleared++;
         AddScore(1);

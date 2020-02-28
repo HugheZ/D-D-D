@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DungeonBuilderManager : MonoBehaviour {
 
@@ -75,6 +76,6 @@ public class DungeonBuilderManager : MonoBehaviour {
     }
     public void FinishRoom()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
 }

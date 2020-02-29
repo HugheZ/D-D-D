@@ -5575,6 +5575,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82151162932608286}
 --- !u!114 &114133786146859412
 MonoBehaviour:
@@ -5603,6 +5604,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82919110710757888}
 --- !u!114 &114222423532887466
 MonoBehaviour:
@@ -5615,6 +5617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114229096470284872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5629,6 +5632,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82931729251286062}
 --- !u!114 &114263069311672702
 MonoBehaviour:
@@ -5654,6 +5658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114314269374566052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5715,6 +5720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114445696600588838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5738,6 +5744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114641886897825562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5752,6 +5759,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82614365342197318}
 --- !u!114 &114658812209494038
 MonoBehaviour:
@@ -5844,6 +5852,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82241756208346546}
 --- !u!114 &114828443801604388
 MonoBehaviour:
@@ -5885,6 +5894,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82069392747121282}
 --- !u!212 &212005734418499406
 SpriteRenderer:

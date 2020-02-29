@@ -9608,6 +9608,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 1
+  scriptEnabled: 1
   FIRE: {fileID: 82966808725491454}
 --- !u!114 &114028257633004078
 MonoBehaviour:
@@ -9701,6 +9702,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82614318682154254}
 --- !u!114 &114111217162269288
 MonoBehaviour:
@@ -9716,6 +9718,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82660178526280924}
 --- !u!114 &114173654025743586
 MonoBehaviour:
@@ -9731,6 +9734,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82036597311773834}
 --- !u!114 &114179827709198354
 MonoBehaviour:
@@ -9759,6 +9763,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82130307411960324}
 --- !u!114 &114203849915354978
 MonoBehaviour:
@@ -9826,6 +9831,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82457033033271696}
 --- !u!114 &114276197243112596
 MonoBehaviour:
@@ -9904,6 +9910,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82024772380707078}
 --- !u!114 &114375212871052966
 MonoBehaviour:
@@ -9919,6 +9926,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82007466067644970}
 --- !u!114 &114376753151782988
 MonoBehaviour:
@@ -10072,6 +10080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114576815524718848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10086,6 +10095,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 1
+  scriptEnabled: 1
   FIRE: {fileID: 82649967538710400}
 --- !u!114 &114591722314832358
 MonoBehaviour:
@@ -10127,6 +10137,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82966429322311382}
 --- !u!114 &114629409240008060
 MonoBehaviour:
@@ -10181,6 +10192,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82209255021136772}
 --- !u!114 &114834669859318522
 MonoBehaviour:
@@ -10206,6 +10218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114863059221387062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10233,6 +10246,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82939622098554702}
 --- !u!114 &114889268581023342
 MonoBehaviour:

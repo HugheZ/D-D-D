@@ -82,9 +82,13 @@ public class ArrowTrapScript : MonoBehaviour
             GetComponent<Animator>().enabled = true;
     }
 
-    public void SwapEnabled()
+    public void SetDisabled()
     {
-        scriptEnabled = !scriptEnabled;
+        scriptEnabled = false;
+    }
+    public void SetEnabled()
+    {
+        scriptEnabled = true;
     }
 
 }

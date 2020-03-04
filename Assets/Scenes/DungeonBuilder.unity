@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 1197631341}
   room: {fileID: 393385992}
+  fire: {fileID: 1345002521462280, guid: 1e579472b5a8714468393b6dbff59991, type: 2}
   shuffleButton: {fileID: 1331583803}
   shuffleText: {fileID: 1477159138}
   trapPool:

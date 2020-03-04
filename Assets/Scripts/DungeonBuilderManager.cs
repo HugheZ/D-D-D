@@ -42,7 +42,7 @@ public class DungeonBuilderManager : MonoBehaviour {
         rnd = new System.Random();
         GetNewTraps();
         //TODO: GET PLAYER NUMBER + CHANGE FIRE COLOR
-        fireColor = new Color(255, 117, 0);
+        fireColor = new Color(1, 0.458823529411764f, 0);
     }
 	
 	// Update is called once per frame

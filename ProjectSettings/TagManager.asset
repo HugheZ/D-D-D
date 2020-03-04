@@ -8,6 +8,10 @@ TagManager:
   - Weapons
   - Door
   - Cursor
+  - P1Room
+  - P2Room
+  - P3Room
+  - P4Room
   layers:
   - Default
   - TransparentFX

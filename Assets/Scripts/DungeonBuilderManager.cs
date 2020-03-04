@@ -8,6 +8,8 @@ public class DungeonBuilderManager : MonoBehaviour {
 
     public GameObject cursor;
     public GameObject room;
+    public GameObject fire;
+    Color fireColor;
     public Button shuffleButton;
     public Text shuffleText;
     public List<GameObject> trapPool;
@@ -39,6 +41,8 @@ public class DungeonBuilderManager : MonoBehaviour {
         shuffleText.text = "Shuffles Left: " + shufflesLeft;
         rnd = new System.Random();
         GetNewTraps();
+        //TODO: GET PLAYER NUMBER + CHANGE FIRE COLOR
+        fireColor = new Color(1, 0.458823529411764f, 0);
     }
 	
 	// Update is called once per frame
@@ -51,7 +55,7 @@ public class DungeonBuilderManager : MonoBehaviour {
         {
             GameObject newTrap = trapPool[rnd.Next(0, trapPool.Count)];
             if (newTrap.GetComponent<ArrowTrapScript>())
-                newTrap.GetComponent<ArrowTrapScript>().SwapEnabled();
+                newTrap.GetComponent<ArrowTrapScript>().SetDisabled();
             if (newTrap.GetComponent<SawbladeScript>())
                 newTrap.GetComponent<SawbladeScript>().FlipActive();
             Instantiate(newTrap, trapSpawnPts[i]);
@@ -76,6 +80,21 @@ public class DungeonBuilderManager : MonoBehaviour {
     }
     public void FinishRoom()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameObject fire1 = Instantiate(fire, new Vector2(-7.5f,-3.5f), Quaternion.identity, room.transform);
+        fire1.GetComponent<SpriteRenderer>().color = fireColor;
+        GameObject fire2 = Instantiate(fire, new Vector2(-2.5f, -3.5f), Quaternion.identity, room.transform);
+        fire2.GetComponent<SpriteRenderer>().color = fireColor;
+        GameObject fire3 = Instantiate(fire, new Vector2(-7.5f, 4.5f), Quaternion.identity, room.transform);
+        fire3.GetComponent<SpriteRenderer>().color = fireColor;
+        GameObject fire4 = Instantiate(fire, new Vector2(-2.5f, 4.5f), Quaternion.identity, room.transform);
+        fire4.GetComponent<SpriteRenderer>().color = fireColor;
+        //TODO: Set tag of room to be correct player's tag
+        room.tag = "P1Room";
+        //room.tag = "P2Room";
+        //room.tag = "P3Room";
+        //room.tag = "P4Room";
+        //preserve the room by not destroying it
+        DontDestroyOnLoad(room);
+        SceneManager.LoadScene("MultiplayerRun");
     }
 }

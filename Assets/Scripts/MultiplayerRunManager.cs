@@ -16,6 +16,7 @@ public class MultiplayerRunManager : MonoBehaviour {
     public Transform p2Space;
     public Transform p3Space;
     public Transform p4Space;
+    public List<Transform> playerSpawns;
     
 
 	// Use this for initialization
@@ -53,6 +54,7 @@ public class MultiplayerRunManager : MonoBehaviour {
         GameObject p2r1 = Instantiate(p1room, p2Space);
         GameObject p3r1 = Instantiate(p1room, p3Space);
         GameObject p4r1 = Instantiate(p1room, p4Space);
+        
         p1r1.SetActive(true);
         p2r1.SetActive(true);
         p3r1.SetActive(true);

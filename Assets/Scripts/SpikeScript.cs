@@ -6,7 +6,7 @@ public class SpikeScript : MonoBehaviour
 {
     BoxCollider2D spikeBox;
     public AudioSource spikeAudio;
-    public Camera camera;
+    //public Camera camera;
     Transform tform;
 
     // Start is called before the first frame update
@@ -15,20 +15,20 @@ public class SpikeScript : MonoBehaviour
         spikeBox = GetComponent<BoxCollider2D>();
         spikeBox.isTrigger = true;
         tform = gameObject.GetComponent<Transform>();
-        camera = FindObjectOfType<Camera>();
+        //camera = FindObjectOfType<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (distToCam(tform.position.x, tform.position.y)>9.0)
+        /*if (distToCam(tform.position.x, tform.position.y)>9.0)
         {
             gameObject.GetComponent<AudioSource>().mute = true;
         }
         else if (distToCam(tform.position.x, tform.position.y) < 9)
         {
             gameObject.GetComponent<AudioSource>().mute = false;
-        }
+        }*/
     }
 
     public void setSpikesInactive()
@@ -53,12 +53,12 @@ public class SpikeScript : MonoBehaviour
         gameObject.GetComponent<AudioSource>().mute = true;
     }
 
-    public float distToCam(float x, float y)
+    /*public float distToCam(float x, float y)
     {
         Transform ct = camera.transform;
         float cx = ct.position.x;
         float cy = ct.position.y;
 
         return (Mathf.Sqrt(((x - cx) * (x - cx)) + ((y - cy) * (y - cy))));
-    }
+    }*/
 }

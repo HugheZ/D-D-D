@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class MultiplayerRunManager : MonoBehaviour {
 
@@ -11,25 +12,42 @@ public class MultiplayerRunManager : MonoBehaviour {
     public GameObject bossRoom;
     public GameObject boss;
     bool bossSpawned;
+    bool playersSpawned = false;
     public Transform zero;
     public Transform p1Space;
     public Transform p2Space;
     public Transform p3Space;
     public Transform p4Space;
-    public List<Transform> playerSpawns;
-    
+    public List<Vector2> playerSpawns;
+    NetManScript netman;
 
-	// Use this for initialization
-	void Start () {
+    private static MultiplayerRunManager _instance = null;
+    public static MultiplayerRunManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        _instance = this;
+    }
+    // Use this for initialization
+    void Start () {
+
+        netman = NetManScript.Instance;
+        SetTrapsEnabled();
+        SpawnPlayers();
+
         if (p1room == null)
         {
-            p1room = GameObject.FindGameObjectWithTag("P1Room");
-            ArrowTrapScript[] arrowTraps = (ArrowTrapScript[])FindObjectsOfType(typeof(ArrowTrapScript));
-            foreach(ArrowTrapScript arrowTrap in arrowTraps)
-                arrowTrap.SetEnabled();
-            SawbladeScript[] sawblades = (SawbladeScript[])FindObjectsOfType(typeof(SawbladeScript));
-            foreach (SawbladeScript sawblade in sawblades)
-                sawblade.FlipActive();
+            p1room = GameObject.FindGameObjectWithTag("P1Room");            
             p1room.SetActive(false);
             p1room.transform.position = new Vector2(0, 0);
         }
@@ -58,7 +76,7 @@ public class MultiplayerRunManager : MonoBehaviour {
         p1r1.SetActive(true);
         p2r1.SetActive(true);
         p3r1.SetActive(true);
-        p4r1.SetActive(true);
+        p4r1.SetActive(true);       
 
         bossSpawned = false;
 
@@ -66,6 +84,11 @@ public class MultiplayerRunManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        p1room.SetActive(false);
+        SetTrapsEnabled();
+        if (!playersSpawned)
+            SpawnPlayers();
+
         if (PlayerInRoom() && bossSpawned)
         {
             Instantiate(boss, zero);
@@ -77,5 +100,24 @@ public class MultiplayerRunManager : MonoBehaviour {
     {
         //TODO: check if a player reaches boss room
         return true;
+    }
+    private void SetTrapsEnabled()
+    {
+        ArrowTrapScript[] arrowTraps = (ArrowTrapScript[])FindObjectsOfType(typeof(ArrowTrapScript));
+        foreach (ArrowTrapScript arrowTrap in arrowTraps)
+            arrowTrap.SetEnabled();
+        SawbladeScript[] sawblades = (SawbladeScript[])FindObjectsOfType(typeof(SawbladeScript));
+        foreach (SawbladeScript sawblade in sawblades)
+            sawblade.FlipActive();
+    }
+    private void SpawnPlayers()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for (int index = 0; index < players.Length; index++)
+        {
+            GameObject player = players[index];
+            player.transform.position = playerSpawns[index];
+        }
+        playersSpawned = true;
     }
 }

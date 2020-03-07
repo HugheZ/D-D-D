@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class DungeonBuilderManager : MonoBehaviour {
 
-    public GameObject player;
     public GameObject room;
     public GameObject fire;
     Color fireColor;
+    NetManScript netMan;
     public Button shuffleButton;
     public Text shuffleText;
     public List<GameObject> trapPool;
@@ -37,12 +37,11 @@ public class DungeonBuilderManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        netMan = NetManScript.Instance;
         shufflesLeft = 3;
         shuffleText.text = "Shuffles Left: " + shufflesLeft;
         rnd = new System.Random();
         GetNewTraps();
-
-        player.GetComponent<PlayerConnection>().MakeCursor();
 
         //TODO: GET PLAYER NUMBER + CHANGE FIRE COLOR
         fireColor = new Color(1, 0.458823529411764f, 0);
@@ -98,6 +97,7 @@ public class DungeonBuilderManager : MonoBehaviour {
         //room.tag = "P4Room";
         //preserve the room by not destroying it
         DontDestroyOnLoad(room);
-        SceneManager.LoadScene("MultiplayerRun");
+        //SceneManager.LoadScene("MultiplayerRun");
+        netMan.Player1Ready();
     }
 }

@@ -241,7 +241,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 308885631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 55, z: -10}
+  m_LocalPosition: {x: -50, y: 56, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -500,10 +500,10 @@ MonoBehaviour:
   p3Space: {fileID: 104202841}
   p4Space: {fileID: 2038561027}
   playerSpawns:
-  - {fileID: 1089215806}
-  - {fileID: 751969430}
-  - {fileID: 1772201142}
-  - {fileID: 282621706}
+  - {x: -50, y: 50}
+  - {x: 50, y: 50}
+  - {x: -50, y: -50}
+  - {x: 50, y: -50}
 --- !u!4 &1930404517
 Transform:
   m_ObjectHideFlags: 0

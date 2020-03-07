@@ -87,6 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4818033734675742}
+  - component: {fileID: 114731832711144202}
   m_Layer: 0
   m_Name: BossRoom
   m_TagString: Untagged
@@ -311,6 +312,38 @@ Transform:
   m_Father: {fileID: 4436562091816640}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114731832711144202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476267867353936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 239
+    i1: 116
+    i2: 28
+    i3: 215
+    i4: 250
+    i5: 233
+    i6: 186
+    i7: 180
+    i8: 170
+    i9: 13
+    i10: 159
+    i11: 121
+    i12: 248
+    i13: 179
+    i14: 41
+    i15: 90
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!19719996 &2113883505667215936
 TilemapCollider2D:
   m_ObjectHideFlags: 1

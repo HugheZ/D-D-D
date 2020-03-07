@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 331682144974327074}
   - component: {fileID: 82400723556219120}
   - component: {fileID: 114494269444340678}
+  - component: {fileID: 114638861613084320}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -169,6 +170,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+--- !u!114 &114638861613084320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345002521462280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 30
+    i1: 87
+    i2: 148
+    i3: 114
+    i4: 181
+    i5: 168
+    i6: 113
+    i7: 68
+    i8: 104
+    i9: 57
+    i10: 59
+    i11: 109
+    i12: 191
+    i13: 245
+    i14: 153
+    i15: 145
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212562092332949980
 SpriteRenderer:
   m_ObjectHideFlags: 1

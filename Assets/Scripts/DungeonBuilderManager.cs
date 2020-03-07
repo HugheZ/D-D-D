@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DungeonBuilderManager : MonoBehaviour {
 
-    public GameObject cursor;
+    public GameObject player;
     public GameObject room;
     public GameObject fire;
     Color fireColor;
@@ -41,6 +41,9 @@ public class DungeonBuilderManager : MonoBehaviour {
         shuffleText.text = "Shuffles Left: " + shufflesLeft;
         rnd = new System.Random();
         GetNewTraps();
+
+        player.GetComponent<PlayerConnection>().MakeCursor();
+
         //TODO: GET PLAYER NUMBER + CHANGE FIRE COLOR
         fireColor = new Color(1, 0.458823529411764f, 0);
     }

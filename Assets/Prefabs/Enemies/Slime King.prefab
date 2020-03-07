@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 50976779209447058}
   - component: {fileID: 114843472620880868}
   - component: {fileID: 82714923670583810}
+  - component: {fileID: 114254304953172010}
   m_Layer: 19
   m_Name: Slime King
   m_TagString: Untagged
@@ -301,6 +302,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   timeUntilDeactive: 4
+--- !u!114 &114254304953172010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1561540705188224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 30
+    i1: 41
+    i2: 255
+    i3: 215
+    i4: 32
+    i5: 30
+    i6: 174
+    i7: 68
+    i8: 153
+    i9: 34
+    i10: 4
+    i11: 156
+    i12: 175
+    i13: 40
+    i14: 223
+    i15: 181
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114843472620880868
 MonoBehaviour:
   m_ObjectHideFlags: 1

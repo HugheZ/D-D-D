@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114137236963910278}
   - component: {fileID: 95524320329089200}
   - component: {fileID: 82564751380045162}
+  - component: {fileID: 114330806993015368}
   m_Layer: 17
   m_Name: ArrowTrapS
   m_TagString: Untagged
@@ -196,8 +197,40 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
-  scriptEnabled: 1
+  scriptEnabled: 0
   FIRE: {fileID: 82564751380045162}
+--- !u!114 &114330806993015368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1113484195628792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 165
+    i1: 161
+    i2: 217
+    i3: 220
+    i4: 222
+    i5: 204
+    i6: 86
+    i7: 84
+    i8: 89
+    i9: 177
+    i10: 119
+    i11: 71
+    i12: 147
+    i13: 173
+    i14: 146
+    i15: 17
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212494973970145010
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -241,7 +241,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 308885631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 56, z: -10}
+  m_LocalPosition: {x: -50, y: 50, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -492,6 +492,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218a538abd0c31e4d9943c74d283403e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p1room: {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
+  p2room: {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
+  p3room: {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
+  p4room: {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
   bossRoom: {fileID: 1298702232}
   boss: {fileID: 1561540705188224, guid: 1e29ffd7201eae449922049caf28dfb5, type: 2}
   zero: {fileID: 790191186}

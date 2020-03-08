@@ -5,10 +5,10 @@ using UnityEngine.Networking;
 
 public class MultiplayerRunManager : MonoBehaviour {
 
-    GameObject p1room;
-    GameObject p2room;
-    GameObject p3room;
-    GameObject p4room;
+    public GameObject p1room;
+    public GameObject p2room;
+    public GameObject p3room;
+    public GameObject p4room;
     public GameObject bossRoom;
     public GameObject boss;
     bool bossSpawned;

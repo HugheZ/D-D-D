@@ -9128,6 +9128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114054736749931474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9168,6 +9169,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82594865618654574}
 --- !u!114 &114142872803019796
 MonoBehaviour:
@@ -9193,6 +9195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114217320430516676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9230,6 +9233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114254261636125618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9270,6 +9274,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82988677537172642}
 --- !u!114 &114302210803552632
 MonoBehaviour:
@@ -9386,6 +9391,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82922653833532054}
 --- !u!114 &114422923619864732
 MonoBehaviour:
@@ -9452,6 +9458,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82477220986150608}
 --- !u!114 &114503245458006362
 MonoBehaviour:
@@ -9493,6 +9500,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82638442022096424}
 --- !u!114 &114541826893913162
 MonoBehaviour:
@@ -9520,6 +9528,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82038949839843816}
 --- !u!114 &114578947812209100
 MonoBehaviour:
@@ -9599,6 +9608,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82363719067681988}
 --- !u!114 &114772853878248052
 MonoBehaviour:
@@ -9614,6 +9624,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82891774617672130}
 --- !u!114 &114819941496354678
 MonoBehaviour:
@@ -9665,6 +9676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114829474458534522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9718,6 +9730,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82775285023574272}
 --- !u!114 &114979536372843430
 MonoBehaviour:
@@ -9733,6 +9746,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82245293680576714}
 --- !u!114 &114988619225374080
 MonoBehaviour:

@@ -5270,6 +5270,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82486343030018618}
 --- !u!114 &114209559768287980
 MonoBehaviour:
@@ -5296,6 +5297,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82801066574934840}
 --- !u!114 &114302354684097662
 MonoBehaviour:
@@ -5311,6 +5313,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82207731688037366}
 --- !u!114 &114302373172750128
 MonoBehaviour:
@@ -5335,6 +5338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114321710473850242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5372,6 +5376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114377890133680482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5412,6 +5417,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82107668188880232}
 --- !u!114 &114597443620785746
 MonoBehaviour:
@@ -5479,6 +5485,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 1
+  scriptEnabled: 1
   FIRE: {fileID: 82220633153442060}
 --- !u!114 &114656751089783358
 MonoBehaviour:
@@ -5506,6 +5513,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 1
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82853374915888826}
 --- !u!114 &114724048843640864
 MonoBehaviour:
@@ -5518,6 +5526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4915c458435ba446bb1ec576cc4529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &114872968659760416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5545,6 +5554,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 1
+  scriptEnabled: 1
   FIRE: {fileID: 82139035881306146}
 --- !u!114 &114896250663843130
 MonoBehaviour:
@@ -5585,6 +5595,7 @@ MonoBehaviour:
   facingRight: 1
   facingSouth: 0
   facingNorth: 0
+  scriptEnabled: 1
   FIRE: {fileID: 82807853576947824}
 --- !u!114 &114958994772919836
 MonoBehaviour:
@@ -5600,6 +5611,7 @@ MonoBehaviour:
   facingRight: 0
   facingSouth: 0
   facingNorth: 1
+  scriptEnabled: 1
   FIRE: {fileID: 82972574532690102}
 --- !u!212 &212001567638771630
 SpriteRenderer:

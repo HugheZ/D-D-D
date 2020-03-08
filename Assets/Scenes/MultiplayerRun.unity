@@ -504,6 +504,10 @@ MonoBehaviour:
   - {fileID: 751969430}
   - {fileID: 1772201142}
   - {fileID: 282621706}
+  p1camera: {fileID: 0}
+  p2camera: {fileID: 0}
+  p3camera: {fileID: 0}
+  p4camera: {fileID: 0}
 --- !u!4 &1930404517
 Transform:
   m_ObjectHideFlags: 0

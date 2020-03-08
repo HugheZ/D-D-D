@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MultiplayerRunManager : MonoBehaviour {
 
-    GameObject p1room;
-    GameObject p2room;
-    GameObject p3room;
-    GameObject p4room;
+    public GameObject p1room;
+    public GameObject p2room;
+    public GameObject p3room;
+    public GameObject p4room;
     public GameObject bossRoom;
     public GameObject boss;
     bool bossSpawned;
@@ -17,6 +17,7 @@ public class MultiplayerRunManager : MonoBehaviour {
     public Transform p3Space;
     public Transform p4Space;
     public List<Transform> playerSpawns;
+    public Camera p1camera, p2camera, p3camera, p4camera;
     
 
 	// Use this for initialization
@@ -61,6 +62,12 @@ public class MultiplayerRunManager : MonoBehaviour {
         p4r1.SetActive(true);
 
         bossSpawned = false;
+
+        //Instantiate camera sizes
+        p1camera.rect = new Rect(0, 0, .5f, .5f);
+        p2camera.rect = new Rect(.5f, 0, .5f, .5f);
+        p3camera.rect = new Rect(0, .5f, .5f, .5f);
+        p4camera.rect = new Rect(.5f, .5f, .5f, .5f);
 
     }
 	

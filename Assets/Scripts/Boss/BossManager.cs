@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class BossManager : MonoBehaviour {
+public class BossManager : NetworkBehaviour {
 
     private static BossManager _instance;
 
@@ -104,5 +105,18 @@ public class BossManager : MonoBehaviour {
     void Deactivate()
     {
         ResetBoss(true);
+    }
+
+    /// <summary>
+    /// Updates the correct player's score
+    /// </summary>
+    /// <param name="PID"></param>
+    /// <param name="damage"></param>
+    public void UpdateScore(NetworkConnection PID, float damage)
+    {
+        if (isServer)
+        {
+            print("\nAttacker: " + PID.connectionId + "\nDamage: " + damage);
+        }
     }
 }

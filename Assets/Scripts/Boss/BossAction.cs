@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BossAction : MonoBehaviour {
+public class BossAction : NetworkBehaviour {
     Animator anim; //animator controller
     Vector3 nextPosn; //next position to move to
     public float maxSlideDistance; //maximum distance to slide to
@@ -50,9 +51,20 @@ public class BossAction : MonoBehaviour {
     /// </summary>
     public void Jump()
     {
+        if (!isServer) return;
         Vector2 newPosn = GenerateNextJump();
+        RpcJump(newPosn);
+    }
+
+    /// <summary>
+    /// Logic for telling all clients to jump
+    /// </summary>
+    /// <param name="posn">New position to move to</param>
+    [ClientRpc]
+    void RpcJump(Vector2 posn)
+    {
         if (moveAction != null) StopCoroutine(moveAction);
-        moveAction = StartCoroutine(_MV(newPosn, jumpTime));
+        moveAction = StartCoroutine(_MV(posn, jumpTime));
     }
 
     /// <summary>
@@ -60,9 +72,20 @@ public class BossAction : MonoBehaviour {
     /// </summary>
     public void Move()
     {
+        if (!isServer) return;
         Vector2 newPosn = GenerateNextPosition();
+        RpcMove(newPosn);
+    }
+
+    /// <summary>
+    /// Logic for telling all clients to move
+    /// </summary>
+    /// <param name="posn">New position to move to</param>
+    [ClientRpc]
+    void RpcMove(Vector2 posn)
+    {
         if (moveAction != null) StopCoroutine(moveAction);
-        moveAction = StartCoroutine(_MV(newPosn, slideTime));
+        moveAction = StartCoroutine(_MV(posn, slideTime));
     }
 
     IEnumerator _MV(Vector2 position, float time)
@@ -84,10 +107,12 @@ public class BossAction : MonoBehaviour {
     /// </summary>
     public void Shoot()
     {
+        if (!isServer) return;
         foreach (Vector2 point in shootPoints)
         {
             Bubble bub = Instantiate(bubble, transform.TransformPoint(point), Quaternion.identity);
             bub.GetComponent<Rigidbody2D>().velocity = (transform.TransformPoint(point) - transform.position) * shootSpeed;
+            NetworkServer.Spawn(bub.gameObject);
         }
     }
 

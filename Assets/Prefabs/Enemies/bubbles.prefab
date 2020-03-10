@@ -26,6 +26,8 @@ GameObject:
   - component: {fileID: 198111682080677056}
   - component: {fileID: 199204355814634384}
   - component: {fileID: 82153704539343088}
+  - component: {fileID: 114749445447605114}
+  - component: {fileID: 114023397863591760}
   m_Layer: 13
   m_Name: bubbles
   m_TagString: Untagged
@@ -176,6 +178,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114023397863591760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873650054833304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114137177599345446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +210,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b3c5f64a7f6dc4784f69f9a22c3fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114749445447605114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873650054833304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 255
+    i1: 104
+    i2: 24
+    i3: 43
+    i4: 228
+    i5: 225
+    i6: 38
+    i7: 4
+    i8: 57
+    i9: 144
+    i10: 253
+    i11: 183
+    i12: 162
+    i13: 156
+    i14: 121
+    i15: 216
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!198 &198111682080677056
 ParticleSystem:
   m_ObjectHideFlags: 1

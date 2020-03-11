@@ -45,12 +45,13 @@ public class MultiplayerRunManager : MonoBehaviour {
         SetTrapsEnabled();
         SpawnPlayers();
 
+        GameObject p1temp = p1room;
+        p1room = GameObject.FindGameObjectWithTag("P1Room");
         if (p1room == null)
-        {
-            p1room = GameObject.FindGameObjectWithTag("P1Room");            
-            p1room.SetActive(false);
-            p1room.transform.position = new Vector2(0, 0);
-        }
+            p1room = p1temp;
+        p1room.SetActive(false);
+        p1room.transform.position = new Vector2(0, 0);
+
         /*if (p2room == null)
         {
             p2room = GameObject.FindGameObjectWithTag("P2Room");

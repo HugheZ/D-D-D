@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7d3bc19140b2a45a9127750fbcbc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   room: {fileID: 393385992}
   fire: {fileID: 1345002521462280, guid: 1e579472b5a8714468393b6dbff59991, type: 2}
   shuffleButton: {fileID: 1331583803}
@@ -800,6 +799,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4631945832366134, guid: 97ce084910794964b9605225c7fc1717, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

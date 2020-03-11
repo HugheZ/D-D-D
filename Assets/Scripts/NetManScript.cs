@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class NetManScript : NetworkManager {
     bool p1Ready = false;
     public GameObject dwarfPrefab;
+    public Dictionary<int, GameObject> playerMap;
     //NetworkManager myNetMan;
 
     private static NetManScript _instance = null;
@@ -37,6 +38,11 @@ public class NetManScript : NetworkManager {
         {
             p1Ready = false;
             playerPrefab = dwarfPrefab;
+            foreach (int nameIt in playerMap.Keys) {
+                var newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                //edit the player based on which player # they are
+                playerMap[nameIt] = newPlayer;
+            }
             ServerChangeScene("MultiplayerRun");
         }
 	}
@@ -46,7 +52,10 @@ public class NetManScript : NetworkManager {
     }
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        base.OnServerAddPlayer(conn, playerControllerId);
+        var player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        //edit player
+        playerMap.Add(conn.connectionId, player);
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)
     {

@@ -59,9 +59,23 @@ public class BossManager : NetworkBehaviour {
             boss.GetComponent<BossAction>().enabled = true;
             BossCollisionHandler col = boss.GetComponent<BossCollisionHandler>();
             col.enabled = true;
-            //TODO: rset health
-            //TODO: reset animation states
+            col.ResetHealth();
+            BossAnimFacilitator anim = boss.GetComponent<BossAnimFacilitator>();
+            anim.ResetState();
         }
+
+        //disable UI
+        bossUI.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Resets the boss client side and disables it
+    /// </summary>
+    /// <param name="totalReset">Whether to reset all of the boss' parameters</param>
+    [ClientRpc]
+    void RpcResetBoss(bool totalReset)
+    {
+        ResetBoss(totalReset);
     }
 
     /// <summary>
@@ -93,7 +107,6 @@ public class BossManager : NetworkBehaviour {
             boss.GetComponent<BossCollisionHandler>().enabled = false;
             //deactivate all after some time
             Invoke("Deactivate", timeUntilDeactivate);
-            //ResetBoss(true);
 
             //TODO: trigger main game manager to fade the screen
         }
@@ -116,7 +129,8 @@ public class BossManager : NetworkBehaviour {
     {
         if (isServer)
         {
-            print("\nAttacker: " + PID.connectionId + "\nDamage: " + damage);
+            //TODO
+            //MultiplayerManager.Instance.AwardPointsById(PID,damage);
         }
     }
 }

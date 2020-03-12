@@ -121,4 +121,18 @@ public class BossAnimFacilitator : NetworkBehaviour {
     {
         anim.SetBool("die", true);
     }
+
+    /// <summary>
+    /// Completely resets the animation state of the boss
+    /// </summary>
+    public void ResetState()
+    {
+        anim.SetBool("die", true);
+        UnsetAttack();
+        UnsetCharge();
+        foreach (string trigger in new string[]{ "shoot", "jump", "move", "hurt", "face_hurt"})
+        {
+            anim.ResetTrigger(trigger);
+        }
+    }
 }

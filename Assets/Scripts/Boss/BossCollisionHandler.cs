@@ -61,11 +61,15 @@ public class BossCollisionHandler : NetworkBehaviour {
     void UpdateUI(float HP)
     {
         //if death
-        if (health <= 0)
+        if (HP <= 0)
         {
             BossManager.Instance.UpdateHealth(HP, timeUntilDeactive);
             //update anim
             anim.Die();
+        }
+        else if(HP >= 100)
+        {
+            BossManager.Instance.UpdateHealth(HP);
         }
         else
         {
@@ -73,5 +77,14 @@ public class BossCollisionHandler : NetworkBehaviour {
             //update anim
             anim.SetHurt();
         }
+    }
+
+    /// <summary>
+    /// Resets the boss' health
+    /// </summary>
+    public void ResetHealth()
+    {
+        health = 100;
+        BossManager.Instance.UpdateHealth(health);
     }
 }

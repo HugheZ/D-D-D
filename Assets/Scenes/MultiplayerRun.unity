@@ -454,6 +454,21 @@ Prefab:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87f0a05bd074ef841982ccc6b703c357, type: 2}
   m_IsPrefabAsset: 0
@@ -552,6 +567,21 @@ Prefab:
       propertyPath: m_Name
       value: Player4
       objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87f0a05bd074ef841982ccc6b703c357, type: 2}
   m_IsPrefabAsset: 0
@@ -625,6 +655,21 @@ Prefab:
     - target: {fileID: 1189184245222730, guid: 87f0a05bd074ef841982ccc6b703c357, type: 2}
       propertyPath: m_Name
       value: Player3
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20366543256340084, guid: 87f0a05bd074ef841982ccc6b703c357,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87f0a05bd074ef841982ccc6b703c357, type: 2}

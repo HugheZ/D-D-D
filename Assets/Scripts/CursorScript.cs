@@ -7,6 +7,7 @@ public class CursorScript : MonoBehaviour {
     Rigidbody2D rb;
     public float speed = 10;
     public GameObject cursorTip;
+    public Color playerColor;
     bool holdingSomething = false;
     Transform whatHolding;
     int layermask;

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Slasher : MonoBehaviour
+public class Slasher : NetworkBehaviour
 {
     PlayerMovement mvr;
     Animator anim;
@@ -31,21 +32,41 @@ public class Slasher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //check for clicks
-        if (Input.GetMouseButtonDown(0) && !isSwinging && !mvr.IsPosing())
+        if (isLocalPlayer)
         {
-            isSwinging = true;
-            //disable
-            DisableHitboxes();
-
-            //swing, which will enable collider
-            anim.SetTrigger("slash");
-
-            //notify mover
-            mvr.DisableMove();
-            PlayerSource.PlayOneShot(whoosh);
-
+            //check for clicks
+            if (Input.GetMouseButtonDown(0) && !isSwinging && !mvr.IsPosing())
+            {
+                CmdSwing();
+            }
         }
+    }
+
+    /// <summary>
+    /// Swing to command the server
+    /// Relays command to all clients
+    /// </summary>
+    [Command]
+    void CmdSwing()
+    {
+        RpcSwing();
+    }
+
+    /// <summary>
+    /// Swings the player's axe
+    /// </summary>
+    [ClientRpc]
+    void RpcSwing()
+    {
+        isSwinging = true;
+        //disable
+        DisableHitboxes();
+
+        //swing, which will enable collider
+        anim.SetTrigger("slash");
+        //notify mover
+        mvr.DisableMove();
+        PlayerSource.PlayOneShot(whoosh);
     }
 
     /// <summary>

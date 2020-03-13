@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
+using UnityEngine.Networking;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     Animator anim;
     public float speed;
@@ -11,8 +11,16 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer rend;
 
     bool facingLeft;
+    [SyncVar(hook = "ToggleFlex")]
     bool flexing;
+    [SyncVar(hook = "ToggleHi")]
     bool hi;
+
+    //Whether flex was played
+    bool playedFlex = false;
+
+    //Whether hello was played
+    bool helloPlayed = false;
 
     public bool canMove;
     public AudioSource PlayerSound;
@@ -47,87 +55,134 @@ public class PlayerMovement : MonoBehaviour
         //if we can move, allow movement inputs
         if (canMove)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (isLocalPlayer)
             {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    flexing = true;
+                    ToggleFlex(flexing);
+                }
+                //else if (Input.GetKey(KeyCode.R))
+                //{
+                //    flexing = true;
+                //    anim.SetBool("isFlexing", flexing);
+                //}
+                else if (Input.GetKeyUp(KeyCode.R))
+                {
+                    flexing = false;
+                    ToggleFlex(flexing);
+                }
+                else if (Input.GetKey(KeyCode.Space))
+                {
+                    hi = true;
+                    ToggleHi(hi);
+                }
+                else if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    hi = false;
+                    ToggleHi(hi);
+                }
+                else
+                {
+                    //set velocities
+                    x = Input.GetAxis("Horizontal");
+                    y = Input.GetAxis("Vertical");
+
+                    //check flip
+                    //flip if going majority left
+                    if (x < -.01f && y < .5f && y > -.5f)
+                    {
+                        //if we were facing right, flip the sprite
+                        if (!facingLeft)
+                        {
+                            facingLeft = true;
+                            rend.flipX = true;
+                        }
+                    }
+                    else if (x > .01f || (x > -.5f && (y > .5f || y < -.5f)))
+                    {
+                        //flip if we were going left
+                        if (facingLeft)
+                        {
+                            facingLeft = false;
+                            rend.flipX = false;
+                        }
+                    }
+
+                    if (2 * x + y != 0 && ((Time.time - lastFoot) > .25))
+                    {
+                        if (foot)
+                        {
+                            lastFoot = Time.time;
+                            PlayerSound.PlayOneShot(leftFoot);
+                        }
+                        else
+                        {
+                            lastFoot = Time.time;
+                            PlayerSound.PlayOneShot(rightFoot);
+                        }
+                    }
+                }
+            }
+
+
+
+            //set anim controllers
+            anim.SetFloat("x", x);
+            anim.SetFloat("y", y);
+
+            //move by speed
+            rb.velocity = new Vector2(x, y) * speed;
+        }
+    }
+
+    /// <summary>
+    /// Toggles the flex field
+    /// </summary>
+    /// <param name="flex">Whether the player is flexing</param>
+    void ToggleFlex(bool flex)
+    {
+        if (flex)
+        {
+            //play sound if not yet played
+            if (!playedFlex)
+            {
+                playedFlex = true;
                 PlayerSound.PlayOneShot(FLEXBROTHER);
-                anim.SetTrigger("flexBegin");
             }
-            else if (Input.GetKey(KeyCode.R))
-            {
-                flexing = true;
-                anim.SetBool("isFlexing", flexing);
-            }
-            else if (Input.GetKeyUp(KeyCode.R))
-            {
-                flexing = false;
-                anim.SetBool("isFlexing", flexing);
-            }
-            else if (Input.GetKey(KeyCode.Space))
-            {
-                if (!hi)
-                {
-                    PlayerSound.PlayOneShot(hello);
-                }
-                anim.SetBool("hi", true);
-                hi = true;
-                //TODO: play sound
-            }
-            else if (Input.GetKeyUp(KeyCode.Space))
-            {
-                anim.SetBool("hi", false);
-                hi = false;
-            }
-            else
-            {
-                //set velocities
-                x = Input.GetAxis("Horizontal");
-                y = Input.GetAxis("Vertical");
-
-                //check flip
-                //flip if going majority left
-                if (x < -.01f && y < .5f && y > -.5f)
-                {
-                    //if we were facing right, flip the sprite
-                    if (!facingLeft)
-                    {
-                        facingLeft = true;
-                        rend.flipX = true;
-                    }
-                }
-                else if (x > .01f || (x > -.5f && (y > .5f || y < -.5f)))
-                {
-                    //flip if we were going left
-                    if (facingLeft)
-                    {
-                        facingLeft = false;
-                        rend.flipX = false;
-                    }
-                }
-
-                if (2 * x + y != 0 && ((Time.time-lastFoot)>.25))
-                {
-                    if (foot)
-                    {
-                        lastFoot = Time.time;
-                        PlayerSound.PlayOneShot(leftFoot);
-                    }
-                    else
-                    {
-                        lastFoot = Time.time;
-                        PlayerSound.PlayOneShot(rightFoot);
-                    }
-                }
-            }
+            anim.SetTrigger("flexBegin");
+        }
+        else
+        {
+            playedFlex = false;
+            anim.ResetTrigger("flexBegin");
         }
 
-        
+        anim.SetBool("isFlexing", flex);
+    }
 
-        //set anim controllers
-        anim.SetFloat("x", x);
-        anim.SetFloat("y", y);
+    /// <summary>
+    /// Toggles the hi function
+    /// </summary>
+    /// <param name="yo">whether the player is saying hello</param>
+    void ToggleHi(bool yo)
+    {
+        if (hello)
+        {
+            //play sound if not yet done
+            if (!helloPlayed)
+            {
+                PlayerSound.PlayOneShot(hello);
+            }
 
-        //move by speed
-        rb.velocity = new Vector2(x, y) * speed;
+            helloPlayed = true;
+        }
+        else
+        {
+            helloPlayed = false;
+        }
+
+        anim.SetBool("hi", yo);
     }
 
     /// <summary>

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BossCollisionHandler : MonoBehaviour {
+public class BossCollisionHandler : NetworkBehaviour {
 
     [SerializeField]
+    [SyncVar(hook ="UpdateUI")]
     float health; //the boss' health
     BossAnimFacilitator anim; //boss animator
     [SerializeField]
@@ -15,19 +17,28 @@ public class BossCollisionHandler : MonoBehaviour {
         anim = GetComponent<BossAnimFacilitator>();
 	}
 
+    /// <summary>
+    /// Handles collision logic
+    /// 
+    /// SERVER: handles collisions
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("Hit");
-        //if weapon, decrease health
-        if (collision.gameObject.CompareTag("Weapons"))
+        if (isServer)
         {
-            Slasher sl = collision.gameObject.GetComponentInParent<Slasher>();
-            if (sl)
+            //if weapon, decrease health
+            if (collision.gameObject.CompareTag("Weapons"))
             {
-                //update anim
-                anim.SetHurt();
-                //damage
-                DamageBoss(sl.damagePerSwing);
+                Slasher sl = collision.gameObject.GetComponentInParent<Slasher>();
+                if (sl)
+                {
+                    //notify server
+                    DamageBoss(sl.damagePerSwing);
+                    //increment that player's score
+                    NetworkConnection scoringPlayer = collision.gameObject.GetComponentInParent<NetworkIdentity>().connectionToClient;
+                    BossManager.Instance.UpdateScore(scoringPlayer, sl.damagePerSwing);
+                }
             }
         }
     }
@@ -50,14 +61,30 @@ public class BossCollisionHandler : MonoBehaviour {
     void UpdateUI(float HP)
     {
         //if death
-        if (health <= 0)
+        if (HP <= 0)
         {
             BossManager.Instance.UpdateHealth(HP, timeUntilDeactive);
+            //update anim
             anim.Die();
+        }
+        else if(HP >= 100)
+        {
+            BossManager.Instance.UpdateHealth(HP);
         }
         else
         {
             BossManager.Instance.UpdateHealth(HP);
+            //update anim
+            anim.SetHurt();
         }
+    }
+
+    /// <summary>
+    /// Resets the boss' health
+    /// </summary>
+    public void ResetHealth()
+    {
+        health = 100;
+        BossManager.Instance.UpdateHealth(health);
     }
 }

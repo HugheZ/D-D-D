@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BossAnimFacilitator : MonoBehaviour {
+public class BossAnimFacilitator : NetworkBehaviour {
 
     Animator anim; //animator controller
     Collider2D col; //collider
@@ -21,7 +22,7 @@ public class BossAnimFacilitator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (IDLE)
+		if (IDLE && isServer)
         {
             IDLE = false;
             Invoke("GenerateNextAttack", timeToNextAttack);
@@ -35,6 +36,7 @@ public class BossAnimFacilitator : MonoBehaviour {
     void GenerateNextAttack()
     {
         int choice = Random.Range(0, 10);
+
         string trigger = "";
 
         if (choice <= 3)
@@ -51,7 +53,17 @@ public class BossAnimFacilitator : MonoBehaviour {
         }
         else trigger = "undf";
 
-        anim.SetTrigger(trigger);
+        RpcTriggerAnimation(trigger);
+    }
+
+    /// <summary>
+    /// Triggers an animation over the client
+    /// </summary>
+    /// <param name="aTrig"></param>
+    [ClientRpc]
+    void RpcTriggerAnimation(string aTrig)
+    {
+        if(aTrig != "") anim.SetTrigger(aTrig);
     }
 
     public void SetIDLE()
@@ -108,5 +120,19 @@ public class BossAnimFacilitator : MonoBehaviour {
     public void Die()
     {
         anim.SetBool("die", true);
+    }
+
+    /// <summary>
+    /// Completely resets the animation state of the boss
+    /// </summary>
+    public void ResetState()
+    {
+        anim.SetBool("die", true);
+        UnsetAttack();
+        UnsetCharge();
+        foreach (string trigger in new string[]{ "shoot", "jump", "move", "hurt", "face_hurt"})
+        {
+            anim.ResetTrigger(trigger);
+        }
     }
 }

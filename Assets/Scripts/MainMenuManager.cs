@@ -135,4 +135,9 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(selectedGame);
     }
+
+    public void StartBoss()
+    {
+        SceneManager.LoadScene("Experimental");
+    }
 }

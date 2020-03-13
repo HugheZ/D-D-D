@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class BossManager : MonoBehaviour {
+public class BossManager : NetworkBehaviour {
 
     private static BossManager _instance;
 
@@ -58,9 +59,23 @@ public class BossManager : MonoBehaviour {
             boss.GetComponent<BossAction>().enabled = true;
             BossCollisionHandler col = boss.GetComponent<BossCollisionHandler>();
             col.enabled = true;
-            //TODO: rset health
-            //TODO: reset animation states
+            col.ResetHealth();
+            BossAnimFacilitator anim = boss.GetComponent<BossAnimFacilitator>();
+            anim.ResetState();
         }
+
+        //disable UI
+        bossUI.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Resets the boss client side and disables it
+    /// </summary>
+    /// <param name="totalReset">Whether to reset all of the boss' parameters</param>
+    [ClientRpc]
+    void RpcResetBoss(bool totalReset)
+    {
+        ResetBoss(totalReset);
     }
 
     /// <summary>
@@ -92,7 +107,6 @@ public class BossManager : MonoBehaviour {
             boss.GetComponent<BossCollisionHandler>().enabled = false;
             //deactivate all after some time
             Invoke("Deactivate", timeUntilDeactivate);
-            //ResetBoss(true);
 
             //TODO: trigger main game manager to fade the screen
         }
@@ -104,5 +118,19 @@ public class BossManager : MonoBehaviour {
     void Deactivate()
     {
         ResetBoss(true);
+    }
+
+    /// <summary>
+    /// Updates the correct player's score
+    /// </summary>
+    /// <param name="PID"></param>
+    /// <param name="damage"></param>
+    public void UpdateScore(NetworkConnection PID, float damage)
+    {
+        if (isServer)
+        {
+            //TODO
+            //MultiplayerManager.Instance.AwardPointsById(PID,damage);
+        }
     }
 }

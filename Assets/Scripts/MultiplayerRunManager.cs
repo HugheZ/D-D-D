@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MultiplayerRunManager : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class MultiplayerRunManager : MonoBehaviour {
     public GameObject p4room;
     public GameObject bossRoom;
     public GameObject boss;
+    public GameObject player1, player2, player3, player4;
     bool bossSpawned;
     public Transform zero;
     public Transform p1Space;
@@ -17,7 +19,11 @@ public class MultiplayerRunManager : MonoBehaviour {
     public Transform p3Space;
     public Transform p4Space;
     public List<Transform> playerSpawns;
-    public Camera p1camera, p2camera, p3camera, p4camera;
+    public Camera p1camera, p2camera, p3camera, p4camera, main;
+    public Canvas progressCanvas;
+    public Image sideToSide;
+    public Image player1progress, player2progress, player3progress, player4progress;
+    public int numPlayers;
     
 
 	// Use this for initialization
@@ -63,11 +69,61 @@ public class MultiplayerRunManager : MonoBehaviour {
 
         bossSpawned = false;
 
-        //Instantiate camera sizes
-        p1camera.rect = new Rect(0, 0, .5f, .5f);
-        p2camera.rect = new Rect(.5f, 0, .5f, .5f);
-        p3camera.rect = new Rect(0, .5f, .5f, .5f);
-        p4camera.rect = new Rect(.5f, .5f, .5f, .5f);
+        if (numPlayers == 2)
+        {
+            //Instantiate camera sizes
+            p1camera.rect = new Rect(0, 0, .5f, 1);
+            p2camera.rect = new Rect(.5f, 0, .5f, 1);
+
+            //Delete extraneous players
+            player3.SetActive(false);
+            player4.SetActive(false);
+
+            //Unfill all progress
+            player1progress.fillAmount = 0;
+            player2progress.fillAmount = 0;
+            player3progress.fillAmount = 0;
+            player4progress.fillAmount = 0;
+
+        }
+        else if (numPlayers == 3)
+        {
+            //Instantiate camera sizes
+            p1camera.rect = new Rect(0, .5f, .5f, .5f);
+            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
+            p3camera.rect = new Rect(0, 0, .5f, .5f);
+            main.rect = new Rect(.5f, 0, .5f, .5f);
+            p4camera.rect = new Rect(0, 0, 0, 0);
+
+            //Insert horizontal camera split
+            sideToSide.gameObject.SetActive(true);
+
+            //Delete extraneous player
+            player4.SetActive(false);
+
+            //Unfill all progress
+            player1progress.fillAmount = 0;
+            player2progress.fillAmount = 0;
+            player3progress.fillAmount = 0;
+            player4progress.fillAmount = 0;
+        }
+        else if (numPlayers == 4)
+        {
+            //Instantiate camera sizes
+            p1camera.rect = new Rect(0, .5f, .5f, .5f);
+            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
+            p3camera.rect = new Rect(0, 0, .5f, .5f);
+            p4camera.rect = new Rect(.5f, 0, .5f, .5f);
+
+            //Insert horizontal camera split
+            sideToSide.gameObject.SetActive(true);
+
+            //Unfill all progress
+            player1progress.fillAmount = 0;
+            player2progress.fillAmount = 0;
+            player3progress.fillAmount = 0;
+            player4progress.fillAmount = 0;
+        }
 
     }
 	

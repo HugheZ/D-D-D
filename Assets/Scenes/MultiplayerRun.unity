@@ -668,10 +668,10 @@ MonoBehaviour:
   p3Space: {fileID: 104202841}
   p4Space: {fileID: 2038561027}
   playerSpawns:
-  - {fileID: 1089215806}
-  - {fileID: 751969430}
-  - {fileID: 1772201142}
-  - {fileID: 282621706}
+  - {x: -50, y: 50, z: 0}
+  - {x: 50, y: 50, z: 0}
+  - {x: -50, y: -50, z: 0}
+  - {x: 50, y: -50, z: 0}
   p1camera: {fileID: 1991741078}
   p2camera: {fileID: 602945025}
   p3camera: {fileID: 1298456178}

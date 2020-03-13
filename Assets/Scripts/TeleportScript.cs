@@ -5,6 +5,7 @@ using UnityEngine;
 public class TeleportScript : MonoBehaviour
 {
     ManagerScript manager;
+    MultiplayerRunManager mman;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +16,11 @@ public class TeleportScript : MonoBehaviour
     void Update()
     {
         manager = ManagerScript.Instance;
+        mman = MultiplayerRunManager.Instance;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        manager.NextRoom();
+        if (manager != null) manager.NextRoom();
+        else mman.NextRoom(collision.gameObject);
     }
 }

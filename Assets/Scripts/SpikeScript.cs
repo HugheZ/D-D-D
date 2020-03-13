@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpikeScript : MonoBehaviour
 {
     BoxCollider2D spikeBox;
-    public AudioSource spikeAudio;
+    //public AudioSource spikeAudio;
     public Camera camera;
     Transform tform;
 
@@ -21,14 +21,14 @@ public class SpikeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (distToCam(tform.position.x, tform.position.y)>9.0)
+        /*if (distToCam(tform.position.x, tform.position.y)>9.0)
         {
             gameObject.GetComponent<AudioSource>().mute = true;
         }
         else if (distToCam(tform.position.x, tform.position.y) < 9)
         {
             gameObject.GetComponent<AudioSource>().mute = false;
-        }
+        }*/
     }
 
     public void setSpikesInactive()
@@ -38,11 +38,11 @@ public class SpikeScript : MonoBehaviour
 
     public void setSpikesActive()
     {
-        spikeAudio.PlayOneShot(spikeAudio.clip);
+        //spikeAudio.PlayOneShot(spikeAudio.clip);
         spikeBox.enabled = true;
     }
 
-    public void OnBecameVisible()
+    /*public void OnBecameVisible()
     {
 
         gameObject.GetComponent<AudioSource>().mute = false;
@@ -60,5 +60,5 @@ public class SpikeScript : MonoBehaviour
         float cy = ct.position.y;
 
         return (Mathf.Sqrt(((x - cx) * (x - cx)) + ((y - cy) * (y - cy))));
-    }
+    }*/
 }

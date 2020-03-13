@@ -467,7 +467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1372556605004554
 GameObject:
   m_ObjectHideFlags: 1
@@ -585,7 +585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1544780213100928
 GameObject:
   m_ObjectHideFlags: 1
@@ -946,7 +946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1774464585925854
 GameObject:
   m_ObjectHideFlags: 1
@@ -5523,7 +5523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82201922196201924}
   camera: {fileID: 0}
 --- !u!114 &114013745878865680
 MonoBehaviour:
@@ -5536,7 +5535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82999031060972820}
   camera: {fileID: 0}
 --- !u!114 &114047089314711060
 MonoBehaviour:
@@ -5588,7 +5586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82870553002417988}
   camera: {fileID: 0}
 --- !u!114 &114215522261794278
 MonoBehaviour:
@@ -5645,7 +5642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82219777459519502}
   camera: {fileID: 0}
 --- !u!114 &114280308216448352
 MonoBehaviour:
@@ -5670,7 +5666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82441475569528920}
   camera: {fileID: 0}
 --- !u!114 &114319514565524854
 MonoBehaviour:
@@ -5683,7 +5678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882d1963d754d614cbe0fc7985cb069c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!114 &114364484191687066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5695,7 +5689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82210054383725558}
   camera: {fileID: 0}
 --- !u!114 &114406400959742116
 MonoBehaviour:
@@ -5708,7 +5701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882d1963d754d614cbe0fc7985cb069c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!114 &114441684877238916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5732,7 +5724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882d1963d754d614cbe0fc7985cb069c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!114 &114505068516452866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5772,7 +5763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82012216588074226}
   camera: {fileID: 0}
 --- !u!114 &114659397177038162
 MonoBehaviour:
@@ -5785,7 +5775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82457652139542458}
   camera: {fileID: 0}
 --- !u!114 &114666362664907322
 MonoBehaviour:
@@ -5798,7 +5787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82233432937226628}
   camera: {fileID: 0}
 --- !u!114 &114677350475493724
 MonoBehaviour:
@@ -5811,7 +5799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82052019242643138}
   camera: {fileID: 0}
 --- !u!114 &114694950495111234
 MonoBehaviour:
@@ -5824,7 +5811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882d1963d754d614cbe0fc7985cb069c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!114 &114757841552955276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5836,7 +5822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82780670144749440}
   camera: {fileID: 0}
 --- !u!114 &114761699717310038
 MonoBehaviour:
@@ -5865,7 +5850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82843850630589934}
   camera: {fileID: 0}
 --- !u!114 &114890857141033582
 MonoBehaviour:
@@ -5878,7 +5862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8345293a0f669c64ab5ec298a77b3a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeAudio: {fileID: 82869959327185254}
   camera: {fileID: 0}
 --- !u!114 &114953142975135066
 MonoBehaviour:

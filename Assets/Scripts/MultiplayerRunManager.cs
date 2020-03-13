@@ -15,7 +15,7 @@ public class MultiplayerRunManager : MonoBehaviour {
     public Transform p2Space;
     public Transform p3Space;
     public Transform p4Space;
-    public List<Transform> playerSpawns;
+    public List<Vector3> playerSpawns;
     public Camera p1camera, p2camera, p3camera, p4camera;
     System.Random rnd;
     List<GameObject> runOrder;
@@ -28,7 +28,24 @@ public class MultiplayerRunManager : MonoBehaviour {
     GameObject p3r1;
     GameObject p4r1;
 
-
+    //stuff for Singleton
+    private static MultiplayerRunManager _instance = null;
+    public static MultiplayerRunManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        _instance = this;
+    }
     // Use this for initialization
     void Start () {
         rnd = new System.Random();
@@ -65,18 +82,24 @@ public class MultiplayerRunManager : MonoBehaviour {
             //TODO: enable boss ui and such
         }
 	}
-    public void NextRoom(int playerNum)
-    {        
+    public void NextRoom(GameObject player)
+    {
+        player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
+        int playerNum = 0;
         switch (playerNum)
         {
             case 1:
                 Destroy(p1r1);
                 p1CurRoom++;
-                if(p1CurRoom >= runOrder.Count)
+                if (p1CurRoom >= runOrder.Count)
                 {
                     //player reaches boss room
                 }
-                p1r1 = Instantiate(runOrder[p1CurRoom], p1Space);
+                else
+                {
+                    p1r1 = Instantiate(runOrder[p1CurRoom], p1Space);
+                    player.transform.position = playerSpawns[0];
+                }
                 break;
             case 2:
                 Destroy(p2r1);
@@ -85,7 +108,11 @@ public class MultiplayerRunManager : MonoBehaviour {
                 {
                     //player reaches boss room
                 }
-                p2r1 = Instantiate(runOrder[p2CurRoom], p2Space);
+                else
+                {
+                    p2r1 = Instantiate(runOrder[p2CurRoom], p2Space);
+                    player.transform.position = playerSpawns[1];
+                }
                 break;
             case 3:
                 Destroy(p3r1);
@@ -94,7 +121,11 @@ public class MultiplayerRunManager : MonoBehaviour {
                 {
                     //player reaches boss room
                 }
-                p3r1 = Instantiate(runOrder[p3CurRoom], p3Space);
+                else
+                {
+                    p3r1 = Instantiate(runOrder[p3CurRoom], p3Space);
+                    player.transform.position = playerSpawns[2];
+                }
                 break;
             default:
                 Destroy(p4r1);
@@ -103,36 +134,15 @@ public class MultiplayerRunManager : MonoBehaviour {
                 {
                     //player reaches boss room
                 }
-                p4r1 = Instantiate(runOrder[p4CurRoom], p4Space);
+                else
+                {
+                    p4r1 = Instantiate(runOrder[p4CurRoom], p4Space);
+                    player.transform.position = playerSpawns[3];
+                }
                 break;
         }
-        /*player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
-        Destroy(currentRoom);
-        int traps = rand.Next(3);
-        int newRoom = curRoom;
-        while (newRoom == curRoom)
-            newRoom = rand.Next(0, rooms.Count);
-        curRoom = newRoom;
-        player.transform.position = reSpawnPt;
-        currentRoom = Instantiate(rooms[curRoom], new Vector3(0, 0, 0), Quaternion.identity);
-        if (traps == 0)
-        {
-            currentRoom.transform.GetChild(3).gameObject.SetActive(true);
-            print("A Room");
-        }
-        else if (traps == 1)
-        {
-            currentRoom.transform.GetChild(4).gameObject.SetActive(true);
-            print("B Room");
-        }
-        else
-        {
-            currentRoom.transform.GetChild(5).gameObject.SetActive(true);
-            print("C Room");
-        }
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
-        roomsCleared++;
-        AddScore(1);*/
+        
     }
     private bool PlayerInRoom()
     {

@@ -104,7 +104,7 @@ public class MainMenuManager : MonoBehaviour
         selectedGame = "MultiplayerGame";
         anim.SetTrigger("start");
         MenuAudio.PlayOneShot(click);
-        SceneManager.LoadScene("DungeonBuilder");
+        SceneManager.LoadScene("MultiplayerRun");
         //throw new Exception("Not yet implemented");
     }
 

@@ -82,6 +82,6 @@ public class HealthSystem : MonoBehaviour
         anim.SetTrigger("die");
 
         //All disabled, inform manager
-        ManagerScript.Instance.PlayerDied();
+        if(ManagerScript.Instance) ManagerScript.Instance.PlayerDied();
     }
 }

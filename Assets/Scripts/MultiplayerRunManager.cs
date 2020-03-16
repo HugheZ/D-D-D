@@ -24,6 +24,7 @@ public class MultiplayerRunManager : MonoBehaviour {
     public Image sideToSide;
     public Image player1progress, player2progress, player3progress, player4progress;
     public int numPlayers;
+    public ProgressDiamondScript pDiamondScript;
     
 
 	// Use this for initialization
@@ -124,6 +125,9 @@ public class MultiplayerRunManager : MonoBehaviour {
             player3progress.fillAmount = 0;
             player4progress.fillAmount = 0;
         }
+
+        pDiamondScript = FindObjectOfType<ProgressDiamondScript>();
+        
 
     }
 	

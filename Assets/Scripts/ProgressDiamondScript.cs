@@ -18,7 +18,7 @@ public class ProgressDiamondScript : MonoBehaviour {
 		
 	}
 
-    void ChangeProgress(int playerIndex, float progress)
+    public void ChangeProgress(int playerIndex, float progress)
     {
         progresses[playerIndex] += progress;
         if(playerIndex == 0)

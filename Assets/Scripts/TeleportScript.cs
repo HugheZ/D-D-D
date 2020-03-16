@@ -20,7 +20,15 @@ public class TeleportScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (manager != null) manager.NextRoom();
-        else mman.NextRoom(collision.gameObject);
+        if (manager != null)
+        {
+            manager.NextRoom();
+            //TODO: update progress
+        }
+        else
+        {
+            mman.NextRoom(collision.gameObject);
+            //TODO: update progress
+        }
     }
 }

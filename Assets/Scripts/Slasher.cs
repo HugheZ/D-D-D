@@ -7,7 +7,6 @@ public class Slasher : NetworkBehaviour
 {
     PlayerMovement mvr;
     Animator anim;
-    bool flexing;
     bool isSwinging;
 
     //damage per player swing
@@ -37,7 +36,8 @@ public class Slasher : NetworkBehaviour
             //check for clicks
             if (Input.GetMouseButtonDown(0) && !isSwinging && !mvr.IsPosing())
             {
-                CmdSwing();
+                if(!isServer) CmdSwing();
+                RpcSwing();
             }
         }
     }

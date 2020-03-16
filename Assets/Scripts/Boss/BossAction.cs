@@ -97,7 +97,6 @@ public class BossAction : NetworkBehaviour {
         {
             curTime += Time.deltaTime;
             transform.position = Vector2.Lerp(transform.position, position, curTime / time);
-            print("Pos: " + position + "\nDist: " + Vector2.Distance(transform.position, position));
             yield return new WaitForEndOfFrame();
         }
     }

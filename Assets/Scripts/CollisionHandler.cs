@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CollisionHandler : MonoBehaviour
+public class CollisionHandler : NetworkBehaviour
 {
     public bool canGetHurt = true;
     float timeSinceHurt;
@@ -25,39 +26,45 @@ public class CollisionHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //If you are in invincibility frames, make sure not enough time has passed to get out of them
-        if (!canGetHurt)
+        if (isLocalPlayer)
         {
-            if(Time.time - timeSinceHurt > 2)
+            //If you are in invincibility frames, make sure not enough time has passed to get out of them
+            if (!canGetHurt)
             {
-                canGetHurt = true;
+                if (Time.time - timeSinceHurt > 2)
+                {
+                    canGetHurt = true;
+                }
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<SpikeScript>() != null) {
-            //ground is spikes
-            if (canGetHurt)
+        if (isLocalPlayer)
+        {
+            if (collision.gameObject.GetComponent<SpikeScript>() != null && canGetHurt)
+            {
+                //ground is spikes
+                HurtPlayer(8);
+                getInvincibilityFrames();
+            }
+            else if (collision.gameObject.tag == "Pit")
+            {
+                //hit a pit, fall
+                FallInPit();
+            }
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isLocalPlayer)
+        {
+            if (collision.gameObject.GetComponent<SpikeScript>() != null && canGetHurt)
             {
                 HurtPlayer(8);
                 getInvincibilityFrames();
             }
-        }
-        else if(collision.gameObject.tag == "Pit")
-        {
-            //hit a pit, fall
-            FallInPit();
-        }
-
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<SpikeScript>() != null && canGetHurt)
-        {
-            HurtPlayer(8);
-            getInvincibilityFrames();
         }
     }
 
@@ -116,41 +123,42 @@ public class CollisionHandler : MonoBehaviour
         StartCoroutine("flickerSprite");
         
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<SawbladeScript>() != null)
+        if (isLocalPlayer)
         {
-            if (canGetHurt)
+            if (collision.gameObject.GetComponent<SawbladeScript>() != null)
             {
-                //we hit a sawblade, take damage
-                HurtPlayer(16);
+                if (canGetHurt)
+                {
+                    //we hit a sawblade, take damage
+                    HurtPlayer(16);
+                    //get I-frames
+                    getInvincibilityFrames();
 
-                //launch player backward
-                int magnitude = -25000;
-                Vector2 force = transform.position - collision.gameObject.transform.position;
-                force.Normalize();
-                rb.velocity = new Vector2(force.x, force.y) * magnitude;
-                print(rb.velocity);
-
-                //get I-frames
-                getInvincibilityFrames();
+                    //launch player backward
+                    //int magnitude = -25000;
+                    //Vector2 force = transform.position - collision.gameObject.transform.position;
+                    //force.Normalize();
+                    //rb.velocity = new Vector2(force.x, force.y) * magnitude;
+                    //print(rb.velocity);
+                }
+            }
+            else if (collision.gameObject.GetComponent<ArrowScript>() != null)
+            {
+                //an arrow hit us
+                if (canGetHurt)
+                {
+                    HurtPlayer(12);
+                    getInvincibilityFrames();
+                }
+            }
+            else if (collision.gameObject.tag == "Door")
+            {
+                Door.PlayOneShot(Door.clip);
             }
         }
-        else if (collision.gameObject.GetComponent<ArrowScript>() != null)
-        {
-            //an arrow hit us
-            if (canGetHurt)
-            {
-                HurtPlayer(12);
-                getInvincibilityFrames();
-            }
-        }
-        else if (collision.gameObject.tag == "Door")
-        {
-            Door.PlayOneShot(Door.clip);
-        }
-        print(collision.gameObject.tag);
-        
     }
 
     /// <summary>
@@ -159,9 +167,9 @@ public class CollisionHandler : MonoBehaviour
     /// <param name="damage">dmage taken</param>
     private void HurtPlayer(int damage)
     {
+        if (!isServer) CmdHurtPlayer(damage);
         HP.HurtPlayer(damage);
     }
-
     
     
     private IEnumerator flickerSprite()
@@ -183,5 +191,31 @@ public class CollisionHandler : MonoBehaviour
         }
         srender.color = Color.white;
         
+    }
+
+
+    /// <summary>
+    /// Tells server to relay hurt player command
+    /// </summary>
+    [Command]
+    void CmdHurtPlayer(int damage)
+    {
+        RpcHurtPlayer(damage, netId.Value);
+    }
+
+    /// <summary>
+    /// Hurts the player for x damage
+    /// </summary>
+    /// <param name="damage">Damage to hurt the player</param>
+    [ClientRpc]
+    void RpcHurtPlayer(int damage, uint notToInclude)
+    {
+        if (notToInclude != netId.Value)
+        {
+            //hurt the player
+            HurtPlayer(damage);
+            //get I-frames
+            getInvincibilityFrames();
+        }
     }
 }

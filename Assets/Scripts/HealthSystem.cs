@@ -40,15 +40,24 @@ public class HealthSystem : MonoBehaviour
         //decrement health
         health -= damage;
 
-        //inform manager
-        ManagerScript.Instance.PlayerHit(health);
+        UpdateGame(health);
+    }
 
+    /// <summary>
+    /// Updates UI and manager of new health
+    /// </summary>
+    /// <param name="newHealth"></param>
+    void UpdateGame(int newHealth)
+    {
         //die if dead
         if (health <= 0) KillPlayer();
         else
         {
             PlayerAudio.PlayOneShot(damageSound);
         }
+
+        //inform manager
+        ManagerScript.Instance.PlayerHit(newHealth);
     }
 
     /// <summary>

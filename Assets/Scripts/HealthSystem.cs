@@ -57,7 +57,7 @@ public class HealthSystem : MonoBehaviour
         }
 
         //inform manager
-        ManagerScript.Instance.PlayerHit(newHealth);
+        if(ManagerScript.Instance) ManagerScript.Instance.PlayerHit(newHealth);
     }
 
     /// <summary>

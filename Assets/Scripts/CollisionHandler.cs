@@ -47,7 +47,6 @@ public class CollisionHandler : NetworkBehaviour
             {
                 //ground is spikes
                 HurtPlayer(8);
-                getInvincibilityFrames();
             }
             else if (collision.gameObject.tag == "Pit")
             {
@@ -63,7 +62,6 @@ public class CollisionHandler : NetworkBehaviour
             if (collision.gameObject.GetComponent<SpikeScript>() != null && canGetHurt)
             {
                 HurtPlayer(8);
-                getInvincibilityFrames();
             }
         }
     }
@@ -96,7 +94,6 @@ public class CollisionHandler : NetworkBehaviour
         ToggleInteractivity(true);
         //hurt player
         HurtPlayer(20);
-        getInvincibilityFrames();
     }
 
     /// <summary>
@@ -134,8 +131,6 @@ public class CollisionHandler : NetworkBehaviour
                 {
                     //we hit a sawblade, take damage
                     HurtPlayer(16);
-                    //get I-frames
-                    getInvincibilityFrames();
 
                     //launch player backward
                     //int magnitude = -25000;
@@ -151,7 +146,6 @@ public class CollisionHandler : NetworkBehaviour
                 if (canGetHurt)
                 {
                     HurtPlayer(12);
-                    getInvincibilityFrames();
                 }
             }
             else if (collision.gameObject.tag == "Door")
@@ -167,7 +161,9 @@ public class CollisionHandler : NetworkBehaviour
     /// <param name="damage">dmage taken</param>
     private void HurtPlayer(int damage)
     {
-        if (!isServer) CmdHurtPlayer(damage);
+        if (!isServer) CmdHurtPlayer(damage, netId.Value);
+        else RpcHurtPlayer(damage, netId.Value);
+        getInvincibilityFrames();
         HP.HurtPlayer(damage);
     }
     
@@ -198,9 +194,9 @@ public class CollisionHandler : NetworkBehaviour
     /// Tells server to relay hurt player command
     /// </summary>
     [Command]
-    void CmdHurtPlayer(int damage)
+    void CmdHurtPlayer(int damage, uint id)
     {
-        RpcHurtPlayer(damage, netId.Value);
+        RpcHurtPlayer(damage, id);
     }
 
     /// <summary>
@@ -214,8 +210,6 @@ public class CollisionHandler : NetworkBehaviour
         {
             //hurt the player
             HurtPlayer(damage);
-            //get I-frames
-            getInvincibilityFrames();
         }
     }
 }

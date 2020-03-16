@@ -131,13 +131,6 @@ public class CollisionHandler : NetworkBehaviour
                 {
                     //we hit a sawblade, take damage
                     HurtPlayer(16);
-
-                    //launch player backward
-                    //int magnitude = -25000;
-                    //Vector2 force = transform.position - collision.gameObject.transform.position;
-                    //force.Normalize();
-                    //rb.velocity = new Vector2(force.x, force.y) * magnitude;
-                    //print(rb.velocity);
                 }
             }
             else if (collision.gameObject.GetComponent<ArrowScript>() != null)
@@ -161,10 +154,8 @@ public class CollisionHandler : NetworkBehaviour
     /// <param name="damage">dmage taken</param>
     private void HurtPlayer(int damage)
     {
-        if (!isServer) CmdHurtPlayer(damage, netId.Value);
-        else RpcHurtPlayer(damage, netId.Value);
-        getInvincibilityFrames();
-        HP.HurtPlayer(damage);
+        if (!isServer) CmdHurtPlayer(damage);
+        else RpcHurtPlayer(damage);
     }
     
     
@@ -194,9 +185,9 @@ public class CollisionHandler : NetworkBehaviour
     /// Tells server to relay hurt player command
     /// </summary>
     [Command]
-    void CmdHurtPlayer(int damage, uint id)
+    void CmdHurtPlayer(int damage)
     {
-        RpcHurtPlayer(damage, id);
+        RpcHurtPlayer(damage);
     }
 
     /// <summary>
@@ -204,12 +195,9 @@ public class CollisionHandler : NetworkBehaviour
     /// </summary>
     /// <param name="damage">Damage to hurt the player</param>
     [ClientRpc]
-    void RpcHurtPlayer(int damage, uint notToInclude)
+    void RpcHurtPlayer(int damage)
     {
-        if (notToInclude != netId.Value)
-        {
-            //hurt the player
-            HurtPlayer(damage);
-        }
+        getInvincibilityFrames();
+        HP.HurtPlayer(damage);
     }
 }

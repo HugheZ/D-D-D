@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 223198394675512044}
   - component: {fileID: 114994158310412944}
   - component: {fileID: 114376844299447760}
+  - component: {fileID: 114999112079010840}
   m_Layer: 9
   m_Name: ProgressCanvas
   m_TagString: Untagged
@@ -477,6 +478,38 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114999112079010840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101003688285324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 138
+    i1: 130
+    i2: 114
+    i3: 230
+    i4: 59
+    i5: 254
+    i6: 17
+    i7: 180
+    i8: 168
+    i9: 173
+    i10: 44
+    i11: 62
+    i12: 154
+    i13: 189
+    i14: 1
+    i15: 125
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!222 &222180281644001364
 CanvasRenderer:
   m_ObjectHideFlags: 1

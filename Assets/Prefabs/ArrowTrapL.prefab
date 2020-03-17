@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114710625957681252}
   - component: {fileID: 95745879098459606}
   - component: {fileID: 82339917623815728}
+  - component: {fileID: 114425005988952704}
   m_Layer: 17
   m_Name: ArrowTrapL
   m_TagString: Untagged
@@ -182,6 +183,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114425005988952704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630147442100066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 156
+    i1: 148
+    i2: 206
+    i3: 147
+    i4: 92
+    i5: 194
+    i6: 204
+    i7: 244
+    i8: 201
+    i9: 41
+    i10: 251
+    i11: 211
+    i12: 74
+    i13: 147
+    i14: 156
+    i15: 67
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114710625957681252
 MonoBehaviour:
   m_ObjectHideFlags: 1

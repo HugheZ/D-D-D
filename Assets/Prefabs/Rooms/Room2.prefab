@@ -1259,6 +1259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4050741151759710}
+  - component: {fileID: 114107792180935730}
   m_Layer: 0
   m_Name: Room2
   m_TagString: Untagged
@@ -5575,6 +5576,38 @@ MonoBehaviour:
   facingNorth: 0
   scriptEnabled: 1
   FIRE: {fileID: 82151162932608286}
+--- !u!114 &114107792180935730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978294968503758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 63
+    i1: 158
+    i2: 55
+    i3: 228
+    i4: 157
+    i5: 59
+    i6: 170
+    i7: 100
+    i8: 201
+    i9: 77
+    i10: 92
+    i11: 28
+    i12: 210
+    i13: 9
+    i14: 232
+    i15: 155
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114133786146859412
 MonoBehaviour:
   m_ObjectHideFlags: 1

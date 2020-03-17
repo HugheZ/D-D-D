@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50860564986341598}
   - component: {fileID: 114254164858357482}
   - component: {fileID: 95661891141810846}
+  - component: {fileID: 114558675869936990}
   m_Layer: 13
   m_Name: Arrow
   m_TagString: Untagged
@@ -121,6 +122,38 @@ MonoBehaviour:
   facingRight: 0
   facingNorth: 0
   facingSouth: 0
+--- !u!114 &114558675869936990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362157105349476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 6
+    i1: 2
+    i2: 125
+    i3: 194
+    i4: 53
+    i5: 42
+    i6: 44
+    i7: 148
+    i8: 9
+    i9: 32
+    i10: 175
+    i11: 211
+    i12: 116
+    i13: 67
+    i14: 72
+    i15: 163
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212605522107801764
 SpriteRenderer:
   m_ObjectHideFlags: 1

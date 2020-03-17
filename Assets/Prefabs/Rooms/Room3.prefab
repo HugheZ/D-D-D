@@ -1478,6 +1478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4255955149251312}
+  - component: {fileID: 114108969349700978}
   m_Layer: 0
   m_Name: Room3
   m_TagString: Untagged
@@ -9152,6 +9153,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+--- !u!114 &114108969349700978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1874174344028890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 68
+    i1: 43
+    i2: 76
+    i3: 77
+    i4: 156
+    i5: 127
+    i6: 254
+    i7: 132
+    i8: 200
+    i9: 2
+    i10: 96
+    i11: 78
+    i12: 12
+    i13: 39
+    i14: 32
+    i15: 152
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114140784171894412
 MonoBehaviour:
   m_ObjectHideFlags: 1

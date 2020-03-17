@@ -797,6 +797,83 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 908085887}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &1368342472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1368342475}
+  - component: {fileID: 1368342474}
+  - component: {fileID: 1368342473}
+  m_Layer: 0
+  m_Name: NetMan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1368342473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1368342472}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7d3bc19140b2a45a9127750fbcbc78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
+  room: {fileID: 0}
+  fire: {fileID: 1345002521462280, guid: 1e579472b5a8714468393b6dbff59991, type: 2}
+  shuffleButton: {fileID: 0}
+  shuffleText: {fileID: 0}
+  trapPool:
+  - {fileID: 1630147442100066, guid: 9c94ce935cc2ccf4c929fbd34a939c43, type: 2}
+  - {fileID: 1182928977771524, guid: d6d34bb7de29d534dbe53c288735c50c, type: 2}
+  - {fileID: 1328857478336498, guid: 29d8eb26a36ef8542bdfd994eb268e68, type: 2}
+  - {fileID: 1113484195628792, guid: a5a1d9dcdecc565459b1774793ad9211, type: 2}
+  - {fileID: 1378905950041778, guid: 6805a693ec5e48341867252666a74473, type: 2}
+  - {fileID: 1378905950041778, guid: 6805a693ec5e48341867252666a74473, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  trapSpawnPts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1368342474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1368342472}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d887bdd546bbb46ba1a9db5907bb6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 1362157105349476, guid: 06027dc2352a2c940920afd3744348a3,
+    type: 2}
+  amountToPool: 10
+--- !u!4 &1368342475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1368342472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1382601311 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114257149694629790, guid: 8a8272e63bfe11b4a8ad2c3e9abd017d,
@@ -1063,22 +1140,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 12
-    i1: 74
-    i2: 125
-    i3: 113
-    i4: 104
-    i5: 247
-    i6: 202
-    i7: 212
-    i8: 155
-    i9: 98
-    i10: 228
-    i11: 200
-    i12: 32
-    i13: 142
-    i14: 210
-    i15: 223
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!1 &1960915859 stripped

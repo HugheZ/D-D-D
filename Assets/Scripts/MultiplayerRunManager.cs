@@ -133,6 +133,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
         pDiamondScript = FindObjectOfType<ProgressDiamondScript>();
         progresses = pDiamondScript.progresses;
+        pDiamondScript.ChangeProgress(0, .3f);
         
 
     }
@@ -144,6 +145,11 @@ public class MultiplayerRunManager : NetworkBehaviour {
             Instantiate(boss, zero);
             bossSpawned = true;
             //TODO: enable boss ui and such
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pDiamondScript.ChangeProgress(1, .1f);
         }
 	}
     public void NextRoom(GameObject player)
@@ -246,5 +252,10 @@ public class MultiplayerRunManager : NetworkBehaviour {
         {
             progresses = pDiamondScript.progresses;
         }
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("ManagerDisabled");
     }
 }

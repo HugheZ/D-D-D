@@ -12,11 +12,14 @@ public class ProgressDiamondScript : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        progresses = new SyncListFloat();
-        progresses.Add(0f);
-        progresses.Add(0f);
-        progresses.Add(0f);
-        progresses.Add(0f);
+        if (isServer)
+        {
+            progresses = new SyncListFloat();
+            progresses.Add(0f);
+            progresses.Add(0f);
+            progresses.Add(0f);
+            progresses.Add(0f);
+        }     
 	}
 	
 	// Update is called once per frame
@@ -26,21 +29,25 @@ public class ProgressDiamondScript : NetworkBehaviour {
 
     public void ChangeProgress(int playerIndex, float progress)
     {
-        progresses[playerIndex] += progress;
-        if(playerIndex == 0)
+        if (isServer)
         {
-            player1.fillAmount = progresses[playerIndex];
-        }else if (playerIndex == 1)
-        {
-            player2.fillAmount = progresses[playerIndex];
-        }
-        else if (playerIndex == 2)
-        {
-            player3.fillAmount = progresses[playerIndex];
-        }
-        else if (playerIndex == 3)
-        {
-            player4.fillAmount = progresses[playerIndex];
-        }
+            progresses[playerIndex] += progress;
+            if (playerIndex == 0)
+            {
+                player1.fillAmount = progresses[playerIndex];
+            }
+            else if (playerIndex == 1)
+            {
+                player2.fillAmount = progresses[playerIndex];
+            }
+            else if (playerIndex == 2)
+            {
+                player3.fillAmount = progresses[playerIndex];
+            }
+            else if (playerIndex == 3)
+            {
+                player4.fillAmount = progresses[playerIndex];
+            }
+        } 
     }
 }

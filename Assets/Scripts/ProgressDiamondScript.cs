@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class ProgressDiamondScript : MonoBehaviour {
+public class ProgressDiamondScript : NetworkBehaviour {
 
-    float[] progresses = { 0, 0, 0, 0 };
+    public SyncListFloat progresses;
+
     public Image player1, player2, player3, player4;
 
 	// Use this for initialization
 	void Start () {
-		
+        progresses = new SyncListFloat();
+        progresses.Add(0f);
+        progresses.Add(0f);
+        progresses.Add(0f);
+        progresses.Add(0f);
 	}
 	
 	// Update is called once per frame

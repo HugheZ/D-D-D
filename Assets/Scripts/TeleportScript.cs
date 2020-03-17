@@ -23,12 +23,10 @@ public class TeleportScript : MonoBehaviour
         if (manager != null)
         {
             manager.NextRoom();
-            //TODO: update progress
         }
         else
         {
             mman.NextRoom(collision.gameObject);
-            //TODO: update progress
         }
     }
 }

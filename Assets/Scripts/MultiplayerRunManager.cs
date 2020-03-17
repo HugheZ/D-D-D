@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class MultiplayerRunManager : MonoBehaviour {
+public class MultiplayerRunManager : NetworkBehaviour {
     const int ROOM_COUNT = 3;
 
     public List<GameObject> possibleRoomList;
@@ -34,6 +35,8 @@ public class MultiplayerRunManager : MonoBehaviour {
     public Image player1progress, player2progress, player3progress, player4progress;
     public int numPlayers;
     public ProgressDiamondScript pDiamondScript;
+
+    public SyncListFloat progresses; 
 
     //stuff for Singleton
     private static MultiplayerRunManager _instance = null;
@@ -129,6 +132,7 @@ public class MultiplayerRunManager : MonoBehaviour {
         }
 
         pDiamondScript = FindObjectOfType<ProgressDiamondScript>();
+        progresses = pDiamondScript.progresses;
         
 
     }
@@ -201,6 +205,9 @@ public class MultiplayerRunManager : MonoBehaviour {
                 }
                 break;
         }
+        float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
+        pDiamondScript.ChangeProgress(playerNum-1, progress);
+        RpcProgressUpdate();
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         
     }
@@ -230,5 +237,14 @@ public class MultiplayerRunManager : MonoBehaviour {
     {
         //endPlayer.PlayOneShot(click);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    [ClientRpc]
+    private void RpcProgressUpdate()
+    {
+        if (isServer)
+        {
+            progresses = pDiamondScript.progresses;
+        }
     }
 }

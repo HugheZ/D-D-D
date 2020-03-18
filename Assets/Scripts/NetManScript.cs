@@ -7,6 +7,7 @@ public class NetManScript : NetworkManager
 {
     public Dictionary<int, GameObject> playerMap;
     NetworkManager myNetMan;
+    MultiplayerRunManager mrm;
 
     private static NetManScript _instance = null;
     public static NetManScript Instance
@@ -29,6 +30,8 @@ public class NetManScript : NetworkManager
     void Start()
     {
         myNetMan = GetComponent<NetworkManager>();
+        playerMap = new Dictionary<int, GameObject>();
+        mrm = MultiplayerRunManager.Instance;
 
     }
 
@@ -44,10 +47,37 @@ public class NetManScript : NetworkManager
         //edit player
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+        mrm.numPlayers++;
+        if (mrm.numPlayers == 1)
+        {
+            mrm.player1 = player.gameObject;
+            mrm.p1camera = player.GetComponentInChildren<Camera>();
+        }
+        else if (mrm.numPlayers == 2)
+        {
+            mrm.player2 = player.gameObject;
+            mrm.p2camera = player.GetComponentInChildren<Camera>();
+        }
+        else if (mrm.numPlayers == 3)
+        {
+            mrm.player3 = player.gameObject;
+            mrm.p3camera = player.GetComponentInChildren<Camera>();
+        }
+        else if (mrm.numPlayers == 4)
+        {
+            mrm.player4 = player.gameObject;
+            mrm.p4camera = player.GetComponentInChildren<Camera>();
+        }
+        mrm.updateCamera();
+        
+
+
     }
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)
     {
         base.OnServerRemovePlayer(conn, player);
+        mrm.numPlayers--;
+        mrm.updateCamera();
     }
 
 

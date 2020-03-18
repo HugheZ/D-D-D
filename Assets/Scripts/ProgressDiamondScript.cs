@@ -5,13 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class ProgressDiamondScript : NetworkBehaviour {
-
     public SyncListFloat progresses;
 
     public Image player1, player2, player3, player4;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
+        
         if (isServer)
         {
             progresses = new SyncListFloat();
@@ -21,9 +21,9 @@ public class ProgressDiamondScript : NetworkBehaviour {
             progresses.Add(0f);
         }     
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+// Update is called once per frame
+void Update () {
 		
 	}
 

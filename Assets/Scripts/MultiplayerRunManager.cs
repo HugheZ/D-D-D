@@ -32,8 +32,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public Camera p1camera, p2camera, p3camera, p4camera, main;
     public Canvas progressCanvas;
     public Image sideToSide;
+    public Image topToBottom;
     public Image player1progress, player2progress, player3progress, player4progress;
-    public int numPlayers;
+    public int numPlayers = 0;
     public ProgressDiamondScript pDiamondScript;
 
     public SyncListFloat progresses; 
@@ -75,65 +76,20 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
         bossSpawned = false;
 
-        if (numPlayers == 2)
-        {
-            //Instantiate camera sizes
-            p1camera.rect = new Rect(0, 0, .5f, 1);
-            p2camera.rect = new Rect(.5f, 0, .5f, 1);
+        //Unfill all progress
+        player1progress.fillAmount = 0;
+        player2progress.fillAmount = 0;
+        player3progress.fillAmount = 0;
+        player4progress.fillAmount = 0;
 
-            //Delete extraneous players
-            player3.SetActive(false);
-            player4.SetActive(false);
+        //Initalize Cameras
+        main.rect = new Rect(0, 0, 1, 1);
 
-            //Unfill all progress
-            player1progress.fillAmount = 0;
-            player2progress.fillAmount = 0;
-            player3progress.fillAmount = 0;
-            player4progress.fillAmount = 0;
-
-        }
-        else if (numPlayers == 3)
-        {
-            //Instantiate camera sizes
-            p1camera.rect = new Rect(0, .5f, .5f, .5f);
-            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
-            p3camera.rect = new Rect(0, 0, .5f, .5f);
-            main.rect = new Rect(.5f, 0, .5f, .5f);
-            p4camera.rect = new Rect(0, 0, 0, 0);
-
-            //Insert horizontal camera split
-            sideToSide.gameObject.SetActive(true);
-
-            //Delete extraneous player
-            player4.SetActive(false);
-
-            //Unfill all progress
-            player1progress.fillAmount = 0;
-            player2progress.fillAmount = 0;
-            player3progress.fillAmount = 0;
-            player4progress.fillAmount = 0;
-        }
-        else if (numPlayers == 4)
-        {
-            //Instantiate camera sizes
-            p1camera.rect = new Rect(0, .5f, .5f, .5f);
-            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
-            p3camera.rect = new Rect(0, 0, .5f, .5f);
-            p4camera.rect = new Rect(.5f, 0, .5f, .5f);
-
-            //Insert horizontal camera split
-            sideToSide.gameObject.SetActive(true);
-
-            //Unfill all progress
-            player1progress.fillAmount = 0;
-            player2progress.fillAmount = 0;
-            player3progress.fillAmount = 0;
-            player4progress.fillAmount = 0;
-        }
+        //Deinitialize progress diamond
+        progressCanvas.gameObject.SetActive(false);
 
         pDiamondScript = FindObjectOfType<ProgressDiamondScript>();
         progresses = pDiamondScript.progresses;
-        pDiamondScript.ChangeProgress(0, .3f);
         
 
     }
@@ -145,11 +101,6 @@ public class MultiplayerRunManager : NetworkBehaviour {
             Instantiate(boss, zero);
             bossSpawned = true;
             //TODO: enable boss ui and such
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            pDiamondScript.ChangeProgress(1, .1f);
         }
 	}
     public void NextRoom(GameObject player)
@@ -257,5 +208,71 @@ public class MultiplayerRunManager : NetworkBehaviour {
     private void OnDisable()
     {
         Debug.Log("ManagerDisabled");
+    }
+
+    public void updateCamera()
+    {
+        if(numPlayers == 1)
+        {
+            //Deinitialize progress diamond
+            progressCanvas.gameObject.SetActive(false);
+
+            player1.SetActive(true);
+            if(player2 != null)
+            {
+                player2.SetActive(false);
+            }
+            
+
+            p1camera.rect = new Rect(0, 0, 1, 1);
+            main.rect = new Rect(0, 0, 0, 0);
+            if(p2camera != null)
+            {
+                p2camera.rect = new Rect(0, 0, 0, 0);
+            }
+           
+
+        }else if(numPlayers == 2)
+        {
+            //Initialize progress diamond
+            progressCanvas.gameObject.SetActive(true);
+
+            player2.SetActive(true);
+            player3.SetActive(false);
+
+            //Insert camera splits
+            topToBottom.gameObject.SetActive(true);
+            sideToSide.gameObject.SetActive(false);
+
+            //Instantiate camera sizes
+            p1camera.rect = new Rect(0, 0, .5f, 1);
+            p2camera.rect = new Rect(.5f, 0, .5f, 1);
+            p3camera.rect = new Rect(0, 0, 0, 0);
+        }
+        else if(numPlayers == 3)
+        {
+            player3.SetActive(true);
+            player4.SetActive(false);
+
+            //Insert horizontal camera split
+            sideToSide.gameObject.SetActive(true);
+
+            //Instantiate camera sizes
+            p1camera.rect = new Rect(0, .5f, .5f, .5f);
+            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
+            p3camera.rect = new Rect(0, 0, .5f, .5f);
+            main.rect = new Rect(.5f, 0, .5f, .5f);
+            p4camera.rect = new Rect(0, 0, 0, 0);
+        }
+        else if(numPlayers == 4)
+        {
+            player4.SetActive(true);
+
+            //Instantiate camera sizes
+            p1camera.rect = new Rect(0, .5f, .5f, .5f);
+            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
+            p3camera.rect = new Rect(0, 0, .5f, .5f);
+            p4camera.rect = new Rect(.5f, 0, .5f, .5f);
+        }
     }
 }

@@ -39,7 +39,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public ProgressDiamondScript pDiamondScript;
 
-    public SyncListFloat progresses; 
+    public SyncListFloat progresses;
+
+    Dictionary<int, int> scoreTable;
 
     //stuff for Singleton
     private static MultiplayerRunManager _instance = null;
@@ -185,12 +187,27 @@ public class MultiplayerRunManager : NetworkBehaviour {
         //TODO: check if a player reaches boss room
         return true;
     }
+
     public void PlayerDied()
     {
-        //invoke show
-        //Invoke("ShowEnd", timeToShowEnd);
-        //update final score
-        //finalScore.text = string.Format("Rooms Cleared:\n{0}", roomsCleared);
+        int deadPlayers = 0;
+
+        //loop over players in score table, check NetMan for their objects, and see if they are dead, associate that player's score with 0
+        foreach(int ID in scoreTable.Keys)
+        {
+            if(NetManScript.Instance.playerMap[ID].GetComponent<HealthSystem>().health <= 0)
+            {
+                //player has 0 HP, so is dead, so we give them -1 points and update dead player count
+                deadPlayers++;
+                scoreTable[ID] = -1;
+            }
+        }
+
+        //if all players are dead, end the game
+        if(deadPlayers == scoreTable.Keys.Count)
+        {
+            EndGame(false);
+        }
     }
 
     /// <summary>
@@ -202,6 +219,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         //endPlayer.PlayOneShot(endAudio);
         //gameOverUI.SetActive(true);
     }
+
     public void BackToMenu()
     {
         //endPlayer.PlayOneShot(click);
@@ -284,10 +302,31 @@ public class MultiplayerRunManager : NetworkBehaviour {
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    void InitializeScoreTable()
+    {
+        //Initialize score table to current state on game start, give each player score of 0
+        scoreTable = new Dictionary<int, int>();
+        foreach(int key in NetManScript.Instance.playerMap.Keys)
+        {
+            scoreTable.Add(key, 0);
+        }
+    }
+
+    /// <summary>
     /// Called when a player strikes the boss, awards points to the player
     /// </summary>
-    public void AwardPointsByID()
+    public void AwardPointsByID(int ID, float damage)
     {
+        //if the ID is in the map, increment score
+        if (scoreTable.ContainsKey(ID))
+        {
+            scoreTable[ID] += Mathf.FloorToInt(damage);
+            print(scoreTable.ToString());
+        }
+        //else print an error log to the console
+        Debug.LogError("Key awarded points, but does not exist in score table: " + ID);
 
     }
 
@@ -297,6 +336,15 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// </summary>
     public void BossDefeated()
     {
+        EndGame(true);
+    }
 
+    /// <summary>
+    /// Ends the game for all players
+    /// </summary>
+    /// <param name="bossDefeated">Whether the game ended in a boss defeat or not</param>
+    void EndGame(bool bossDefeated)
+    {
+        print("Game ended with result BossDefeated: " + bossDefeated);
     }
 }

@@ -108,7 +108,8 @@ public class BossManager : NetworkBehaviour {
             //deactivate all after some time
             Invoke("Deactivate", timeUntilDeactivate);
 
-            //TODO: trigger main game manager to fade the screen
+            // trigger main game manager to end the game
+            MultiplayerRunManager.Instance.BossDefeated();
         }
     }
 
@@ -130,7 +131,7 @@ public class BossManager : NetworkBehaviour {
         if (isServer)
         {
             //TODO
-            //MultiplayerManager.Instance.AwardPointsById(PID,damage);
+            MultiplayerRunManager.Instance.AwardPointsByID(PID,damage);
         }
     }
 }

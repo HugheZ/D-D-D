@@ -282,4 +282,21 @@ public class MultiplayerRunManager : NetworkBehaviour {
             p4camera.rect = new Rect(.5f, 0, .5f, .5f);
         }
     }
+
+    /// <summary>
+    /// Called when a player strikes the boss, awards points to the player
+    /// </summary>
+    public void AwardPointsByID()
+    {
+
+    }
+
+    /// <summary>
+    /// Called when the boss is defeated, ends the game
+    /// Winner = most damage dealt to boss
+    /// </summary>
+    public void BossDefeated()
+    {
+
+    }
 }

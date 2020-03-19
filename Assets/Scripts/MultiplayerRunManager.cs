@@ -44,7 +44,16 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public SyncListFloat progresses;
 
+    //Keeps scores for all players
     Dictionary<int, int> scoreTable;
+
+    //End Game UI variables
+    public Canvas endGameHud;
+    public Text endGameWinnerText;
+    public Image endGameWinnerImage;
+    public Text endGameSalute;
+    //Whether the game is over
+    bool gameOver;
 
     //stuff for Singleton
     private static MultiplayerRunManager _instance = null;
@@ -98,8 +107,8 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
         pDiamondScript = FindObjectOfType<ProgressDiamondScript>();
         progresses = pDiamondScript.progresses;
-        
 
+        gameOver = false;
     }
 	
 	// Update is called once per frame
@@ -233,25 +242,28 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public void PlayerDied()
     {
-        int deadPlayers = 0;
-
-        List<int> keys = new List<int>(scoreTable.Keys);
-
-        //loop over players in score table, check NetMan for their objects, and see if they are dead, associate that player's score with 0
-        foreach(int ID in keys)
+        if (isServer)
         {
-            if(NetManScript.Instance.playerMap[ID].GetComponent<HealthSystem>().health <= 0)
+            int deadPlayers = 0;
+
+            List<int> keys = new List<int>(scoreTable.Keys);
+
+            //loop over players in score table, check NetMan for their objects, and see if they are dead, associate that player's score with 0
+            foreach (int ID in keys)
             {
-                //player has 0 HP, so is dead, so we give them -1 points and update dead player count
-                deadPlayers++;
-                scoreTable[ID] = -1;
+                if (NetManScript.Instance.playerMap[ID].GetComponent<HealthSystem>().health <= 0)
+                {
+                    //player has 0 HP, so is dead, so we give them -1 points and update dead player count
+                    deadPlayers++;
+                    scoreTable[ID] = -1;
+                }
             }
-        }
 
-        //if all players are dead, end the game
-        if(deadPlayers == scoreTable.Keys.Count)
-        {
-            EndGame(false);
+            //if all players are dead, end the game
+            if (deadPlayers == scoreTable.Keys.Count)
+            {
+                RpcEndGame(false, -1);
+            }
         }
     }
 
@@ -416,16 +428,55 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// </summary>
     public void BossDefeated()
     {
-        EndGame(true);
+        if (isServer)
+        {
+            // find highest scoring player
+            int winner = -1;
+            int score = 0;
+            foreach(KeyValuePair<int, int> entry in scoreTable)
+            {
+                if (entry.Value > score) winner = entry.Key;
+            }
+
+            // tell everyone about it
+            RpcEndGame(true, winner);
+        }
     }
 
     /// <summary>
     /// Ends the game for all players
     /// </summary>
     /// <param name="bossDefeated">Whether the game ended in a boss defeat or not</param>
-    void EndGame(bool bossDefeated)
+    [ClientRpc]
+    void RpcEndGame(bool bossDefeated, int playerIfWon)
     {
-        print("Game ended with result BossDefeated: " + bossDefeated);
+        if (!gameOver)
+        {
+            gameOver = true;
+
+            if (bossDefeated)
+            {
+                //if the boss died, find out the winning player's image and plaster it on the end game UI
+                if(playerIfWon != -1)
+                {
+                    //set player if we have a valid index
+                    endGameWinnerImage.sprite = NetManScript.Instance.playerMap[playerIfWon].GetComponent<SpriteRenderer>().sprite;
+                    //set other fields
+                    endGameWinnerText.text = string.Format("Winner!\n{0}", playerIfWon);
+                    endGameSalute.text = "Congratulations, noble dwarf.\n\nYou have bested the dungeon and your traitorous kin.\nReturn now, live in luxury, and enjoy your honor!";
+                }
+                else
+                {
+                    endGameWinnerText.text = "Winner!";
+                    endGameSalute.text = "Contragulations, unknown dwarf.\n\nYou may be a ghost to us, but you shall go down in the annals of history.\nThe rest may fight over who the winner was.";
+                }
+            }
+            else
+            {
+                //boss did not die, everyone else did, simply keep the base text and present the menu
+                endGameHud.gameObject.SetActive(true);
+            }
+        }
     }
 
     /// <summary>

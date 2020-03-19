@@ -34,6 +34,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public Image sideToSide;
     public Image topToBottom;
     public Image player1progress, player2progress, player3progress, player4progress;
+    bool gameStarted;
 
     public int numPlayers = 0;
 
@@ -79,6 +80,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         p4r1 = Instantiate(runOrder[0], p4Space);
 
         bossSpawned = false;
+        gameStarted = false;
 
         //Unfill all progress
         player1progress.fillAmount = 0;
@@ -106,13 +108,18 @@ public class MultiplayerRunManager : NetworkBehaviour {
             bossSpawned = true;
             //TODO: enable boss ui and such
         }
-	}
+        if (!gameStarted && isServer && Input.GetKeyDown(KeyCode.R))
+            StartGame();
+    }
 
     /// <summary>
     /// ///////////////////////////////////////////////////////////////////
     /// </summary>
     public void StartGame()
     {
+        updateCamera();
+        gameStarted = true;
+        print("Game start!");
         //TODO: teleport players to correct spots
     }
 

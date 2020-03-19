@@ -12,6 +12,7 @@ public class NetManScript : NetworkManager
     public Transform p4startPt;
     NetworkManager myNetMan;
     MultiplayerRunManager mrm;
+    int p1ConnId;
 
     private static NetManScript _instance = null;
     public static NetManScript Instance
@@ -42,10 +43,6 @@ public class NetManScript : NetworkManager
     // Update is called once per frame
     void Update()
     {
-        if (playerMap.Keys.Count >= 1)//&& the first player is flexing)
-        {
-            mrm.StartGame();
-        }
 
     }
 
@@ -68,11 +65,13 @@ public class NetManScript : NetworkManager
                 break;
         }
         var player = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
+        if (playerMap.Keys.Count == 0)
+            p1ConnId = playerControllerId;
         //edit player
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
         mrm.numPlayers = playerMap.Count;
-        print(playerMap.Count);
+        print(playerMap.Keys.Count);
         if (mrm.numPlayers == 1)
         {
             mrm.player1 = player.gameObject;
@@ -93,7 +92,6 @@ public class NetManScript : NetworkManager
             mrm.player4 = player.gameObject;
             mrm.p4camera = player.GetComponentInChildren<Camera>();
         }
-        mrm.updateCamera();
         
 
 

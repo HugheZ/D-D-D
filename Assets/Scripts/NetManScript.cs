@@ -42,6 +42,10 @@ public class NetManScript : NetworkManager
     // Update is called once per frame
     void Update()
     {
+        if (playerMap.Keys.Count >= 1)//&& the first player is flexing)
+        {
+            mrm.StartGame();
+        }
 
     }
 

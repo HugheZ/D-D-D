@@ -105,6 +105,16 @@ public class MultiplayerRunManager : NetworkBehaviour {
             //TODO: enable boss ui and such
         }
 	}
+
+    /// <summary>
+    /// ///////////////////////////////////////////////////////////////////
+    /// </summary>
+    public void StartGame()
+    {
+        //TODO: teleport players to correct spots
+    }
+
+
     public void NextRoom(GameObject player)
     {
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);

@@ -131,7 +131,7 @@ public class BossManager : NetworkBehaviour {
         if (isServer)
         {
             //TODO
-            MultiplayerRunManager.Instance.AwardPointsByID(PID.connectionId,damage);
+            if(MultiplayerRunManager.Instance) MultiplayerRunManager.Instance.AwardPointsByID(PID.connectionId,damage);
         }
     }
 }

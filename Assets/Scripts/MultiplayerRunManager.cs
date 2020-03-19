@@ -117,10 +117,11 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// </summary>
     public void StartGame()
     {
-        updateCamera();
         gameStarted = true;
         print("Game start!");
         //TODO: teleport players to correct spots
+        InitializeScoreTable();
+        updateCamera();
     }
 
 
@@ -199,8 +200,10 @@ public class MultiplayerRunManager : NetworkBehaviour {
     {
         int deadPlayers = 0;
 
+        List<int> keys = new List<int>(scoreTable.Keys);
+
         //loop over players in score table, check NetMan for their objects, and see if they are dead, associate that player's score with 0
-        foreach(int ID in scoreTable.Keys)
+        foreach(int ID in keys)
         {
             if(NetManScript.Instance.playerMap[ID].GetComponent<HealthSystem>().health <= 0)
             {
@@ -333,7 +336,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
             print(scoreTable.ToString());
         }
         //else print an error log to the console
-        Debug.LogError("Key awarded points, but does not exist in score table: " + ID);
+        else Debug.LogError("Key awarded points, but does not exist in score table: " + ID);
 
     }
 

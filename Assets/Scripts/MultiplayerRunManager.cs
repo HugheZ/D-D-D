@@ -265,7 +265,14 @@ public class MultiplayerRunManager : NetworkBehaviour {
             {
                 player2.SetActive(false);
             }
-            
+            if (player3 != null)
+            {
+                player3.SetActive(false);
+            }
+            if (player4 != null)
+            {
+                player4.SetActive(false);
+            }
 
             p1camera.rect = new Rect(0, 0, 1, 1);
             main.rect = new Rect(0, 0, 0, 0);
@@ -280,8 +287,16 @@ public class MultiplayerRunManager : NetworkBehaviour {
             //Initialize progress diamond
             progressCanvas.gameObject.SetActive(true);
 
+            player1.SetActive(true);
             player2.SetActive(true);
-            player3.SetActive(false);
+            if (player3 != null)
+            {
+                player3.SetActive(false);
+            }
+            if (player4 != null)
+            {
+                player4.SetActive(false);
+            }
 
             //Insert camera splits
             topToBottom.gameObject.SetActive(true);
@@ -290,14 +305,24 @@ public class MultiplayerRunManager : NetworkBehaviour {
             //Instantiate camera sizes
             p1camera.rect = new Rect(0, 0, .5f, 1);
             p2camera.rect = new Rect(.5f, 0, .5f, 1);
-            p3camera.rect = new Rect(0, 0, 0, 0);
+            main.rect = new Rect(0, 0, 0, 0);
         }
         else if(numPlayers == 3)
         {
-            player3.SetActive(true);
-            player4.SetActive(false);
+            //Initialize progress diamond
+            progressCanvas.gameObject.SetActive(true);
 
-            //Insert horizontal camera split
+            player1.SetActive(true);
+            player2.SetActive(true);
+            player3.SetActive(true);
+            if(player4 != null)
+            {
+                player4.SetActive(false);
+            }
+            
+
+            //Insert camera splits
+            topToBottom.gameObject.SetActive(true);
             sideToSide.gameObject.SetActive(true);
 
             //Instantiate camera sizes
@@ -305,17 +330,27 @@ public class MultiplayerRunManager : NetworkBehaviour {
             p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
             p3camera.rect = new Rect(0, 0, .5f, .5f);
             main.rect = new Rect(.5f, 0, .5f, .5f);
-            p4camera.rect = new Rect(0, 0, 0, 0);
         }
         else if(numPlayers == 4)
         {
+            //Initialize progress diamond
+            progressCanvas.gameObject.SetActive(true);
+
+            player1.SetActive(true);
+            player2.SetActive(true);
+            player3.SetActive(true);
             player4.SetActive(true);
+
+            //Insert camera splits
+            topToBottom.gameObject.SetActive(true);
+            sideToSide.gameObject.SetActive(true);
 
             //Instantiate camera sizes
             p1camera.rect = new Rect(0, .5f, .5f, .5f);
             p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
             p3camera.rect = new Rect(0, 0, .5f, .5f);
             p4camera.rect = new Rect(.5f, 0, .5f, .5f);
+            main.rect = new Rect(0, 0, 0, 0);
         }
     }
 

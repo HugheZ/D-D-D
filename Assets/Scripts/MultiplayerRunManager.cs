@@ -287,7 +287,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// <summary>
     /// Called when a player strikes the boss, awards points to the player
     /// </summary>
-    public void AwardPointsByID()
+    public void AwardPointsByID(NetworkConnection pid, float damage)
     {
 
     }

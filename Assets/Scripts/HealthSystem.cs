@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class HealthSystem : MonoBehaviour
     public AudioSource PlayerAudio;
     public AudioClip death;
     public AudioClip damageSound;
+    public Image healthImage;   //health image to use as slider
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +59,17 @@ public class HealthSystem : MonoBehaviour
         }
 
         //inform manager
-        if(ManagerScript.Instance) ManagerScript.Instance.PlayerHit(newHealth);
+        PlayerHit(newHealth);
+    }
+
+    /// <summary>
+    /// Calculates the new health for the player
+    /// </summary>
+    /// <param name="newHealth">The new health of the player</param>
+    public void PlayerHit(int newHealth)
+    {
+        //set UI
+        healthImage.fillAmount = newHealth / 100f;
     }
 
     /// <summary>
@@ -83,5 +95,6 @@ public class HealthSystem : MonoBehaviour
 
         //All disabled, inform manager
         if(ManagerScript.Instance) ManagerScript.Instance.PlayerDied();
+        if (MultiplayerRunManager.Instance) MultiplayerRunManager.Instance.PlayerDied();
     }
 }

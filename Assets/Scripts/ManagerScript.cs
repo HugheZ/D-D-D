@@ -22,7 +22,6 @@ public class ManagerScript : MonoBehaviour
 
     public Text score;  //score text
     public Text finalScore; //final score box
-    public Image healthImage;   //health image to use as slider
     private int totalScore; //the total score of the player
     public GameObject gameOverUI; //the ui to display when the game is over
     public float timeToShowEnd; //time until the end screen is shown after death
@@ -127,16 +126,6 @@ public class ManagerScript : MonoBehaviour
     private void SetScoreUI()
     {
         score.text = totalScore.ToString();
-    }
-
-    /// <summary>
-    /// Calculates the new health for the player
-    /// </summary>
-    /// <param name="newHealth">The new health of the player</param>
-    public void PlayerHit(int newHealth)
-    {
-        //set UI
-        healthImage.fillAmount = newHealth / 100f;
     }
 
 

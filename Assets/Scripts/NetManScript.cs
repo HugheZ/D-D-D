@@ -103,4 +103,13 @@ public class NetManScript : NetworkManager
         mrm.updateCamera();
     }
 
+    /// <summary>
+    /// Disconnects the player
+    /// </summary>
+    /// <param name="isServer">Whether the caller is a host or client</param>
+    public void Disconnect(bool isServer)
+    {
+        if (isServer) StopHost();
+        else StopClient();
+    }
 }

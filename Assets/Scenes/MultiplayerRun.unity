@@ -3144,10 +3144,10 @@ MonoBehaviour:
   p3Space: {fileID: 104202841}
   p4Space: {fileID: 2038561027}
   playerSpawns:
-  - {x: -50, y: 50, z: 0}
-  - {x: 50, y: 50, z: 0}
-  - {x: -50, y: -50, z: 0}
-  - {x: 50, y: -50, z: 0}
+  - {x: -50, y: 51, z: 0}
+  - {x: 50, y: 51, z: 0}
+  - {x: -50, y: -49, z: 0}
+  - {x: 50, y: -49, z: 0}
   p1camera: {fileID: 0}
   p2camera: {fileID: 0}
   p3camera: {fileID: 0}
@@ -3160,6 +3160,7 @@ MonoBehaviour:
   player2progress: {fileID: 1382601311}
   player3progress: {fileID: 856114602}
   player4progress: {fileID: 318991637}
+  holdingRoomCanvas: {fileID: 363074541}
   numPlayers: 0
   pDiamondScript: {fileID: 0}
 --- !u!4 &1930404517

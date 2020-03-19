@@ -113,7 +113,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (PlayerInRoom() && bossSpawned && isServer)
+        if (PlayerInRoom() && !bossSpawned && isServer)
         {
             //enable boss ui and such
             if (!BossManager.Instance)
@@ -415,7 +415,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
         if (scoreTable.ContainsKey(ID))
         {
             scoreTable[ID] += Mathf.FloorToInt(damage);
-            print(scoreTable.ToString());
+            string ret = "";
+            foreach (KeyValuePair<int, int> pair in scoreTable) ret += "[" + pair.Key + ": " + pair.Value + "] ";
+            print(ret);
         }
         //else print an error log to the console
         else Debug.LogError("Key awarded points, but does not exist in score table: " + ID);

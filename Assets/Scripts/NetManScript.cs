@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 public class NetManScript : NetworkManager
 {
     public Dictionary<int, GameObject> playerMap;
+    public Transform p1startPt;
+    public Transform p2startPt;
+    public Transform p3startPt;
+    public Transform p4startPt;
     NetworkManager myNetMan;
     MultiplayerRunManager mrm;
 
@@ -43,7 +47,23 @@ public class NetManScript : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        var player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        Vector2 spawnAt = new Vector2();
+        switch (playerMap.Keys.Count)
+        {
+            case 1:
+                spawnAt = p2startPt.position;
+                break;
+            case 2:
+                spawnAt = p3startPt.position;
+                break;
+            case 3:
+                spawnAt = p4startPt.position;
+                break;
+            default:
+                spawnAt = p1startPt.position;
+                break;
+        }
+        var player = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
         //edit player
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);

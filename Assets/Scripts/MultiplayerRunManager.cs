@@ -36,6 +36,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public Image player1progress, player2progress, player3progress, player4progress;
     bool gameStarted;
     public Canvas holdingRoomCanvas;
+    Dictionary<int, GameObject> playerMapCopy;
 
     public int numPlayers = 0;
 
@@ -137,8 +138,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
     {
         gameStarted = true;
         holdingRoomCanvas.enabled = false;
-        print("Game start!");
+        print("Game start!");        
         NetManScript netman = NetManScript.Instance;
+        playerMapCopy = netman.playerMap;
         var e = netman.playerMap.GetEnumerator();
         for (int i = 0; i < netman.playerMap.Keys.Count; i++)
         {            
@@ -153,10 +155,18 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public void NextRoom(GameObject player)
     {
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
+        NetworkConnection tpPlayer = player.GetComponentInParent<NetworkIdentity>().connectionToClient;
         int playerNum = 0;
+        var e = playerMapCopy.Keys.GetEnumerator();
+        for (int i = 0; i < playerMapCopy.Keys.Count; i++)
+        {
+            e.MoveNext();
+            if (e.Current == tpPlayer.connectionId)
+                playerNum = i;
+        }
         switch (playerNum)
         {
-            case 1:
+            case 0:
                 Destroy(p1r1);
                 p1CurRoom++;
                 if (p1CurRoom >= runOrder.Count)
@@ -169,7 +179,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
                     player.transform.position = playerSpawns[0];
                 }
                 break;
-            case 2:
+            case 1:
                 Destroy(p2r1);
                 p2CurRoom++;
                 if (p2CurRoom >= runOrder.Count)
@@ -182,7 +192,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
                     player.transform.position = playerSpawns[1];
                 }
                 break;
-            case 3:
+            case 2:
                 Destroy(p3r1);
                 p3CurRoom++;
                 if (p3CurRoom >= runOrder.Count)

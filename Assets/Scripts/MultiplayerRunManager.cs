@@ -35,6 +35,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public Image topToBottom;
     public Image player1progress, player2progress, player3progress, player4progress;
     bool gameStarted;
+    public Canvas holdingRoomCanvas;
 
     public int numPlayers = 0;
 
@@ -135,8 +136,15 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public void StartGame()
     {
         gameStarted = true;
+        holdingRoomCanvas.enabled = false;
         print("Game start!");
-        //TODO: teleport players to correct spots
+        NetManScript netman = NetManScript.Instance;
+        var e = netman.playerMap.GetEnumerator();
+        for (int i = 0; i < netman.playerMap.Keys.Count; i++)
+        {            
+            e.MoveNext();
+            e.Current.Value.gameObject.transform.position = playerSpawns[i];
+        }
         InitializeScoreTable();
         updateCamera();
     }

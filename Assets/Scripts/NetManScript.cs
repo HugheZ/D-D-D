@@ -72,7 +72,7 @@ public class NetManScript : NetworkManager
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
         mrm.numPlayers = playerMap.Count;
-        print(playerMap.Count);
+        print(playerMap.Keys.Count);
         if (mrm.numPlayers == 1)
         {
             mrm.player1 = player.gameObject;
@@ -93,7 +93,6 @@ public class NetManScript : NetworkManager
             mrm.player4 = player.gameObject;
             mrm.p4camera = player.GetComponentInChildren<Camera>();
         }
-        mrm.updateCamera();
         
 
 

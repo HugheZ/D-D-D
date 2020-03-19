@@ -111,6 +111,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// </summary>
     public void StartGame()
     {
+        updateCamera();
         //TODO: teleport players to correct spots
     }
 

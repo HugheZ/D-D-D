@@ -12,6 +12,7 @@ public class NetManScript : NetworkManager
     public Transform p4startPt;
     NetworkManager myNetMan;
     MultiplayerRunManager mrm;
+    int p1ConnId;
 
     private static NetManScript _instance = null;
     public static NetManScript Instance
@@ -44,6 +45,7 @@ public class NetManScript : NetworkManager
     {
         if (playerMap.Keys.Count >= 1)//&& the first player is flexing)
         {
+            //if(playerMap[p1ConnId] is flexing)
             mrm.StartGame();
         }
 
@@ -68,6 +70,8 @@ public class NetManScript : NetworkManager
                 break;
         }
         var player = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
+        if (playerMap.Keys.Count == 0)
+            p1ConnId = playerControllerId;
         //edit player
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);

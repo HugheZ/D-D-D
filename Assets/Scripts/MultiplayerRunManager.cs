@@ -102,14 +102,31 @@ public class MultiplayerRunManager : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (PlayerInRoom() && bossSpawned)
+        if (PlayerInRoom() && bossSpawned && isServer)
         {
-            Instantiate(boss, zero);
+            //enable boss ui and such
+            if (!BossManager.Instance)
+            {
+                GameObject bossBoy = Instantiate(boss, zero, true);
+                NetworkServer.Spawn(bossBoy);
+            }
+            else
+            {
+                RpcEnableBoss();
+            }
             bossSpawned = true;
-            //TODO: enable boss ui and such
         }
         if (!gameStarted && isServer && Input.GetKeyDown(KeyCode.R))
             StartGame();
+    }
+
+    /// <summary>
+    /// Enables the boss on all clients
+    /// </summary>
+    [ClientRpc]
+    void RpcEnableBoss()
+    {
+        BossManager.Instance.EnableBoss();
     }
 
     /// <summary>
@@ -356,5 +373,14 @@ public class MultiplayerRunManager : NetworkBehaviour {
     void EndGame(bool bossDefeated)
     {
         print("Game ended with result BossDefeated: " + bossDefeated);
+    }
+
+    /// <summary>
+    /// Disconnects the player from the game
+    /// </summary>
+    public void Disconnect()
+    {
+        NetManScript.Instance.Disconnect(isServer);
+        SceneManager.LoadScene("MainMenu");
     }
 }

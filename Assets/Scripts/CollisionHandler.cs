@@ -141,6 +141,20 @@ public class CollisionHandler : NetworkBehaviour
                     HurtPlayer(12);
                 }
             }
+            else if(collision.gameObject.GetComponent<Bubble>() != null)
+            {
+                if (canGetHurt)
+                {
+                    HurtPlayer(5);
+                }
+            }
+            else if(collision.gameObject.GetComponent<BossAction>() != null)
+            {
+                if (canGetHurt)
+                {
+                    HurtPlayer(16);
+                }
+            }
             else if (collision.gameObject.tag == "Door")
             {
                 Door.PlayOneShot(Door.clip);

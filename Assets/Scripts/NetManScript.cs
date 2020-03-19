@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 public class NetManScript : NetworkManager
 {
     public Dictionary<int, GameObject> playerMap;
+    public Transform p1startPt;
+    public Transform p2startPt;
+    public Transform p3startPt;
+    public Transform p4startPt;
     NetworkManager myNetMan;
     MultiplayerRunManager mrm;
 
@@ -38,16 +42,37 @@ public class NetManScript : NetworkManager
     // Update is called once per frame
     void Update()
     {
+        if (playerMap.Keys.Count >= 1)//&& the first player is flexing)
+        {
+            mrm.StartGame();
+        }
 
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        var player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        Vector2 spawnAt = new Vector2();
+        switch (playerMap.Keys.Count)
+        {
+            case 1:
+                spawnAt = p2startPt.position;
+                break;
+            case 2:
+                spawnAt = p3startPt.position;
+                break;
+            case 3:
+                spawnAt = p4startPt.position;
+                break;
+            default:
+                spawnAt = p1startPt.position;
+                break;
+        }
+        var player = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
         //edit player
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-        mrm.numPlayers++;
+        mrm.numPlayers = playerMap.Count;
+        print(playerMap.Count);
         if (mrm.numPlayers == 1)
         {
             mrm.player1 = player.gameObject;
@@ -79,6 +104,5 @@ public class NetManScript : NetworkManager
         mrm.numPlayers--;
         mrm.updateCamera();
     }
-
 
 }

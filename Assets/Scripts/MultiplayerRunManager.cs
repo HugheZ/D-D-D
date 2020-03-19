@@ -34,7 +34,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public Image sideToSide;
     public Image topToBottom;
     public Image player1progress, player2progress, player3progress, player4progress;
+
     public int numPlayers = 0;
+
     public ProgressDiamondScript pDiamondScript;
 
     public SyncListFloat progresses; 
@@ -103,6 +105,16 @@ public class MultiplayerRunManager : NetworkBehaviour {
             //TODO: enable boss ui and such
         }
 	}
+
+    /// <summary>
+    /// ///////////////////////////////////////////////////////////////////
+    /// </summary>
+    public void StartGame()
+    {
+        //TODO: teleport players to correct spots
+    }
+
+
     public void NextRoom(GameObject player)
     {
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
@@ -203,11 +215,6 @@ public class MultiplayerRunManager : NetworkBehaviour {
         {
             progresses = pDiamondScript.progresses;
         }
-    }
-
-    private void OnDisable()
-    {
-        Debug.Log("ManagerDisabled");
     }
 
     public void updateCamera()

@@ -34,7 +34,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public Image sideToSide;
     public Image topToBottom;
     public Image player1progress, player2progress, player3progress, player4progress;
+
     public int numPlayers = 0;
+
     public ProgressDiamondScript pDiamondScript;
 
     public SyncListFloat progresses; 
@@ -203,11 +205,6 @@ public class MultiplayerRunManager : NetworkBehaviour {
         {
             progresses = pDiamondScript.progresses;
         }
-    }
-
-    private void OnDisable()
-    {
-        Debug.Log("ManagerDisabled");
     }
 
     public void updateCamera()

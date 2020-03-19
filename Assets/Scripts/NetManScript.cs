@@ -47,7 +47,8 @@ public class NetManScript : NetworkManager
         //edit player
         playerMap.Add(conn.connectionId, player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-        mrm.numPlayers++;
+        mrm.numPlayers = playerMap.Count;
+        print(playerMap.Count);
         if (mrm.numPlayers == 1)
         {
             mrm.player1 = player.gameObject;
@@ -79,6 +80,5 @@ public class NetManScript : NetworkManager
         mrm.numPlayers--;
         mrm.updateCamera();
     }
-
 
 }

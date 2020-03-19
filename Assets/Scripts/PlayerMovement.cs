@@ -289,7 +289,7 @@ public class PlayerMovement : NetworkBehaviour
     /// <param name="yo">whether the player is saying hello</param>
     void ToggleHi(bool yo)
     {
-        if (hello)
+        if (yo)
         {
             //play sound if not yet done
             if (!helloPlayed)

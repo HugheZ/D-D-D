@@ -117,6 +117,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     {
         updateCamera();
         gameStarted = true;
+        print("Game start!");
         //TODO: teleport players to correct spots
     }
 
@@ -292,7 +293,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// <summary>
     /// Called when a player strikes the boss, awards points to the player
     /// </summary>
-    public void AwardPointsByID()
+    public void AwardPointsByID(NetworkConnection pid, float score)
     {
 
     }

@@ -574,7 +574,7 @@ MonoBehaviour:
   boss: {fileID: 1561540705188224}
   bossPrefab: {fileID: 1561540705188224}
   music: {fileID: 82598727058023290}
-  enableFromStart: 1
+  enableFromStart: 0
 --- !u!114 &114258180943069180
 MonoBehaviour:
   m_ObjectHideFlags: 1

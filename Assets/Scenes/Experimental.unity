@@ -1725,6 +1725,7 @@ MonoBehaviour:
   p2startPt: {fileID: 1202988187}
   p3startPt: {fileID: 0}
   p4startPt: {fileID: 0}
+  controllers: []
 --- !u!4 &1561846801
 Transform:
   m_ObjectHideFlags: 0

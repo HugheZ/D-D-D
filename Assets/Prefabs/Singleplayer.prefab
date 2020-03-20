@@ -596,6 +596,7 @@ MonoBehaviour:
   PlayerAudio: {fileID: 82623206208765542}
   death: {fileID: 8300000, guid: 6f5bc0d7ece38fb42960b67fe68f4ac5, type: 3}
   damageSound: {fileID: 8300000, guid: add6c50cdca3b964cacedf0eed70adcf, type: 3}
+  healthImage: {fileID: 0}
 --- !u!114 &114312645169516238
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -14,6 +14,9 @@ public class NetManScript : NetworkManager
     MultiplayerRunManager mrm;
     int p1ConnId;
 
+    //list of player animatiors
+    public List<RuntimeAnimatorController> controllers;
+
     private static NetManScript _instance = null;
     public static NetManScript Instance
     {
@@ -92,8 +95,12 @@ public class NetManScript : NetworkManager
             mrm.player4 = player.gameObject;
             mrm.p4camera = player.GetComponentInChildren<Camera>();
         }
-        
 
+        //change animator
+        //if (playerMap.Keys.Count <= controllers.Count)
+        //{
+        //    player.GetComponent<PlayerIdentityController>().index = playerMap.Keys.Count - 1;
+        //}
 
     }
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)

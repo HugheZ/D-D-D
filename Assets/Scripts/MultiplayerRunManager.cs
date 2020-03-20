@@ -81,6 +81,10 @@ public class MultiplayerRunManager : NetworkBehaviour {
         {
             int traps = rnd.Next(3,6);
             GameObject startRoom = possibleRoomList[rnd.Next(0, possibleRoomList.Count)];
+            for(int i = 3; i< 6; i++)
+            {
+                startRoom.transform.GetChild(i).gameObject.SetActive(false);
+            }
             startRoom.transform.GetChild(traps).gameObject.SetActive(true);
             runOrder.Add(startRoom);
         }

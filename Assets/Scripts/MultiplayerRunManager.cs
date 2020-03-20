@@ -85,7 +85,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     void Start () {
         rnd = new System.Random();
         runOrder = new List<GameObject>();
-        for(int rc = 0; rc < ROOM_COUNT; rc++)
+        /*for(int rc = 0; rc < ROOM_COUNT; rc++)
         {
             int traps = rnd.Next(3,6);
             GameObject startRoom = possibleRoomList[rnd.Next(0, possibleRoomList.Count)];
@@ -95,12 +95,12 @@ public class MultiplayerRunManager : NetworkBehaviour {
             }
             startRoom.transform.GetChild(traps).gameObject.SetActive(true);
             runOrder.Add(startRoom);
-        }
+        }*/
         
-        p1r1 = Instantiate(runOrder[0], p1Space);
+        /*p1r1 = Instantiate(runOrder[0], p1Space);
         p2r1 = Instantiate(runOrder[0], p2Space);
         p3r1 = Instantiate(runOrder[0], p3Space);
-        p4r1 = Instantiate(runOrder[0], p4Space);
+        p4r1 = Instantiate(runOrder[0], p4Space);*/
 
         bossSpawned = false;
         gameStarted = false;
@@ -176,6 +176,34 @@ public class MultiplayerRunManager : NetworkBehaviour {
         //}
         //InitializeScoreTable();
         //updateCamera();
+
+
+        /*
+        //Initalize players and cameras
+        //##### FIGURE OUT HOW TO ACCESS PLAYER GAMEOBJECTS #####
+        if (numPlayers == 1)
+        {
+            player1 = player1.gameObject;
+            p1camera = player1.GetComponentInChildren<Camera>();
+        }
+        else if (numPlayers == 2)
+        {
+            player2 = player2.gameObject;
+            p2camera = player2.GetComponentInChildren<Camera>();
+        }
+        else if (numPlayers == 3)
+        {
+            player3 = player3.gameObject;
+            p3camera = player3.GetComponentInChildren<Camera>();
+        }
+        else if (numPlayers == 4)
+        {
+            player4 = player4.gameObject;
+            p4camera = player4.GetComponentInChildren<Camera>();
+        }
+        */
+        //updateCamera();
+
         InitializeScoreTable();
         containingDoor.SetActive(false);
         dungeon.SetActive(true);
@@ -273,7 +301,11 @@ public class MultiplayerRunManager : NetworkBehaviour {
         {
 
         }
-
+        /*
+        float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
+        pDiamondScript.ChangeProgress(playerNum, progress);
+        RpcProgressUpdate();
+        */
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         
     }

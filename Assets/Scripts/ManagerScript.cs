@@ -90,7 +90,11 @@ public class ManagerScript : MonoBehaviour
         curRoom = newRoom;
         player.transform.position = reSpawnPt;
         currentRoom = Instantiate(rooms[curRoom], new Vector3(0,0,0), Quaternion.identity);
-        if(traps == 0)
+        for (int i = 3; i < 6; i++)
+        {
+            currentRoom.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        if (traps == 0)
         {
             currentRoom.transform.GetChild(3).gameObject.SetActive(true);
             print("A Room");

@@ -100,14 +100,16 @@ GameObject:
   m_Component:
   - component: {fileID: 4377391829702240}
   - component: {fileID: 212789992780655550}
+  - component: {fileID: 114325189265165216}
+  - component: {fileID: 114226937283990402}
+  - component: {fileID: 114985517148212888}
   - component: {fileID: 50988557899332838}
   - component: {fileID: 61631021656139202}
   - component: {fileID: 95572591484783364}
   - component: {fileID: 114302697373431218}
   - component: {fileID: 82623206208765542}
-  - component: {fileID: 114390132245576682}
-  - component: {fileID: 114180494293224052}
-  - component: {fileID: 114950513601414544}
+  - component: {fileID: 114312645169516238}
+  - component: {fileID: 114772646298513114}
   m_Layer: 9
   m_Name: Singleplayer
   m_TagString: Player
@@ -566,7 +568,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114180494293224052
+--- !u!114 &114226937283990402
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,16 +576,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466894535341214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262e904599f79dc4085a3b6a4c4b0fba, type: 3}
+  m_Script: {fileID: 11500000, guid: c4b20b2e694c7674baa60a5acbc9c6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerSwing: 5
-  upHB: {fileID: 61037308353285240}
-  rightHB: {fileID: 61728131295553902}
-  downHB: {fileID: 61781780738533066}
-  leftHB: {fileID: 61733564589003422}
-  PlayerSource: {fileID: 82623206208765542}
-  whoosh: {fileID: 8300000, guid: 80ca87d519aae984eac99956ade039e7, type: 3}
+  canGetHurt: 1
+  Door: {fileID: 82623206208765542}
 --- !u!114 &114302697373431218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -600,7 +597,7 @@ MonoBehaviour:
   death: {fileID: 8300000, guid: 6f5bc0d7ece38fb42960b67fe68f4ac5, type: 3}
   damageSound: {fileID: 8300000, guid: add6c50cdca3b964cacedf0eed70adcf, type: 3}
   healthImage: {fileID: 0}
---- !u!114 &114390132245576682
+--- !u!114 &114312645169516238
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,12 +605,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466894535341214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757fed6fabe80664db5d094d9aa2f910, type: 3}
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canGetHurt: 1
-  Door: {fileID: 82623206208765542}
---- !u!114 &114950513601414544
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 35
+    i1: 241
+    i2: 56
+    i3: 234
+    i4: 189
+    i5: 164
+    i6: 151
+    i7: 196
+    i8: 154
+    i9: 88
+    i10: 145
+    i11: 43
+    i12: 7
+    i13: 52
+    i14: 238
+    i15: 154
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114325189265165216
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -621,7 +637,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466894535341214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd77c8b9bdc39641af493fa878d45e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8fedbb992b0144d99a4c7055adae55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
@@ -633,7 +649,45 @@ MonoBehaviour:
   hello: {fileID: 8300000, guid: 14549ff00728b3c49b17cb214a3e9e5f, type: 3}
   FLEXBROTHER: {fileID: 8300000, guid: a4db943303ebb5e4bb1a982aff5f0da4, type: 3}
   foot: 0
-  playerCamera: {fileID: 0}
+--- !u!114 &114772646298513114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466894535341214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114985517148212888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466894535341214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168c391543b1c1545a582cb0420cf2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSwing: 5
+  upHB: {fileID: 61037308353285240}
+  rightHB: {fileID: 61728131295553902}
+  downHB: {fileID: 61781780738533066}
+  leftHB: {fileID: 61733564589003422}
+  PlayerSource: {fileID: 82623206208765542}
+  whoosh: {fileID: 8300000, guid: 80ca87d519aae984eac99956ade039e7, type: 3}
 --- !u!212 &212789992780655550
 SpriteRenderer:
   m_ObjectHideFlags: 1

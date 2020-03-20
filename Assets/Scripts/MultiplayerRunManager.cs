@@ -307,8 +307,8 @@ public class MultiplayerRunManager : NetworkBehaviour {
         RpcProgressUpdate();
         */
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
-        
     }
+
     private bool PlayerInRoom()
     {
         //TODO: check if a player reaches boss room
@@ -567,4 +567,6 @@ public class MultiplayerRunManager : NetworkBehaviour {
         NetManScript.Instance.Disconnect(isServer);
         SceneManager.LoadScene("MainMenu");
     }
+
+
 }

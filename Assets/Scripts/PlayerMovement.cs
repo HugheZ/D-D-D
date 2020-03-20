@@ -47,6 +47,8 @@ public class PlayerMovement : NetworkBehaviour
     public bool foot;
     float lastFoot;
 
+    public Camera playerCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -352,5 +354,11 @@ public class PlayerMovement : NetworkBehaviour
     public bool IsPosing()
     {
         return flexing || hi;
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        playerCamera.gameObject.SetActive(true);
+        playerCamera.rect = new Rect(0, 0, 1, 1);
     }
 }

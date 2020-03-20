@@ -85,7 +85,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1241688671835508
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +730,7 @@ MonoBehaviour:
   hello: {fileID: 8300000, guid: 14549ff00728b3c49b17cb214a3e9e5f, type: 3}
   FLEXBROTHER: {fileID: 8300000, guid: a4db943303ebb5e4bb1a982aff5f0da4, type: 3}
   foot: 0
+  playerCamera: {fileID: 20366543256340084}
 --- !u!114 &114175831979396924
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -295,6 +295,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
         //teleport to boss
         Vector3 spawnPt = bossRoom.transform.position + new Vector3(0,8,0);
+        player.transform.position = spawnPt;
 
         //enable boss if not yet done
         if (!bossSpawned)

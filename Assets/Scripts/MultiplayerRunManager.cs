@@ -77,7 +77,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     void Start () {
         rnd = new System.Random();
         runOrder = new List<GameObject>();
-        for(int rc = 0; rc < ROOM_COUNT; rc++)
+        /*for(int rc = 0; rc < ROOM_COUNT; rc++)
         {
             int traps = rnd.Next(3,6);
             GameObject startRoom = possibleRoomList[rnd.Next(0, possibleRoomList.Count)];
@@ -87,12 +87,12 @@ public class MultiplayerRunManager : NetworkBehaviour {
             }
             startRoom.transform.GetChild(traps).gameObject.SetActive(true);
             runOrder.Add(startRoom);
-        }
+        }*/
         
-        p1r1 = Instantiate(runOrder[0], p1Space);
+        /*p1r1 = Instantiate(runOrder[0], p1Space);
         p2r1 = Instantiate(runOrder[0], p2Space);
         p3r1 = Instantiate(runOrder[0], p3Space);
-        p4r1 = Instantiate(runOrder[0], p4Space);
+        p4r1 = Instantiate(runOrder[0], p4Space);*/
 
         bossSpawned = false;
         gameStarted = false;
@@ -192,7 +192,10 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public void NextRoom(GameObject player)
     {
-        player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
+        //SEND PLAYER TO BOSS ROOM
+
+
+        /*player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
         int playerNum = GetPlayerSpawnPoint(player);
         switch (playerNum)
         {
@@ -254,7 +257,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         RpcProgressUpdate();
         
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
-        
+        */
     }
     private bool PlayerInRoom()
     {

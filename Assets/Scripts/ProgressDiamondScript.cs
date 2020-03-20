@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class ProgressDiamondScript : NetworkBehaviour {
-    public SyncListFloat progresses;
+    public SyncListFloat progresses = new SyncListFloat();
 
     public Image player1, player2, player3, player4;
 
@@ -14,7 +14,7 @@ public class ProgressDiamondScript : NetworkBehaviour {
         
         if (isServer)
         {
-            progresses = new SyncListFloat();
+            
             progresses.Add(0f);
             progresses.Add(0f);
             progresses.Add(0f);

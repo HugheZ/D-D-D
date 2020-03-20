@@ -306,6 +306,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         pDiamondScript.ChangeProgress(playerNum, progress);
         RpcProgressUpdate();
         */
+        player.transform.position = spawnPt;
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         
     }

@@ -81,6 +81,10 @@ public class ManagerScript : MonoBehaviour
     /// </summary>
     public void NextRoom()
     {
+        if (!player)
+        {
+            player = FindObjectOfType<PlayerMovement>().gameObject;
+        }
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
         Destroy(currentRoom);
         int traps = rand.Next(3);

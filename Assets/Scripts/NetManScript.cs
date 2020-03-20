@@ -51,8 +51,8 @@ public class NetManScript : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        Vector2 spawnAt = new Vector2();
-        switch (playerMap.Keys.Count)
+        Vector2 spawnAt = spawnAt = p1startPt.position;
+        /*switch (playerMap.Keys.Count)
         {
             case 1:
                 spawnAt = p2startPt.position;
@@ -66,7 +66,7 @@ public class NetManScript : NetworkManager
             default:
                 spawnAt = p1startPt.position;
                 break;
-        }
+        }*/
         var player = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
         if (playerMap.Keys.Count == 0)
             p1ConnId = playerControllerId;

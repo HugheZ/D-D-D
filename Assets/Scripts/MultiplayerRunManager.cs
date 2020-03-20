@@ -130,7 +130,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
             bossSpawned = true;
         }
         if (!gameStarted && isServer && Input.GetKeyDown(KeyCode.R))
-            StartGame();
+            RpcStartGame();
     }
 
     /// <summary>
@@ -146,7 +146,8 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// <summary>
     /// ///////////////////////////////////////////////////////////////////
     /// </summary>
-    public void StartGame()
+    [ClientRpc]
+    public void RpcStartGame()
     {
         gameStarted = true;
         holdingRoomCanvas.enabled = false;

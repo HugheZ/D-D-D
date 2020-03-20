@@ -226,7 +226,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public Vector3 GetRespawnPoint(GameObject player)
     {
-        return playerSpawns[GetPlayerSpawnPoint(player)];
+        return p1Space.position;
     }
 
 
@@ -306,6 +306,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         pDiamondScript.ChangeProgress(playerNum, progress);
         RpcProgressUpdate();
         */
+        player.transform.position = spawnPt;
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
     }
 

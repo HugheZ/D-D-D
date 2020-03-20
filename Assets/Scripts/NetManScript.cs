@@ -106,8 +106,7 @@ public class NetManScript : NetworkManager
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)
     {
         base.OnServerRemovePlayer(conn, player);
-        mrm.numPlayers--;
-        mrm.updateCamera();
+        mrm.numPlayers = playerMap.Keys.Count;
     }
 
     /// <summary>

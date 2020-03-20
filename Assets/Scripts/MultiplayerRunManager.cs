@@ -120,6 +120,8 @@ public class MultiplayerRunManager : NetworkBehaviour {
             {
                 GameObject bossBoy = Instantiate(boss, zero, true);
                 NetworkServer.Spawn(bossBoy);
+
+                Debug.Log("Created new boss, but be aware:\nThis boss creation is not fully featured. Bosses do not link to manager. Game state is undefined.");
             }
             else
             {
@@ -137,6 +139,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     [ClientRpc]
     void RpcEnableBoss()
     {
+        print("Received instruction to enable boss");
         BossManager.Instance.EnableBoss();
     }
 
@@ -458,6 +461,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
             if (bossDefeated)
             {
+                print("Boss died, player wins: " + playerIfWon);
                 //if the boss died, find out the winning player's image and plaster it on the end game UI
                 if(playerIfWon != -1)
                 {
@@ -472,6 +476,8 @@ public class MultiplayerRunManager : NetworkBehaviour {
                     endGameWinnerText.text = "Winner!";
                     endGameSalute.text = "Contragulations, unknown dwarf.\n\nYou may be a ghost to us, but you shall go down in the annals of history.\nThe rest may fight over who the winner was.";
                 }
+
+                endGameHud.gameObject.SetActive(true);
             }
             else
             {

@@ -47,12 +47,9 @@ public class BossManager : NetworkBehaviour {
         if (!boss)
         {
             boss = Instantiate(bossPrefab, Vector2.zero, Quaternion.identity);
-            boss.SetActive(false);
         }
-        else
-        {
-            boss.SetActive(false);
-        }
+
+        DisableBoss();
 
         if (totalReset)
         {
@@ -63,9 +60,19 @@ public class BossManager : NetworkBehaviour {
             BossAnimFacilitator anim = boss.GetComponent<BossAnimFacilitator>();
             anim.ResetState();
         }
+    }
 
-        //disable UI
+    /// <summary>
+    /// Disables teh boss
+    /// </summary>
+    void DisableBoss()
+    {
+        boss.GetComponent<SpriteRenderer>().enabled = false;
+        boss.GetComponent<CircleCollider2D>().enabled = false;
+        boss.GetComponent<BossAnimFacilitator>().enabled = false;
+        boss.GetComponent<BossAction>().enabled = false;
         bossUI.gameObject.SetActive(false);
+        music.Stop();
     }
 
     /// <summary>
@@ -83,7 +90,11 @@ public class BossManager : NetworkBehaviour {
     /// </summary>
     public void EnableBoss()
     {
-        boss.SetActive(true);
+        boss.GetComponent<SpriteRenderer>().enabled = true;
+        boss.GetComponent<CircleCollider2D>().enabled = true;
+        boss.GetComponent<BossAnimFacilitator>().enabled = true;
+        boss.GetComponent<BossAction>().enabled = true;
+        boss.GetComponent<BossAnimFacilitator>().SetIDLE();
         bossUI.gameObject.SetActive(true);
         music.Play();
     }

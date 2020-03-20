@@ -164,10 +164,8 @@ public class MultiplayerRunManager : NetworkBehaviour {
         updateCamera();
     }
 
-
-    public void NextRoom(GameObject player)
+    int GetPlayerSpawnPoint(GameObject player)
     {
-        player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
         NetworkConnection tpPlayer = player.GetComponentInParent<NetworkIdentity>().connectionToClient;
         int playerNum = 0;
         var e = playerMapCopy.Keys.GetEnumerator();
@@ -177,6 +175,19 @@ public class MultiplayerRunManager : NetworkBehaviour {
             if (e.Current == tpPlayer.connectionId)
                 playerNum = i;
         }
+        return playerNum;
+    }
+
+    public Vector3 GetRespawnPoint(GameObject player)
+    {
+        return playerSpawns[GetPlayerSpawnPoint(player)];
+    }
+
+
+    public void NextRoom(GameObject player)
+    {
+        player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
+        int playerNum = GetPlayerSpawnPoint(player);
         switch (playerNum)
         {
             case 0:

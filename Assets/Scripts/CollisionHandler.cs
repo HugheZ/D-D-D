@@ -82,7 +82,8 @@ public class CollisionHandler : NetworkBehaviour
     /// </summary>
     public void ResetToSpawn()
     {
-        gameObject.transform.position = manager.reSpawnPt;
+        if (manager) gameObject.transform.position = manager.reSpawnPt;
+        else gameObject.transform.position = MultiplayerRunManager.Instance.GetRespawnPoint(gameObject);
     }
 
     /// <summary>

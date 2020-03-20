@@ -146,6 +146,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// <summary>
     /// ///////////////////////////////////////////////////////////////////
     /// </summary>
+    
     [ClientRpc]
     public void RpcStartGame()
     {
@@ -155,6 +156,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         NetManScript netman = NetManScript.Instance;
         playerMapCopy = netman.playerMap;
         var e = netman.playerMap.GetEnumerator();
+        numPlayers = (netman.playerMap.Keys.Count);
         for (int i = 0; i < netman.playerMap.Keys.Count; i++)
         {            
             e.MoveNext();

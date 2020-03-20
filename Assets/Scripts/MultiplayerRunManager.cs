@@ -286,7 +286,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         */
         
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
-        */
+        
     }
     private bool PlayerInRoom()
     {

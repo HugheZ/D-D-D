@@ -13,8 +13,7 @@ public class ProgressDiamondScript : NetworkBehaviour {
     void Start() {
         
         if (isServer)
-        {
-            
+        {    
             progresses.Add(0f);
             progresses.Add(0f);
             progresses.Add(0f);

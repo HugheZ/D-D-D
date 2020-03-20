@@ -249,12 +249,9 @@ public class MultiplayerRunManager : NetworkBehaviour {
                 }
                 break;
         }
-        if(numPlayers > 1)
-        {
-            float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
-            pDiamondScript.ChangeProgress(playerNum - 1, progress);
-            RpcProgressUpdate();
-        }
+        float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
+        pDiamondScript.ChangeProgress(playerNum, progress);
+        RpcProgressUpdate();
         
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         

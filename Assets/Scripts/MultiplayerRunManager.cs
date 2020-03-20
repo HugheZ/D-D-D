@@ -226,7 +226,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public Vector3 GetRespawnPoint(GameObject player)
     {
-        return playerSpawns[GetPlayerSpawnPoint(player)];
+        return p1Space.position;
     }
 
 

@@ -2822,6 +2822,7 @@ MonoBehaviour:
   - {fileID: 1101003688285324, guid: 8a8272e63bfe11b4a8ad2c3e9abd017d, type: 2}
   - {fileID: 1378905950041778, guid: 6805a693ec5e48341867252666a74473, type: 2}
   - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
+  - {fileID: 1220879251368772, guid: 545762ceaabc41b438a9233aa9fec005, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -4453,6 +4454,8 @@ MonoBehaviour:
   endGameWinnerText: {fileID: 219258738}
   endGameWinnerImage: {fileID: 1355079099}
   endGameSalute: {fileID: 730111509}
+  dungeon: {fileID: 0}
+  containingDoor: {fileID: 0}
 --- !u!4 &1930404517
 Transform:
   m_ObjectHideFlags: 0

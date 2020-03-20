@@ -55,6 +55,14 @@ public class MultiplayerRunManager : NetworkBehaviour {
     //Whether the game is over
     bool gameOver;
 
+    /// Temporary sprint 2 fields
+
+    public GameObject dungeon;
+    public GameObject containingDoor;
+
+
+    /// 
+
     //stuff for Singleton
     private static MultiplayerRunManager _instance = null;
     public static MultiplayerRunManager Instance
@@ -156,18 +164,22 @@ public class MultiplayerRunManager : NetworkBehaviour {
     {
         gameStarted = true;
         holdingRoomCanvas.enabled = false;
-        print("Game start!");        
-        NetManScript netman = NetManScript.Instance;
-        playerMapCopy = netman.playerMap;
-        var e = netman.playerMap.GetEnumerator();
-        numPlayers = (netman.playerMap.Keys.Count);
-        for (int i = 0; i < netman.playerMap.Keys.Count; i++)
-        {            
-            e.MoveNext();
-            e.Current.Value.gameObject.transform.position = playerSpawns[i];
-        }
+        print("Game start!");
+        //NetManScript netman = NetManScript.Instance;
+        //playerMapCopy = netman.playerMap;
+        //var e = netman.playerMap.GetEnumerator();
+        //numPlayers = (netman.playerMap.Keys.Count);
+        //for (int i = 0; i < netman.playerMap.Keys.Count; i++)
+        //{            
+        //    e.MoveNext();
+        //    e.Current.Value.gameObject.transform.position = playerSpawns[i];
+        //}
+        //InitializeScoreTable();
+        //updateCamera();
         InitializeScoreTable();
-        updateCamera();
+        containingDoor.SetActive(false);
+        dungeon.SetActive(true);
+        RpcEnableBoss();
     }
 
     int GetPlayerSpawnPoint(GameObject player)
@@ -193,66 +205,75 @@ public class MultiplayerRunManager : NetworkBehaviour {
     public void NextRoom(GameObject player)
     {
         player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
-        int playerNum = GetPlayerSpawnPoint(player);
-        switch (playerNum)
+        //int playerNum = GetPlayerSpawnPoint(player);
+        //switch (playerNum)
+        //{
+        //    case 0:
+        //        Destroy(p1r1);
+        //        p1CurRoom++;
+        //        if (p1CurRoom >= runOrder.Count)
+        //        {
+        //            //player reaches boss room
+        //        }
+        //        else
+        //        {
+        //            p1r1 = Instantiate(runOrder[p1CurRoom], p1Space);
+        //            player.transform.position = playerSpawns[0];
+        //        }
+        //        break;
+        //    case 1:
+        //        Destroy(p2r1);
+        //        p2CurRoom++;
+        //        if (p2CurRoom >= runOrder.Count)
+        //        {
+        //            //player reaches boss room
+        //        }
+        //        else
+        //        {
+        //            p2r1 = Instantiate(runOrder[p2CurRoom], p2Space);
+        //            player.transform.position = playerSpawns[1];
+        //        }
+        //        break;
+        //    case 2:
+        //        Destroy(p3r1);
+        //        p3CurRoom++;
+        //        if (p3CurRoom >= runOrder.Count)
+        //        {
+        //            //player reaches boss room
+        //        }
+        //        else
+        //        {
+        //            p3r1 = Instantiate(runOrder[p3CurRoom], p3Space);
+        //            player.transform.position = playerSpawns[2];
+        //        }
+        //        break;
+        //    default:
+        //        Destroy(p4r1);
+        //        p4CurRoom++;
+        //        if (p4CurRoom >= runOrder.Count)
+        //        {
+        //            //player reaches boss room
+        //        }
+        //        else
+        //        {
+        //            p4r1 = Instantiate(runOrder[p4CurRoom], p4Space);
+        //            player.transform.position = playerSpawns[3];
+        //        }
+        //        break;
+        //}
+        //float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
+        //pDiamondScript.ChangeProgress(playerNum, progress);
+        //RpcProgressUpdate();
+
+        //teleport to boss
+        Vector3 spawnPt = bossRoom.transform.position + new Vector3(0,8,0);
+
+        //enable boss if not yet done
+        if (!bossSpawned)
         {
-            case 0:
-                Destroy(p1r1);
-                p1CurRoom++;
-                if (p1CurRoom >= runOrder.Count)
-                {
-                    //player reaches boss room
-                }
-                else
-                {
-                    p1r1 = Instantiate(runOrder[p1CurRoom], p1Space);
-                    player.transform.position = playerSpawns[0];
-                }
-                break;
-            case 1:
-                Destroy(p2r1);
-                p2CurRoom++;
-                if (p2CurRoom >= runOrder.Count)
-                {
-                    //player reaches boss room
-                }
-                else
-                {
-                    p2r1 = Instantiate(runOrder[p2CurRoom], p2Space);
-                    player.transform.position = playerSpawns[1];
-                }
-                break;
-            case 2:
-                Destroy(p3r1);
-                p3CurRoom++;
-                if (p3CurRoom >= runOrder.Count)
-                {
-                    //player reaches boss room
-                }
-                else
-                {
-                    p3r1 = Instantiate(runOrder[p3CurRoom], p3Space);
-                    player.transform.position = playerSpawns[2];
-                }
-                break;
-            default:
-                Destroy(p4r1);
-                p4CurRoom++;
-                if (p4CurRoom >= runOrder.Count)
-                {
-                    //player reaches boss room
-                }
-                else
-                {
-                    p4r1 = Instantiate(runOrder[p4CurRoom], p4Space);
-                    player.transform.position = playerSpawns[3];
-                }
-                break;
+
         }
-        float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
-        pDiamondScript.ChangeProgress(playerNum, progress);
-        RpcProgressUpdate();
-        
+
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         
     }

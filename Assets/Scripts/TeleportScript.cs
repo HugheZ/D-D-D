@@ -26,6 +26,7 @@ public class TeleportScript : MonoBehaviour
         }
         else
         {
+            print("Bad touch! No touchy!");
             mman.NextRoom(collision.gameObject);
         }
     }

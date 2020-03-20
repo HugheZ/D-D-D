@@ -166,8 +166,34 @@ public class MultiplayerRunManager : NetworkBehaviour {
             e.MoveNext();
             e.Current.Value.gameObject.transform.position = playerSpawns[i];
         }
+
+        /*
+        //Initalize players and cameras
+        //##### FIGURE OUT HOW TO ACCESS PLAYER GAMEOBJECTS #####
+        if (numPlayers == 1)
+        {
+            player1 = player1.gameObject;
+            p1camera = player1.GetComponentInChildren<Camera>();
+        }
+        else if (numPlayers == 2)
+        {
+            player2 = player2.gameObject;
+            p2camera = player2.GetComponentInChildren<Camera>();
+        }
+        else if (numPlayers == 3)
+        {
+            player3 = player3.gameObject;
+            p3camera = player3.GetComponentInChildren<Camera>();
+        }
+        else if (numPlayers == 4)
+        {
+            player4 = player4.gameObject;
+            p4camera = player4.GetComponentInChildren<Camera>();
+        }
+        */
+
         InitializeScoreTable();
-        updateCamera();
+        //updateCamera();
     }
 
     int GetPlayerSpawnPoint(GameObject player)
@@ -249,9 +275,12 @@ public class MultiplayerRunManager : NetworkBehaviour {
                 }
                 break;
         }
+
+        /*
         float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
         pDiamondScript.ChangeProgress(playerNum, progress);
         RpcProgressUpdate();
+        */
         
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         

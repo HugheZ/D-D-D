@@ -146,6 +146,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// <summary>
     /// ///////////////////////////////////////////////////////////////////
     /// </summary>
+    
     [ClientRpc]
     public void RpcStartGame()
     {
@@ -155,6 +156,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         NetManScript netman = NetManScript.Instance;
         playerMapCopy = netman.playerMap;
         var e = netman.playerMap.GetEnumerator();
+        numPlayers = (netman.playerMap.Keys.Count);
         for (int i = 0; i < netman.playerMap.Keys.Count; i++)
         {            
             e.MoveNext();
@@ -243,9 +245,13 @@ public class MultiplayerRunManager : NetworkBehaviour {
                 }
                 break;
         }
-        float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
-        pDiamondScript.ChangeProgress(playerNum-1, progress);
-        RpcProgressUpdate();
+        if(numPlayers > 1)
+        {
+            float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
+            pDiamondScript.ChangeProgress(playerNum - 1, progress);
+            RpcProgressUpdate();
+        }
+        
         player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
         
     }

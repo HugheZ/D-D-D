@@ -11,7 +11,7 @@ In multiplayer, race against your friends to reach the final room of the dungeon
 
 D&amp;D&amp;D also features 4 playable characters, an additional unlockable character, and a multitude of play-based and skill-based achievements. You might unlock most just by having fun with friends, but the coveted gold dwarf is reserved for only the quickest and hardiest dwarves.
 
-For this repo, the standalone build is in the Build folder, compiled for standalone Windows target. If that doesn't work and you have Unity installed, you can simply open it as a fresh project and rebuild for your platform. Only standalone Windows target and PS4 were tested for this project, so it might not build for additional platforms.
+This version of the game is written for PC/Mac/Linux standalone support through Unity, though it is created with controller support in mind. We cannot guarantee compilation for a PS4 if you have a PS4 dev kit and license because the game was developed without PS4 support and the PS4 SDK.
 
 Licenses:
 Video Dungeon Boss by Kevin MacLeod
@@ -20,4 +20,8 @@ License: http://creativecommons.org/licenses/by/4.0/
 
 Pookatori and Friends by Kevin MacLeod
 Link: https://incompetech.filmmusic.io/song/4229-pookatori-and-friends
+License: http://creativecommons.org/licenses/by/4.0/
+
+Crossing the Chasm by Kevin MAcLeod
+Link: https://incompetech.filmmusic.io/song/3562-crossing-the-chasm/
 License: http://creativecommons.org/licenses/by/4.0/

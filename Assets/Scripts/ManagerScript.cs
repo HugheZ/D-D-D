@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class ManagerScript : MonoBehaviour
@@ -10,19 +11,22 @@ public class ManagerScript : MonoBehaviour
     public Vector2 reSpawnPt;
     public GameObject player;
     public List<GameObject> rooms;
+    public Button menuButton;
     GameObject currentRoom;
     System.Random rand;
     public Camera camera;
     public AudioSource endPlayer;
     //public AudioClip endAudio;
     public AudioClip click;
+    AcheivementScript achievements;
 
     int curRoom = 0;
     private int roomsCleared;
+    public NetworkManager netman;
 
     public Text score;  //score text
     public Text finalScore; //final score box
-    private int totalScore; //the total score of the player
+    public int totalScore; //the total score of the player
     public GameObject gameOverUI; //the ui to display when the game is over
     public float timeToShowEnd; //time until the end screen is shown after death
 
@@ -47,6 +51,10 @@ public class ManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        netman = GetComponent<NetworkManager>();
+        netman.StartHost();
+        achievements = AcheivementScript.Instance;
+
         roomsCleared = 0;
 
         cameraPts = new List<Vector3>();
@@ -68,12 +76,26 @@ public class ManagerScript : MonoBehaviour
         //UI stuff
         totalScore = 0;
         SetScoreUI();
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        /*if (!NetworkClient.active && !NetworkServer.active && netman.matchMaker == null)
+        {
+            netman.StartUpHost();
+        }
+        if (NetworkClient.active && !ClientScene.ready && netman.client.connection != null)
+        {
+            ClientScene.Ready(netman.client.connection);
+
+            if (ClientScene.localPlayers.Count == 0)
+            {
+                ClientScene.AddPlayer(0);
+            }
+        }*/
     }
 
     /// <summary>
@@ -94,6 +116,7 @@ public class ManagerScript : MonoBehaviour
         curRoom = newRoom;
         player.transform.position = reSpawnPt;
         currentRoom = Instantiate(rooms[curRoom], new Vector3(0,0,0), Quaternion.identity);
+        currentRoom.SetActive(true);
         for (int i = 3; i < 6; i++)
         {
             currentRoom.transform.GetChild(i).gameObject.SetActive(false);
@@ -156,11 +179,18 @@ public class ManagerScript : MonoBehaviour
         //endPlayer.mute = true;
         //endPlayer.PlayOneShot(endAudio);
         gameOverUI.SetActive(true);
+        menuButton.Select();
     }
 
     public void BackToMenu()
     {
         endPlayer.PlayOneShot(click);
+        netman.StopHost();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnDisable()
+    {
+        //achievements.diedBy = 0;
     }
 }

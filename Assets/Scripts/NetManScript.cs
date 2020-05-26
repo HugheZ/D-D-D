@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class NetManScript : NetworkManager
 {
     public Dictionary<int, GameObject> playerMap;
     public Transform p1startPt;
-    public Transform p2startPt;
-    public Transform p3startPt;
-    public Transform p4startPt;
     NetworkManager myNetMan;
     MultiplayerRunManager mrm;
     int p1ConnId;
 
     //list of player animatiors
     public List<RuntimeAnimatorController> controllers;
+
+    //lsit of all approved player names
+    public List<string> playerNames;
 
     private static NetManScript _instance = null;
     public static NetManScript Instance
@@ -51,43 +52,58 @@ public class NetManScript : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        Vector2 spawnAt = spawnAt = p1startPt.position;
-        /*switch (playerMap.Keys.Count)
-        {
-            case 1:
-                spawnAt = p2startPt.position;
-                break;
-            case 2:
-                spawnAt = p3startPt.position;
-                break;
-            case 3:
-                spawnAt = p4startPt.position;
-                break;
-            default:
-                spawnAt = p1startPt.position;
-                break;
-        }*/
+        //base.OnServerAddPlayer(conn, playerControllerId);
+        Vector2 spawnAt = p1startPt.position;
         var player = Instantiate(playerPrefab, spawnAt, Quaternion.identity);
         if (playerMap.Keys.Count == 0)
             p1ConnId = playerControllerId;
         //edit player
-        playerMap.Add(conn.connectionId, player);
+        LinkObjectToID(player, conn.connectionId);
+
+        NetworkServer.Spawn(player);
+
+        ////add to connection
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-        mrm.numPlayers = playerMap.Count;
         print(playerMap.Keys.Count);
-        
 
-        //change animator
-        //if (playerMap.Keys.Count <= controllers.Count)
-        //{
-        //    player.GetComponent<PlayerIdentityController>().index = playerMap.Keys.Count - 1;
-        //}
-
+        ////change animator
+        ////if (playerMap.Keys.Count <= controllers.Count)
+        ////{
+        ////    player.GetComponent<PlayerIdentityController>().index = playerMap.Keys.Count - 1;
+        ////}
     }
+
+    /// <summary>
+    /// Links a gameobject with a particular ID
+    /// </summary>
+    /// <param name="player">The game object to link</param>
+    /// <param name="ID">That player's connection ID</param>
+    public void LinkObjectToID(GameObject player, int ID)
+    {
+        playerMap.Add(ID, player);
+        PlayerIdentityController identity = player.GetComponent<PlayerIdentityController>();
+        LocalPlayerIdentity localIdentity = player.GetComponent<LocalPlayerIdentity>();
+        if (identity)
+        {
+            identity.playerAnimIndex = playerMap.Keys.Count - 1;
+            string name = playerNames.Count > 0 ? playerNames[Random.Range(0, playerNames.Count)] : "Player " + playerMap.Keys.Count;
+            identity.name = name;
+            identity.UID = ID;
+        }
+        else
+        {
+            localIdentity.playerAnimIndex = playerMap.Keys.Count - 1;
+            localIdentity.name = "Player 2";
+            localIdentity.UID = ID;
+        }
+
+        MultiplayerRunManager.Instance.numPlayers = playerMap.Keys.Count;
+    }
+
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)
     {
         base.OnServerRemovePlayer(conn, player);
-        mrm.numPlayers = playerMap.Keys.Count;
+        MultiplayerRunManager.Instance.numPlayers = playerMap.Keys.Count;
     }
 
     /// <summary>
@@ -99,4 +115,23 @@ public class NetManScript : NetworkManager
         if (isServer) StopHost();
         else StopClient();
     }
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void StartUpHost()
+    {
+        NetworkManager.singleton.StopHost();
+        SetPort();
+        NetworkManager.singleton.serverBindToIP = true;
+        //NetworkManager.singleton.serverBindAddress = "localhost";//Network.player.ipAddress;
+        //SetIPAddress();
+        NetworkManager.singleton.StartHost();
+    }
+    void SetPort()
+    {
+        NetworkManager.singleton.networkPort = 7779;
+    }
+
 }

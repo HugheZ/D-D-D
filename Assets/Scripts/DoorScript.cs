@@ -15,11 +15,14 @@ public class DoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>())
+        if (key)
+            return;
+        if (collision.gameObject.GetComponent<PlayerMovement>() || collision.gameObject.GetComponent<PlayerMovementLocal>())
         {
             gameObject.SetActive(false);
         }

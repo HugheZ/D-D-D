@@ -815,6 +815,27 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.016666668
+    functionName: UpdateMask
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.51666665
+    functionName: UpdateMask
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0166667
+    functionName: UpdateMask
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2
     functionName: PlayBossSound
     data: 
@@ -832,6 +853,20 @@ AnimationClip:
     messageOptions: 0
   - time: 2.1333334
     functionName: Jump
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.15
+    functionName: UpdateMask
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.016667
+    functionName: UpdateMask
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

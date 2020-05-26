@@ -11,12 +11,16 @@ public class BossAnimFacilitator : NetworkBehaviour {
     [SerializeField]
     float timeToNextAttack; //time until the next attack is triggered
     bool IDLE; //whether the boss is idle and can get a new attack
+    SpriteMask mask; //the bubble sprite mask
+    SpriteRenderer rend; //the renderere that has our sprite
 
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
         actions = GetComponent<BossAction>();
+        mask = GetComponent<SpriteMask>();
+        rend = GetComponent<SpriteRenderer>();
         IDLE = true;
 	}
 	
@@ -134,5 +138,14 @@ public class BossAnimFacilitator : NetworkBehaviour {
         {
             anim.ResetTrigger(trigger);
         }
+    }
+
+    /// <summary>
+    /// Updates the sprite mask of this boss
+    /// </summary>
+    public void UpdateMask()
+    {
+        mask.sprite = rend.sprite;
+        mask.UpdateGIMaterials();
     }
 }

@@ -31,13 +31,26 @@ public class BossCollisionHandler : NetworkBehaviour {
             if (collision.gameObject.CompareTag("Weapons"))
             {
                 Slasher sl = collision.gameObject.GetComponentInParent<Slasher>();
+                SlasherLocal lsl = null;
+                if (!sl)
+                {
+                    lsl = collision.gameObject.GetComponentInParent<SlasherLocal>();
+                    if (lsl)
+                    {
+                        //notify server
+                        DamageBoss(lsl.damagePerSwing);
+                        //increment that player's score
+                        int scoringPlayer = collision.gameObject.GetComponentInParent<LocalPlayerIdentity>().ID;
+                        BossManager.Instance.UpdateScore(scoringPlayer, lsl.damagePerSwing);
+                    }
+                }
                 if (sl)
                 {
                     //notify server
                     DamageBoss(sl.damagePerSwing);
                     //increment that player's score
                     NetworkConnection scoringPlayer = collision.gameObject.GetComponentInParent<NetworkIdentity>().connectionToClient;
-                    BossManager.Instance.UpdateScore(scoringPlayer, sl.damagePerSwing);
+                    BossManager.Instance.UpdateScore(scoringPlayer.connectionId, sl.damagePerSwing);
                 }
             }
         }

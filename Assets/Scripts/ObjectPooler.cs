@@ -8,11 +8,13 @@ public class ObjectPooler : MonoBehaviour
     public GameObject objectToPool;
     public int amountToPool;
     public static ObjectPooler SharedInstance;
+    public static ObjectPooler FireballSharedInstance;
 
     // Start is called before the first frame update
     void Start()
     {
-        SharedInstance = this;
+        if (objectToPool.GetComponent<ArrowScript>()) SharedInstance = this;
+        else FireballSharedInstance = this;
 
         pooledObjects = new List<GameObject>();
         for (int i = 0; i < amountToPool; i++)

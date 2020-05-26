@@ -143,12 +143,12 @@ RectTransform:
   m_Children:
   - {fileID: 1077444497}
   m_Father: {fileID: 2029204618}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6454629, y: 0.06282759}
-  m_AnchorMax: {x: 0.9706157, y: 0.13922009}
-  m_AnchoredPosition: {x: 0.5126953, y: -0.8499756}
-  m_SizeDelta: {x: -1.0253906, y: -0.2999878}
+  m_AnchorMin: {x: 0.02938428, y: 0.06282759}
+  m_AnchorMax: {x: 0.3545371, y: 0.13922009}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &69753840
 MonoBehaviour:
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -594,7 +594,7 @@ RectTransform:
   - {fileID: 1063423828}
   - {fileID: 165384046}
   m_Father: {fileID: 2029204618}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3545371, y: 0.53800005}
   m_AnchorMax: {x: 0.6454586, y: 0.76900005}
@@ -777,7 +777,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Quit Game
 --- !u!222 &593471048
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -882,6 +882,8 @@ GameObject:
   - component: {fileID: 735227873}
   - component: {fileID: 735227875}
   - component: {fileID: 735227876}
+  - component: {fileID: 735227878}
+  - component: {fileID: 735227877}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -913,11 +915,14 @@ MonoBehaviour:
   - {fileID: 1613975509302662, guid: cc7c750e4dc554f4fad6e1a051eea79f, type: 2}
   - {fileID: 1989325859235162, guid: cc76624bc48ec9144975ae63ee922951, type: 2}
   - {fileID: 1083399823777364, guid: f6d26c63e3a03a14babfd52c625b5d07, type: 2}
+  menuButton: {fileID: 69753840}
   camera: {fileID: 888390222}
   endPlayer: {fileID: 735227876}
   click: {fileID: 8300000, guid: a77c35e5b8519c34b857d76dbaa74dd7, type: 3}
+  netman: {fileID: 0}
   score: {fileID: 503577960}
   finalScore: {fileID: 165384047}
+  totalScore: 0
   gameOverUI: {fileID: 1076911557}
   timeToShowEnd: 3
 --- !u!4 &735227874
@@ -957,10 +962,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b61295468dbf66644a99aa808a637b27, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b6b4bc46cd68556408baf1a949c0ed81, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.234
-  m_Pitch: 1
+  m_Volume: 0.215
+  m_Pitch: 0.73
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -1043,47 +1048,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &783905356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 783905359}
-  - component: {fileID: 783905358}
-  - component: {fileID: 783905357}
-  m_Layer: 0
-  m_Name: NetMan
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &783905357
+--- !u!114 &735227877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 783905356}
+  m_GameObject: {fileID: 735227872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 227461547, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 95d887bdd546bbb46ba1a9db5907bb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
---- !u!114 &783905358
+  pooledObjects: []
+  objectToPool: {fileID: 1805573993148116, guid: 60a629c8758a855438b4e9035abd84d1,
+    type: 2}
+  amountToPool: 30
+--- !u!114 &735227878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 783905356}
+  m_GameObject: {fileID: 735227872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57346b2c20b88664abb81c74af4f606c, type: 3}
+  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -1098,30 +1086,24 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 1189184245222730, guid: 87f0a05bd074ef841982ccc6b703c357,
     type: 2}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 1
+  m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 1189184245222730, guid: 87f0a05bd074ef841982ccc6b703c357, type: 2}
-  - {fileID: 1476267867353936, guid: ef741cd7fae9bab4aa0d9f79f8b3295a, type: 2}
   - {fileID: 1367848130169016, guid: 97ce084910794964b9605225c7fc1717, type: 2}
   - {fileID: 1978294968503758, guid: 3f9e37e49d3baa64c94d5c1cd209e89b, type: 2}
   - {fileID: 1874174344028890, guid: 442b4c4d9c7ffe84c802604e0c272098, type: 2}
   - {fileID: 1602561825669388, guid: 401c405e966e02b44a1a083acebf3e26, type: 2}
   - {fileID: 1289916884055048, guid: 40ef9e336fe32244e9ff3cd1403d208d, type: 2}
-  - {fileID: 1561540705188224, guid: 1e29ffd7201eae449922049caf28dfb5, type: 2}
-  - {fileID: 1873650054833304, guid: ff68182be4e126043990fdb7a29c79d8, type: 2}
-  - {fileID: 1147336962350138, guid: 6065a26e10fbf4241a055016f400222a, type: 2}
-  - {fileID: 1362157105349476, guid: 06027dc2352a2c940920afd3744348a3, type: 2}
-  - {fileID: 1630147442100066, guid: 9c94ce935cc2ccf4c929fbd34a939c43, type: 2}
-  - {fileID: 1182928977771524, guid: d6d34bb7de29d534dbe53c288735c50c, type: 2}
-  - {fileID: 1328857478336498, guid: 29d8eb26a36ef8542bdfd994eb268e68, type: 2}
-  - {fileID: 1113484195628792, guid: a5a1d9dcdecc565459b1774793ad9211, type: 2}
+  - {fileID: 1638671745477464, guid: 964fa451520abbd48838787702c6044a, type: 2}
+  - {fileID: 1540442788208110, guid: 17e58dad90eb25344922c576112a5ebc, type: 2}
+  - {fileID: 1613975509302662, guid: cc7c750e4dc554f4fad6e1a051eea79f, type: 2}
+  - {fileID: 1989325859235162, guid: cc76624bc48ec9144975ae63ee922951, type: 2}
+  - {fileID: 1083399823777364, guid: f6d26c63e3a03a14babfd52c625b5d07, type: 2}
+  - {fileID: 1189184245222730, guid: 87f0a05bd074ef841982ccc6b703c357, type: 2}
+  - {fileID: 1828187790196020, guid: 686d7146ee5f32b42969b6ccb6ba8aec, type: 2}
   - {fileID: 1345002521462280, guid: 1e579472b5a8714468393b6dbff59991, type: 2}
-  - {fileID: 1101003688285324, guid: 8a8272e63bfe11b4a8ad2c3e9abd017d, type: 2}
-  - {fileID: 1378905950041778, guid: 6805a693ec5e48341867252666a74473, type: 2}
-  - {fileID: 1082731731186538, guid: 0cc94a916afaa7146a0576aa9a99ebc4, type: 2}
-  - {fileID: 1220879251368772, guid: 545762ceaabc41b438a9233aa9fec005, type: 2}
+  - {fileID: 1147336962350138, guid: 6065a26e10fbf4241a055016f400222a, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -1177,24 +1159,6 @@ MonoBehaviour:
   matchSize: 1
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  p1startPt: {fileID: 783905359}
-  p2startPt: {fileID: 0}
-  p3startPt: {fileID: 0}
-  p4startPt: {fileID: 0}
-  controllers: []
---- !u!4 &783905359
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 783905356}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888390220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,6 +1311,46 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1005937320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1005937322}
+  - component: {fileID: 1005937321}
+  m_Layer: 0
+  m_Name: PlayerSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1005937321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005937320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1050975500, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1005937322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005937320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063423827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,12 +1578,12 @@ RectTransform:
   m_Children:
   - {fileID: 593471046}
   m_Father: {fileID: 2029204618}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.029384276, y: 0.06282759}
-  m_AnchorMax: {x: 0.3545371, y: 0.13922009}
-  m_AnchoredPosition: {x: 1.7299805, y: -0.8499756}
-  m_SizeDelta: {x: -1.0255127, y: -0.2999878}
+  m_AnchorMin: {x: 0.6454629, y: 0.06282759}
+  m_AnchorMax: {x: 0.9706157, y: 0.13922009}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148388307
 MonoBehaviour:
@@ -1593,7 +1597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1937,7 +1941,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 69753838}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1566547988
@@ -2253,9 +2257,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 69753839}
   - {fileID: 403229024}
   - {fileID: 1148388306}
-  - {fileID: 69753839}
   - {fileID: 1618834791}
   m_Father: {fileID: 1076911558}
   m_RootOrder: 0

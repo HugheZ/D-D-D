@@ -71,6 +71,11 @@ public class BossManager : NetworkBehaviour {
         boss.GetComponent<CircleCollider2D>().enabled = false;
         boss.GetComponent<BossAnimFacilitator>().enabled = false;
         boss.GetComponent<BossAction>().enabled = false;
+        boss.GetComponentInChildren<ParticleSystem>().Stop();
+        foreach (SpriteRenderer sp in boss.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sp.enabled = false;
+        }
         bossUI.gameObject.SetActive(false);
         music.Stop();
     }
@@ -95,6 +100,11 @@ public class BossManager : NetworkBehaviour {
         boss.GetComponent<BossAnimFacilitator>().enabled = true;
         boss.GetComponent<BossAction>().enabled = true;
         boss.GetComponent<BossAnimFacilitator>().SetIDLE();
+        boss.GetComponentInChildren<ParticleSystem>().Play();
+        foreach(SpriteRenderer sp in boss.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sp.enabled = true;
+        }
         bossUI.gameObject.SetActive(true);
         music.Play();
     }
@@ -120,7 +130,7 @@ public class BossManager : NetworkBehaviour {
             Invoke("Deactivate", timeUntilDeactivate);
 
             // trigger main game manager to end the game
-            MultiplayerRunManager.Instance.BossDefeated();
+            MultiplayerRunManager.Instance.RoundOver();
         }
     }
 
@@ -137,12 +147,12 @@ public class BossManager : NetworkBehaviour {
     /// </summary>
     /// <param name="PID"></param>
     /// <param name="damage"></param>
-    public void UpdateScore(NetworkConnection PID, float damage)
+    public void UpdateScore(int PID, float damage)
     {
         if (isServer)
         {
             //TODO
-            if(MultiplayerRunManager.Instance) MultiplayerRunManager.Instance.AwardPointsByID(PID.connectionId,damage);
+            if(MultiplayerRunManager.Instance) MultiplayerRunManager.Instance.AwardPointsByID(PID, damage);
         }
     }
 }

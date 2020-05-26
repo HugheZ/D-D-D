@@ -12,6 +12,13 @@ TagManager:
   - P2Room
   - P3Room
   - P4Room
+  - Fireball
+  - SavePoint
+  - Undefined
+  - Hurtbox
+  - FanPush
+  - GHOST
+  - BackButtonTag
   layers:
   - Default
   - TransparentFX
@@ -33,10 +40,10 @@ TagManager:
   - TrapsNoDmg
   - TrapsNoInterract
   - Boss
-  - 
-  - 
-  - 
-  - 
+  - Gold
+  - Spikes
+  - PushEffect
+  - Ghost
   - 
   - 
   - 
@@ -48,4 +55,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bubbles
+    uniqueID: 3319449817
     locked: 0

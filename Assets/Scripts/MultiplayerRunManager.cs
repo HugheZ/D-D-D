@@ -8,11 +8,13 @@ using UnityEngine.Networking;
 public class MultiplayerRunManager : NetworkBehaviour {
     const int ROOM_COUNT = 3;
 
+    AcheivementScript achievements;
+
     public List<GameObject> possibleRoomList;
-    public GameObject bossRoom;
-    public GameObject boss;
+    public GameObject bossRoom; //room for the end-game
+    public GameObject boss; //boss object
+    public GameObject goldRoom; //gold room and zone
     public GameObject player1, player2, player3, player4;
-    bool bossSpawned;
     public Transform zero;
     public Transform p1Space;
     public Transform p2Space;
@@ -37,6 +39,15 @@ public class MultiplayerRunManager : NetworkBehaviour {
     bool gameStarted;
     public Canvas holdingRoomCanvas;
     Dictionary<int, GameObject> playerMapCopy;
+    public Button menuButton;
+    public Camera startCamera;
+
+    public Vector3 player1RespawnPoint, player2RespawnPoint;
+
+    public GameObject p1HoldingRoom, p2HoldingRoom, p3HoldingRoom, p4HoldingRoom;
+    public GameObject p1Block, p2Block, p3Block, p4Block;
+
+    public bool isLocalMultiplayerGame = false;
 
     public int numPlayers = 0;
 
@@ -62,6 +73,15 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
 
     /// 
+    bool endGameStarted; // has the end of the game begun?
+    public bool endGameChoice; //choice in endgame, true for boss and false for gold
+
+    float gameStartTime;
+
+    [SerializeField]
+    GameObject localMultiplayerPrefab; //prefab for local multiplayer
+    int additionalLocalPlayers = 0;
+    bool awaitingLocalJoin = false;
 
     //stuff for Singleton
     private static MultiplayerRunManager _instance = null;
@@ -102,7 +122,7 @@ public class MultiplayerRunManager : NetworkBehaviour {
         p3r1 = Instantiate(runOrder[0], p3Space);
         p4r1 = Instantiate(runOrder[0], p4Space);*/
 
-        bossSpawned = false;
+        endGameStarted = false;
         gameStarted = false;
 
         //Unfill all progress
@@ -121,11 +141,137 @@ public class MultiplayerRunManager : NetworkBehaviour {
         progresses = pDiamondScript.progresses;
 
         gameOver = false;
+
+        player1RespawnPoint = p1Space.position;
+        player2RespawnPoint = p1Space.position;
+
+        startCamera.enabled = (false);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (PlayerInRoom() && !bossSpawned && isServer)
+        
+        if (!gameStarted && isServer && (Input.GetKeyDown(KeyCode.R) || Input.GetKeyUp(KeyCode.Joystick1Button5)))
+        {
+            //generate seed for pathing and for end game choice
+            int pathSeed = rnd.Next(4);
+            int[] roomSeed = { rnd.Next(2, 5) , rnd.Next(2, 5) , rnd.Next(2, 5) , rnd.Next(2, 5) , rnd.Next(2, 5) ,
+                rnd.Next(2, 5) , rnd.Next(2, 5) , rnd.Next(2, 5) , rnd.Next(2, 5) };
+            endGameChoice = rnd.Next(0,2) == 0 ? false : true;
+            if (endGameChoice) print("BOSS TIME");
+            else print("GOLD TIME");
+            RpcStartGame(pathSeed, roomSeed);
+        }
+
+        //if game hasn't started and we are in local multiplayer, poll keyboard input for second player
+        if(!gameStarted && isServer && awaitingLocalJoin)
+        {
+            if (Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick2Button0))
+            {
+                SpawnLocalPlayer();
+                awaitingLocalJoin = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Enables the boss on all clients
+    /// </summary>
+    [ClientRpc]
+    void RpcEnableBoss()
+    {
+        print("Received instruction to enable boss");
+        BossManager.Instance.EnableBoss();
+    }
+
+    [ClientRpc]
+    void RpcEnableGoldRoom()
+    {
+        print("Received instruction to enable gold room");
+        GoldRoomManager.Instance.EnableGoldRoom();
+    }
+
+    /// <summary>
+    /// Sends an RPC call to enable the game to start on all client machines
+    /// </summary>
+    /// <param name="pathSeed">The seed used to generate the path seeds</param>
+    /// <param name="roomSeed">Individual random seeds used for room generation</param>
+    
+    [ClientRpc]
+    public void RpcStartGame(int pathSeed, int[] roomSeed)
+    {
+        if (isServer)
+        {
+            gameStartTime = Time.time;
+        }
+        gameStarted = true;
+        holdingRoomCanvas.enabled = false;
+        print("Game start!");
+        InitializeScoreTable();
+        containingDoor.SetActive(false);
+        dungeon.SetActive(true);
+        //enable random traps
+        for(int i = 0; i < 9; i++)
+        {
+            Transform thing = dungeon.transform.GetChild(0).GetChild(i);
+            GameObject currentRoom = thing.gameObject;
+            thing.GetChild(2).gameObject.SetActive(false);
+            thing.GetChild(3).gameObject.SetActive(false);
+            thing.GetChild(4).gameObject.SetActive(false);
+            thing.GetChild(roomSeed[i]).gameObject.SetActive(true);
+            
+        }
+        //determine the path
+        //int path = rnd.Next(4);
+        if(pathSeed % 2 == 0)
+        {
+            //go left at first
+            dungeon.transform.GetChild(1).gameObject.SetActive(false);
+            if(pathSeed == 2)
+                dungeon.transform.GetChild(3).gameObject.SetActive(false);
+            else
+                dungeon.transform.GetChild(4).gameObject.SetActive(false);
+        } else
+        {
+            //go right at first
+            dungeon.transform.GetChild(2).gameObject.SetActive(false);
+            if (pathSeed == 1)
+                dungeon.transform.GetChild(5).gameObject.SetActive(false);
+            else
+                dungeon.transform.GetChild(6).gameObject.SetActive(false);
+        }
+    }
+
+    int GetPlayerSpawnPoint(GameObject player)
+    {
+        NetworkConnection tpPlayer = player.GetComponentInParent<NetworkIdentity>().connectionToClient;
+        int playerNum = 0;
+        playerMapCopy = NetManScript.Instance.playerMap;
+        var e = playerMapCopy.Keys.GetEnumerator();
+        for (int i = 0; i < playerMapCopy.Keys.Count; i++)
+        {
+            e.MoveNext();
+            if (e.Current == tpPlayer.connectionId)
+                playerNum = i;
+        }
+        return playerNum;
+    }
+
+    public Vector3 GetRespawnPoint(GameObject player, int playerNum)
+    {
+        if(playerNum == 2)
+        {
+            return player2RespawnPoint;
+        }else
+        {
+            return player1RespawnPoint;
+        }
+        
+    }
+
+    public void PickEnding()
+    {
+        if (endGameChoice) //end game true, start boss
         {
             //enable boss ui and such
             if (!BossManager.Instance)
@@ -139,183 +285,54 @@ public class MultiplayerRunManager : NetworkBehaviour {
             {
                 RpcEnableBoss();
             }
-            bossSpawned = true;
         }
-        if (!gameStarted && isServer && Input.GetKeyDown(KeyCode.R))
-            RpcStartGame();
-    }
-
-    /// <summary>
-    /// Enables the boss on all clients
-    /// </summary>
-    [ClientRpc]
-    void RpcEnableBoss()
-    {
-        print("Received instruction to enable boss");
-        BossManager.Instance.EnableBoss();
-    }
-
-    /// <summary>
-    /// ///////////////////////////////////////////////////////////////////
-    /// </summary>
-    
-    [ClientRpc]
-    public void RpcStartGame()
-    {
-        gameStarted = true;
-        holdingRoomCanvas.enabled = false;
-        print("Game start!");
-        //NetManScript netman = NetManScript.Instance;
-        //playerMapCopy = netman.playerMap;
-        //var e = netman.playerMap.GetEnumerator();
-        //numPlayers = (netman.playerMap.Keys.Count);
-        //for (int i = 0; i < netman.playerMap.Keys.Count; i++)
-        //{            
-        //    e.MoveNext();
-        //    e.Current.Value.gameObject.transform.position = playerSpawns[i];
-        //}
-        //InitializeScoreTable();
-        //updateCamera();
-
-
-        /*
-        //Initalize players and cameras
-        //##### FIGURE OUT HOW TO ACCESS PLAYER GAMEOBJECTS #####
-        if (numPlayers == 1)
+        else //end game false, start gold
         {
-            player1 = player1.gameObject;
-            p1camera = player1.GetComponentInChildren<Camera>();
+            //enable gold UI and such
+            if (!GoldRoomManager.Instance)
+            {
+                //TODO: instantiate manager
+                RpcEnableGoldRoom();
+            }
+            else
+            {
+                RpcEnableGoldRoom();
+            }
         }
-        else if (numPlayers == 2)
-        {
-            player2 = player2.gameObject;
-            p2camera = player2.GetComponentInChildren<Camera>();
-        }
-        else if (numPlayers == 3)
-        {
-            player3 = player3.gameObject;
-            p3camera = player3.GetComponentInChildren<Camera>();
-        }
-        else if (numPlayers == 4)
-        {
-            player4 = player4.gameObject;
-            p4camera = player4.GetComponentInChildren<Camera>();
-        }
-        */
-        //updateCamera();
 
-        InitializeScoreTable();
-        containingDoor.SetActive(false);
-        dungeon.SetActive(true);
-        RpcEnableBoss();
+        endGameStarted = true;
+
     }
-
-    int GetPlayerSpawnPoint(GameObject player)
-    {
-        NetworkConnection tpPlayer = player.GetComponentInParent<NetworkIdentity>().connectionToClient;
-        int playerNum = 0;
-        var e = playerMapCopy.Keys.GetEnumerator();
-        for (int i = 0; i < playerMapCopy.Keys.Count; i++)
-        {
-            e.MoveNext();
-            if (e.Current == tpPlayer.connectionId)
-                playerNum = i;
-        }
-        return playerNum;
-    }
-
-    public Vector3 GetRespawnPoint(GameObject player)
-    {
-        return p1Space.position;
-    }
-
 
     public void NextRoom(GameObject player)
     {
-        player.GetComponent<CollisionHandler>().ToggleInteractivity(false);
-        //int playerNum = GetPlayerSpawnPoint(player);
-        //switch (playerNum)
-        //{
-        //    case 0:
-        //        Destroy(p1r1);
-        //        p1CurRoom++;
-        //        if (p1CurRoom >= runOrder.Count)
-        //        {
-        //            //player reaches boss room
-        //        }
-        //        else
-        //        {
-        //            p1r1 = Instantiate(runOrder[p1CurRoom], p1Space);
-        //            player.transform.position = playerSpawns[0];
-        //        }
-        //        break;
-        //    case 1:
-        //        Destroy(p2r1);
-        //        p2CurRoom++;
-        //        if (p2CurRoom >= runOrder.Count)
-        //        {
-        //            //player reaches boss room
-        //        }
-        //        else
-        //        {
-        //            p2r1 = Instantiate(runOrder[p2CurRoom], p2Space);
-        //            player.transform.position = playerSpawns[1];
-        //        }
-        //        break;
-        //    case 2:
-        //        Destroy(p3r1);
-        //        p3CurRoom++;
-        //        if (p3CurRoom >= runOrder.Count)
-        //        {
-        //            //player reaches boss room
-        //        }
-        //        else
-        //        {
-        //            p3r1 = Instantiate(runOrder[p3CurRoom], p3Space);
-        //            player.transform.position = playerSpawns[2];
-        //        }
-        //        break;
-        //    default:
-        //        Destroy(p4r1);
-        //        p4CurRoom++;
-        //        if (p4CurRoom >= runOrder.Count)
-        //        {
-        //            //player reaches boss room
-        //        }
-        //        else
-        //        {
-        //            p4r1 = Instantiate(runOrder[p4CurRoom], p4Space);
-        //            player.transform.position = playerSpawns[3];
-        //        }
-        //        break;
-        //}
-        //float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
-        //pDiamondScript.ChangeProgress(playerNum, progress);
-        //RpcProgressUpdate();
+        //enable boss if not yet done
+        if (!endGameStarted && gameStarted)
+            PickEnding();
+
+        RpcMovePlayerToNextRoom(player);
+    }
+
+    [ClientRpc]
+    void RpcMovePlayerToNextRoom(GameObject player)
+    {
+        CollisionHandler col = player.GetComponent<CollisionHandler>();
+        CollisionHandlerLocal lcol = player.GetComponent<CollisionHandlerLocal>();
+        if (col) col.ToggleInteractivity(false);
+        else lcol.ToggleInteractivity(false);
 
         //teleport to boss
-        Vector3 spawnPt = bossRoom.transform.position + new Vector3(0,8,0);
+        Vector3 spawnPt = bossRoom.transform.position + new Vector3(0, 8, 0);
 
-        //enable boss if not yet done
-        if (!bossSpawned)
-        {
-
-        }
-        /*
-        float progress = (1.0f / (float)ROOM_COUNT) / 2.0f;
-        pDiamondScript.ChangeProgress(playerNum, progress);
-        RpcProgressUpdate();
-        */
         player.transform.position = spawnPt;
-        player.GetComponent<CollisionHandler>().ToggleInteractivity(true);
+        if (col) col.ToggleInteractivity(true);
+        else lcol.ToggleInteractivity(true);
     }
 
-    private bool PlayerInRoom()
-    {
-        //TODO: check if a player reaches boss room
-        return true;
-    }
 
+    /// <summary>
+    /// Records the a dead player event, changes scores, and updates required managers
+    /// </summary>
     public void PlayerDied()
     {
         if (isServer)
@@ -335,12 +352,31 @@ public class MultiplayerRunManager : NetworkBehaviour {
                 }
             }
 
+            //update end game managers
+            UpdateManagersOfDeath();
+
             //if all players are dead, end the game
             if (deadPlayers == scoreTable.Keys.Count)
             {
-                RpcEndGame(false, -1);
+                playerMapCopy = NetManScript.Instance.playerMap;
+                foreach (int player in playerMapCopy.Keys)
+                {
+                    GameObject playerObj = playerMapCopy[player];
+                    NetworkConnection conn = playerObj.GetComponent<NetworkIdentity>().connectionToClient;
+                    TargetEndGame(conn, false, false, -1);
+                }
+                
             }
         }
+    }
+
+    /// <summary>
+    /// Tells appropriate end game mangers to update their plaeyrs in-game
+    /// </summary>
+    void UpdateManagersOfDeath()
+    {
+        //update gold manager if it is active and running
+        if (GoldRoomManager.Instance.enabled) GoldRoomManager.Instance.CheckForDeadPlayers();
     }
 
     /// <summary>
@@ -370,13 +406,13 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
     public void updateCamera()
     {
-        if(numPlayers == 1)
+        if (numPlayers == 1)
         {
             //Deinitialize progress diamond
             progressCanvas.gameObject.SetActive(false);
 
             player1.SetActive(true);
-            if(player2 != null)
+            if (player2 != null)
             {
                 player2.SetActive(false);
             }
@@ -391,13 +427,14 @@ public class MultiplayerRunManager : NetworkBehaviour {
 
             p1camera.rect = new Rect(0, 0, 1, 1);
             main.rect = new Rect(0, 0, 0, 0);
-            if(p2camera != null)
+            if (p2camera != null)
             {
                 p2camera.rect = new Rect(0, 0, 0, 0);
             }
-           
 
-        }else if(numPlayers == 2)
+
+        }
+        else if (numPlayers == 2)
         {
             //Initialize progress diamond
             progressCanvas.gameObject.SetActive(true);
@@ -418,53 +455,88 @@ public class MultiplayerRunManager : NetworkBehaviour {
             sideToSide.gameObject.SetActive(false);
 
             //Instantiate camera sizes
-            p1camera.rect = new Rect(0, 0, .5f, 1);
-            p2camera.rect = new Rect(.5f, 0, .5f, 1);
+            int counter = 0;
+            foreach (KeyValuePair<int, GameObject> player in NetManScript.Instance.playerMap)
+            {
+                Rect viewport;
+                if (counter == 0)
+                {
+                    viewport = new Rect(0, 0, .5f, 1);
+                }
+                else
+                {
+                    viewport = new Rect(.5f, 0, .5f, 1);
+                }
+                player.Value.GetComponentInChildren<Camera>().rect = viewport;
+                counter++;
+            }
             main.rect = new Rect(0, 0, 0, 0);
         }
-        else if(numPlayers == 3)
+        else if (numPlayers == 3 || numPlayers == 4)
         {
-            //Initialize progress diamond
-            progressCanvas.gameObject.SetActive(true);
-
-            player1.SetActive(true);
-            player2.SetActive(true);
-            player3.SetActive(true);
-            if(player4 != null)
+            if (numPlayers == 3)
             {
-                player4.SetActive(false);
+                //Initialize progress diamond
+                progressCanvas.gameObject.SetActive(true);
+
+                player1.SetActive(true);
+                player2.SetActive(true);
+                player3.SetActive(true);
+                if (player4 != null)
+                {
+                    player4.SetActive(false);
+                }
+
+
+                //Insert camera splits
+                topToBottom.gameObject.SetActive(true);
+                sideToSide.gameObject.SetActive(true);
+
+                //Instantiate camera main
+                main.rect = new Rect(.5f, 0, .5f, .5f);
             }
-            
+            else if (numPlayers == 4)
+            {
+                //Initialize progress diamond
+                progressCanvas.gameObject.SetActive(true);
 
-            //Insert camera splits
-            topToBottom.gameObject.SetActive(true);
-            sideToSide.gameObject.SetActive(true);
+                player1.SetActive(true);
+                player2.SetActive(true);
+                player3.SetActive(true);
+                player4.SetActive(true);
 
-            //Instantiate camera sizes
-            p1camera.rect = new Rect(0, .5f, .5f, .5f);
-            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
-            p3camera.rect = new Rect(0, 0, .5f, .5f);
-            main.rect = new Rect(.5f, 0, .5f, .5f);
-        }
-        else if(numPlayers == 4)
-        {
-            //Initialize progress diamond
-            progressCanvas.gameObject.SetActive(true);
+                //Insert camera splits
+                topToBottom.gameObject.SetActive(true);
+                sideToSide.gameObject.SetActive(true);
 
-            player1.SetActive(true);
-            player2.SetActive(true);
-            player3.SetActive(true);
-            player4.SetActive(true);
-
-            //Insert camera splits
-            topToBottom.gameObject.SetActive(true);
-            sideToSide.gameObject.SetActive(true);
+                //Instantiate camera main
+                main.rect = new Rect(0, 0, 0, 0);
+            }
 
             //Instantiate camera sizes
-            p1camera.rect = new Rect(0, .5f, .5f, .5f);
-            p2camera.rect = new Rect(.5f, .5f, .5f, .5f);
-            p3camera.rect = new Rect(0, 0, .5f, .5f);
-            p4camera.rect = new Rect(.5f, 0, .5f, .5f);
+            int counter = 0;
+            foreach (KeyValuePair<int, GameObject> player in NetManScript.Instance.playerMap)
+            {
+                Rect viewport;
+                if (counter == 0)
+                {
+                    viewport = new Rect(0, .5f, .5f, .5f);
+                }
+                else if (counter == 1)
+                {
+                    viewport = new Rect(.5f, .5f, .5f, .5f);
+                }
+                else if(counter == 2)
+                {
+                    viewport = new Rect(0, 0, .5f, .5f);
+                }
+                else
+                {
+                    viewport = new Rect(.5f, 0, .5f, .5f);
+                }
+                player.Value.GetComponentInChildren<Camera>().rect = viewport;
+                counter++;
+            }
             main.rect = new Rect(0, 0, 0, 0);
         }
     }
@@ -485,12 +557,14 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// <summary>
     /// Called when a player strikes the boss, awards points to the player
     /// </summary>
-    public void AwardPointsByID(int ID, float damage)
+    /// <param name="ID">ID of the player to award</param>
+    /// <param name="points">Number of points to award</param>
+    public void AwardPointsByID(int ID, float points)
     {
         //if the ID is in the map, increment score
         if (scoreTable.ContainsKey(ID))
         {
-            scoreTable[ID] += Mathf.FloorToInt(damage);
+            scoreTable[ID] += Mathf.FloorToInt(points);
             string ret = "";
             foreach (KeyValuePair<int, int> pair in scoreTable) ret += "[" + pair.Key + ": " + pair.Value + "] ";
             print(ret);
@@ -504,10 +578,15 @@ public class MultiplayerRunManager : NetworkBehaviour {
     /// Called when the boss is defeated, ends the game
     /// Winner = most damage dealt to boss
     /// </summary>
-    public void BossDefeated()
+    public void RoundOver()
     {
         if (isServer)
         {
+
+            playerMapCopy = NetManScript.Instance.playerMap;
+
+            RpcSendTiming(Time.time - gameStartTime);
+
             // find highest scoring player
             int winner = -1;
             int score = 0;
@@ -515,42 +594,92 @@ public class MultiplayerRunManager : NetworkBehaviour {
             {
                 if (entry.Value > score) winner = entry.Key;
             }
+            
 
             // tell everyone about it
-            RpcEndGame(true, winner);
+            foreach (int player in playerMapCopy.Keys)
+            {
+                print("Telling: " + player);
+                GameObject playerObj = playerMapCopy[player];
+                NetworkConnection conn = playerObj.GetComponent<NetworkIdentity>().connectionToClient;
+                if (player == winner)
+                    TargetEndGame(conn, true, true, winner);
+                else
+                    TargetEndGame(conn, true, false, winner);
+
+                
+            }
+
+            //Tell players their score
+            
+            foreach (KeyValuePair<int, int> s in scoreTable)
+            {
+                GameObject scoreForPlayer = null;
+                int playerScore = 0;
+                foreach (KeyValuePair<int, GameObject> player in playerMapCopy)
+                {
+                    if (s.Key == player.Key)
+                    {
+                        playerScore = s.Value;
+                        scoreForPlayer = player.Value;
+                    }
+                }
+                TargetSendScore(scoreForPlayer.GetComponent<NetworkIdentity>().connectionToClient, playerScore);
+            }
+
         }
     }
 
     /// <summary>
     /// Ends the game for all players
     /// </summary>
-    /// <param name="bossDefeated">Whether the game ended in a boss defeat or not</param>
-    [ClientRpc]
-    void RpcEndGame(bool bossDefeated, int playerIfWon)
+    /// <param name="success">Whether the game ended in a boss defeat / gold taken or not</param>
+    [TargetRpc]
+    void TargetEndGame(NetworkConnection conn, bool success, bool didWin, int playerIfWon)
     {
         if (!gameOver)
         {
             gameOver = true;
 
-            if (bossDefeated)
+            if (success)
             {
-                print("Boss died, player wins: " + playerIfWon);
-                //if the boss died, find out the winning player's image and plaster it on the end game UI
-                if(playerIfWon != -1)
+
+                //find winning player
+                Sprite winSprite = null;
+                string winName = "Unknown";
+                foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
                 {
-                    //set player if we have a valid index
-                    endGameWinnerImage.sprite = NetManScript.Instance.playerMap[playerIfWon].GetComponent<SpriteRenderer>().sprite;
-                    //set other fields
-                    endGameWinnerText.text = string.Format("Winner!\n{0}", playerIfWon);
+                    PlayerIdentityController pid = p.GetComponent<PlayerIdentityController>();
+                    LocalPlayerIdentity lpid = p.GetComponent<LocalPlayerIdentity>();
+
+                    int UID = pid ? pid.UID : lpid.UID;
+
+                    if (UID == playerIfWon)
+                    {
+                        winName = pid ? pid.name : lpid.name;
+                        winSprite = p.GetComponent<SpriteRenderer>().sprite;
+                        break;
+                    }
+                }
+
+                print("Boss died, player wins: " + playerIfWon);
+
+                //we know name and sprite, set it
+                endGameWinnerText.text = string.Format("Winner!\n{0}", winName);
+                endGameWinnerImage.sprite = winSprite;
+
+                //display appropriate salute depending on if we won or not
+                if (didWin)
+                {
                     endGameSalute.text = "Congratulations, noble dwarf.\n\nYou have bested the dungeon and your traitorous kin.\nReturn now, live in luxury, and enjoy your honor!";
                 }
                 else
                 {
-                    endGameWinnerText.text = "Winner!";
-                    endGameSalute.text = "Contragulations, unknown dwarf.\n\nYou may be a ghost to us, but you shall go down in the annals of history.\nThe rest may fight over who the winner was.";
+                    endGameSalute.text = "Feeble dwarf, you have been dishonored.\n\nYou will return a broken dwarf, or stay to haunt these halls forever.\nSuch is the fate of a weak dwarf.";
                 }
 
                 endGameHud.gameObject.SetActive(true);
+                menuButton.Select();
             }
             else
             {
@@ -560,6 +689,14 @@ public class MultiplayerRunManager : NetworkBehaviour {
         }
     }
 
+    public void OnDisable()
+    {
+        if (isLocalPlayer)
+        {
+            if (achievements) achievements.diedBy = 0;
+        }
+        
+    }
     /// <summary>
     /// Disconnects the player from the game
     /// </summary>
@@ -570,4 +707,57 @@ public class MultiplayerRunManager : NetworkBehaviour {
     }
 
 
+    /// <summary>
+    /// Notifies the manager that a local game should be played
+    /// Allows local players to poll join in the starting room
+    /// </summary>
+    public void NotifyLocalGame()
+    {
+        awaitingLocalJoin = true;
+    }
+
+    /// <summary>
+    /// Spawns a local player and adds its information to the player map
+    /// NOTE: we link to the negative count of additional local players since they cannot drop out and the count is negated.
+    ///      Although local multiplayers will not appear in a networked game, due to being monobehaviours, we can ensure that
+    ///      these negative values are not going to be chosen by the host (0) and additional players.
+    /// </summary>
+    void SpawnLocalPlayer()
+    {
+        //get new ID
+        additionalLocalPlayers++;
+        //instantiate and link
+        GameObject localPlayer = Instantiate(localMultiplayerPrefab, NetManScript.Instance.p1startPt.position, Quaternion.identity);
+        localPlayer.GetComponent<LocalPlayerIdentity>().ID = -additionalLocalPlayers;
+        NetManScript.Instance.LinkObjectToID(localPlayer, -additionalLocalPlayers);
+
+        updateCamera();
+    }
+
+    [TargetRpc]
+    void TargetSendScore(NetworkConnection conn, int score)
+    {
+        AcheivementScript.Instance.score = score;
+    }
+
+    [ClientRpc]
+    void RpcSendTiming(float time)
+    {
+        if(time < 300)
+        {
+            AcheivementScript.Instance.fiveMinutes = true;
+            if(time < 240)
+            {
+                AcheivementScript.Instance.fourMinutes = true;
+                if(time < 180)
+                {
+                    AcheivementScript.Instance.threeMinutes = true;
+                    if(time < 120)
+                    {
+                        AcheivementScript.Instance.twoMinutes = true;
+                    }
+                }
+            }
+        }
+    }
 }

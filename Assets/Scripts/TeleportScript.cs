@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class TeleportScript : MonoBehaviour
+public class TeleportScript : NetworkBehaviour
 {
     ManagerScript manager;
     MultiplayerRunManager mman;
@@ -27,7 +28,19 @@ public class TeleportScript : MonoBehaviour
         else
         {
             print("Bad touch! No touchy!");
-            mman.NextRoom(collision.gameObject);
+            GameObject obj = collision.gameObject.CompareTag("GHOST") ? collision.transform.parent.gameObject : collision.gameObject;
+            CmdCallNextRoon(obj);
         }
     }
+    [Command]
+    void CmdCallNextRoon(GameObject player)
+    {
+        mman.NextRoom(player);
+        //RpcCallNextRoon(player);
+    }
+    //[ClientRpc]
+    //void RpcCallNextRoon(GameObject player)
+    //{
+    //    mman.NextRoom(player);
+    //}
 }

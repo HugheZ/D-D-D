@@ -3,7 +3,52 @@ guid: 218a538abd0c31e4d9943c74d283403e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bossRoom: {instanceID: 0}
+  - boss: {instanceID: 0}
+  - goldRoom: {instanceID: 0}
+  - player1: {instanceID: 0}
+  - player2: {instanceID: 0}
+  - player3: {instanceID: 0}
+  - player4: {instanceID: 0}
+  - zero: {instanceID: 0}
+  - p1Space: {instanceID: 0}
+  - p2Space: {instanceID: 0}
+  - p3Space: {instanceID: 0}
+  - p4Space: {instanceID: 0}
+  - p1camera: {instanceID: 0}
+  - p2camera: {instanceID: 0}
+  - p3camera: {instanceID: 0}
+  - p4camera: {instanceID: 0}
+  - main: {instanceID: 0}
+  - progressCanvas: {instanceID: 0}
+  - sideToSide: {instanceID: 0}
+  - topToBottom: {instanceID: 0}
+  - player1progress: {instanceID: 0}
+  - player2progress: {instanceID: 0}
+  - player3progress: {instanceID: 0}
+  - player4progress: {instanceID: 0}
+  - holdingRoomCanvas: {instanceID: 0}
+  - menuButton: {instanceID: 0}
+  - startCamera: {instanceID: 0}
+  - ghostSprite: {fileID: 21300012, guid: e36447bb09a8f624c85e2f75192a8564, type: 3}
+  - p1HoldingRoom: {instanceID: 0}
+  - p2HoldingRoom: {instanceID: 0}
+  - p3HoldingRoom: {instanceID: 0}
+  - p4HoldingRoom: {instanceID: 0}
+  - p1Block: {instanceID: 0}
+  - p2Block: {instanceID: 0}
+  - p3Block: {instanceID: 0}
+  - p4Block: {instanceID: 0}
+  - pDiamondScript: {instanceID: 0}
+  - endGameHud: {instanceID: 0}
+  - endGameWinnerText: {instanceID: 0}
+  - endGameWinnerImage: {instanceID: 0}
+  - endGameSalute: {instanceID: 0}
+  - dungeon: {instanceID: 0}
+  - containingDoor: {instanceID: 0}
+  - localMultiplayerPrefab: {instanceID: 0}
+  - m_InSprite: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
